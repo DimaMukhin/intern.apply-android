@@ -1,8 +1,9 @@
-package intern.apply.internapply;
+package intern.apply.internapply.view.mainactivity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import intern.apply.internapply.R;
+import intern.apply.internapply.service.InternAPIService;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,6 +46,22 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        testAPI();
+    }
+
+    /**
+     * Just for reference. will be removed
+     */
+    private void testAPI() {
+        /*
+         api call example just for reference!
+         */
+        InternAPIService api = new InternAPIService();
+
+        api.getFirstJob()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> Log.i("success", response.getDescription()), error -> Log.i("error", error.toString()));
     }
 
     @Override
