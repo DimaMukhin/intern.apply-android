@@ -1,11 +1,11 @@
-package intern.apply.internapply.api.service;
+package intern.apply.internapply.api;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 
 import java.util.List;
 
-import intern.apply.internapply.api.model.Job;
+import intern.apply.internapply.model.Job;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

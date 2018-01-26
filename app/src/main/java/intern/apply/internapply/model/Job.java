@@ -1,4 +1,4 @@
-package intern.apply.internapply.api.model;
+package intern.apply.internapply.model;
 
 /**
  * Created by Unknown on 2018-01-19.

@@ -1,9 +1,9 @@
-package intern.apply.internapply.api.service;
+package intern.apply.internapply.api;
 
 
 import java.util.List;
 
-import intern.apply.internapply.api.model.Job;
+import intern.apply.internapply.model.Job;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 
