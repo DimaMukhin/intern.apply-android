@@ -16,4 +16,15 @@
     <string name="title">Title</string>
     <string name="message">Message</string>
     <string name="send">Send</string>
+
+    <string name="register_header">Registration</string>
+    <string name="username_label">Username</string>
+    <string name="password_label">Password</string>
+    <string name="password_confirm_label">Confirm password</string>
+    <string name="email_label">Email</string>
+    <string name="email_confirm_label">Confirm email</string>
+    <string name="register_button">Register</string>
+
+
+
 </resources>
