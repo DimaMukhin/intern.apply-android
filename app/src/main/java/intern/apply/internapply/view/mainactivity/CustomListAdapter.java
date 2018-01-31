@@ -13,10 +13,6 @@ import intern.apply.internapply.R;
 import intern.apply.internapply.model.Job;
 
 /**
- * Created by habib on 1/29/2018.
- */
-
-/**
  * CustomListAdapter Class
  * Adapter class to convert from Job to rows.
  *
@@ -37,11 +33,11 @@ public class CustomListAdapter extends ArrayAdapter {
         this.context = context;
 
         allTitles = new String[jobs.size()];
-        for (int i = 0; i < jobs.size(); i++)
-            allTitles[i] = jobs.get(i).getTitle();
         allCompanyNames = new String[jobs.size()];
-        for (int i = 0; i < jobs.size(); i++)
+        for (int i = 0; i < jobs.size(); i++) {
+            allTitles[i] = jobs.get(i).getTitle();
             allCompanyNames[i] = jobs.get(i).getCompanyName();
+        }
     }
 
     public View getView(int position, View view, ViewGroup parent) {
