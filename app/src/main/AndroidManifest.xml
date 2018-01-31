@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.contactusactivity.ContactUsActivity"></activity>
+        <activity android:name=".view.registeractivity.RegisterActivity"></activity>
     </application>
 
 </manifest>
