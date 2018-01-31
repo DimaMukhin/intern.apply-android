@@ -12,6 +12,6 @@ import retrofit2.http.GET;
  */
 
 public interface InternAPIClient {
-    @GET("/api/job")
+    @GET("api/job")
     Observable<List<Job>> getAllJobs();
 }

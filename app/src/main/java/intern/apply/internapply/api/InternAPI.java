@@ -2,7 +2,6 @@ package intern.apply.internapply.api;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-
 import java.util.List;
 
 import intern.apply.internapply.model.Job;
@@ -17,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InternAPI {
     private static InternAPI instance = null;
 
-    private final String BASE_URL = "https://intern-apply.herokuapp.com";
+    private final String BASE_URL = "https://intern-apply.herokuapp.com/";
     private InternAPIClient internAPIClient;
 
     private InternAPI() {
