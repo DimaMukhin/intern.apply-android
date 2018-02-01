@@ -6,9 +6,7 @@ public class ContactMessage {
     private String title;
     private String message;
 
-    public ContactMessage() {
-
-    }
+    public ContactMessage() {}
 
     public ContactMessage(String email, String title, String message) {
         this.email = email;
