@@ -78,6 +78,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:text="@string/register_button"
-        android:id="@+id/register" />
+        android:id="@+id/register"
+        android:onClick="sendMessage"/>
 
 </RelativeLayout>

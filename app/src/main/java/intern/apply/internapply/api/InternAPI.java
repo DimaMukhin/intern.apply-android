@@ -7,6 +7,7 @@ import java.util.List;
 
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.User;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -53,6 +54,13 @@ public class InternAPI {
      * @return the message sent to the server
      */
     public Observable<ContactMessage> sendContactMessage(ContactMessage cm) { return internAPIClient.sendContactMessage(cm); }
+
+    /**
+     * send a new user to the server
+     * @param user details of the new user
+     * @return confirmation response from the server
+     */
+    public Observable<User> register(User user) { return internAPIClient.regiser(user); }
 
     //endregion
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.User;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -16,4 +17,7 @@ public interface InternAPIClient {
 
     @POST("/api/contactMessage")
     Observable<ContactMessage> sendContactMessage(@Body ContactMessage cm);
+
+    @POST("/api/reg")
+    Observable<User> regiser(@Body User user);
 }

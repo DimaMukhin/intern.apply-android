@@ -6,12 +6,16 @@ import org.json.JSONObject;
 public class User {
     private String username;
     private String password;
+    private String confirmPassword;
     private String email;
+    private String confirmEmail;
 
-    public User(String username, String password, String email){
+    public User(String username, String password, String confirmPassword, String email, String confirmEmail){
         this.username = username;
         this.password = password;
+        this.confirmPassword = confirmPassword;
         this.email = email;
+        this.confirmEmail = confirmEmail;
     }
 
     public String getUsername(){
@@ -22,9 +26,13 @@ public class User {
         return password;
     }
 
+    public String getConfirmPassword() { return confirmPassword; }
+
     public String getEmail(){
         return email;
     }
+
+    public String getConfirmEmail() { return confirmEmail; }
 
     public void setUsername(String newUsername){
         username = newUsername;
@@ -37,10 +45,4 @@ public class User {
     public void setEmail(String newEmail){
         email = newEmail;
     }
-
-    /*
-    public JSONObject getJSON(){
-        retrun new JSONObject()
-    }
-    */
 }
