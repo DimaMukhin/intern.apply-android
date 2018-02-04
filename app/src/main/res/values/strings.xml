@@ -17,6 +17,7 @@
     <string name="message">Message</string>
     <string name="send">Send</string>
 
+    <string name="action_register">Register</string>
     <string name="register_header">Registration</string>
     <string name="username_label">Username</string>
     <string name="password_label">Password</string>

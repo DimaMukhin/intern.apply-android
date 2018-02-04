@@ -60,7 +60,7 @@ public class InternAPI {
      * @param user details of the new user
      * @return confirmation response from the server
      */
-    public Observable<User> register(User user) { return internAPIClient.regiser(user); }
+    public Observable<User> register(User user) { return internAPIClient.register(user); }
 
     //endregion
 }

@@ -19,5 +19,5 @@ public interface InternAPIClient {
     Observable<ContactMessage> sendContactMessage(@Body ContactMessage cm);
 
     @POST("/api/reg")
-    Observable<User> regiser(@Body User user);
+    Observable<User> register(@Body User user);
 }

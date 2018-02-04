@@ -2,6 +2,8 @@ package intern.apply.internapply.view.registeractivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordConfirm = findViewById(R.id.passwordConfirm);
         email = findViewById(R.id.email);
         emailConfirm = findViewById(R.id.emailConfirm);
+        api = InternAPI.getAPI();
     }
 
     @Override
@@ -37,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * Send a new user to the server
      */
-    public void addUser() {
+    public void addUser(View view) {
         String username = this.username.getText().toString();
         String password = this.password.getText().toString();
         String passwordConfirm = this.passwordConfirm.getText().toString();
@@ -53,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .subscribe(response -> {
                     Toast.makeText(this, "You were registered successfully", Toast.LENGTH_LONG).show();
                 }, error -> {
+                    Log.i("error", error.toString());
                     Toast.makeText(this, "Something went wrong :(", Toast.LENGTH_LONG).show();
                 });
     }
