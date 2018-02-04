@@ -17,6 +17,7 @@ import android.view.View;
 import intern.apply.internapply.R;
 import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.view.registeractivity.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,6 +83,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.action_contact_us) {
             Intent contactUsIntent = new Intent(MainActivity.this, ContactUsActivity.class);
             startActivity(contactUsIntent);
+        }else if (id == R.id.action_register) {
+            Intent RegisterIntent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(RegisterIntent);
         }
 
         return super.onOptionsItemSelected(item);
