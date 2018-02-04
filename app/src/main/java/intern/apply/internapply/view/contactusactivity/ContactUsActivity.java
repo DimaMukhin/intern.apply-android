@@ -17,6 +17,11 @@ import intern.apply.internapply.model.ServerError;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Contact us activity
+ * contact display and message to developers form
+ */
+
 public class ContactUsActivity extends AppCompatActivity {
 
     private EditText etEmail;

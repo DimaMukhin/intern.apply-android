@@ -12,9 +12,7 @@ public class ServerError {
     private int code;
     private String message;
 
-    public ServerError() {
-
-    }
+    public ServerError() {}
 
     public ServerError(int code, String message) {
         this.code = code;
