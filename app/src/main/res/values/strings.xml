@@ -3,6 +3,9 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="survey_header">Intern.apply Customer Survey</string>
+    <string name="action_survey">Survey</string>
+    <string name="submit">Submit</string>
 
     <string name="action_settings">Settings</string>
 </resources>

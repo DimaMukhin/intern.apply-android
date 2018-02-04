@@ -1,5 +1,6 @@
 package intern.apply.internapply.view.mainactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,6 +16,7 @@ import android.view.View;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.view.surveyactivity.SurveyActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -77,6 +79,9 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_survey) {
+            Intent surveyIntent = new Intent(MainActivity.this, SurveyActivity.class);
+            startActivity(surveyIntent);
         }
 
         return super.onOptionsItemSelected(item);

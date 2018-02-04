@@ -4,7 +4,9 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
 
+import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.SurveyQuestion;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,6 +22,7 @@ public class InternAPI {
     private InternAPIClient internAPIClient;
 
     private InternAPI() {
+
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -39,6 +42,14 @@ public class InternAPI {
 
     public Observable<List<Job>> getAllJobs() {
         return internAPIClient.getAllJobs();
+    }
+
+    public Observable<List<SurveyQuestion>> getSurvey() {
+        return internAPIClient.getSurvey();
+    }
+
+    public Observable<CompletedSurvey> sendCompletedSurvey(CompletedSurvey survey) {
+        return internAPIClient.sendCompletedSurvey(survey);
     }
 
     //endregion
