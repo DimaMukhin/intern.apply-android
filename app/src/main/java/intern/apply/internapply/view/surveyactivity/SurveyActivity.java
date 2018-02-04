@@ -44,8 +44,8 @@ public class SurveyActivity extends AppCompatActivity {
      */
 
     public void sendSurvey(View view) {
-
         CompletedSurvey survey = new CompletedSurvey(questionList.getResponses());
+        
         api.sendCompletedSurvey(survey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

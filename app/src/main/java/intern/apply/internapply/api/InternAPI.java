@@ -22,7 +22,6 @@ public class InternAPI {
     private InternAPIClient internAPIClient;
 
     private InternAPI() {
-
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
