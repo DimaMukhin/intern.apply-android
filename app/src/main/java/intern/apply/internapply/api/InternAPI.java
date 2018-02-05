@@ -4,14 +4,11 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
 
+import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-/**
- * Created by Unknown on 2018-01-13.
- */
 
 public class InternAPI {
     private static InternAPI instance = null;
@@ -29,6 +26,10 @@ public class InternAPI {
         internAPIClient = retrofit.create(InternAPIClient.class);
     }
 
+    /**
+     * intern api singleton provider method
+     * @return an intern api singleton object
+     */
     public static InternAPI getAPI() {
         if (instance == null)
             instance = new InternAPI();
@@ -37,9 +38,20 @@ public class InternAPI {
 
     //region Transit API public calls
 
+    /**
+     * get all jobs from the server
+     * @return list of jobs
+     */
     public Observable<List<Job>> getAllJobs() {
         return internAPIClient.getAllJobs();
     }
+
+    /**
+     * send a "contact-us" message to the server
+     * @param cm the contact-us message
+     * @return the message sent to the server
+     */
+    public Observable<ContactMessage> sendContactMessage(ContactMessage cm) { return internAPIClient.sendContactMessage(cm); }
 
     //endregion
 }

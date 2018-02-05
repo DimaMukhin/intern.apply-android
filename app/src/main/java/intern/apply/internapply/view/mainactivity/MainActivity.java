@@ -1,5 +1,6 @@
 package intern.apply.internapply.view.mainactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import intern.apply.internapply.R;
+import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import intern.apply.internapply.api.InternAPI;
 
 public class MainActivity extends AppCompatActivity
@@ -91,6 +93,9 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_contact_us) {
+            Intent contactUsIntent = new Intent(MainActivity.this, ContactUsActivity.class);
+            startActivity(contactUsIntent);
         }
 
         return super.onOptionsItemSelected(item);
