@@ -13,8 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InternAPI {
     private static InternAPI instance = null;
 
-    //    private final String BASE_URL = "https://intern-apply.herokuapp.com/";
-    private final String BASE_URL = "http://10.0.2.2:3000";
+    private final String BASE_URL = "https://intern-apply.herokuapp.com/";
 
     private InternAPIClient internAPIClient;
 
