@@ -8,9 +8,14 @@ public class Job {
     private int id;
     private String title;
     private String description;
+    private String organization;
 
     public int getId() {
         return id;
+    }
+
+    public String getCompanyName() {
+        return organization;
     }
 
     public String getTitle() {
