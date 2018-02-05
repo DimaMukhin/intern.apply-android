@@ -54,23 +54,21 @@ public class MainActivity extends AppCompatActivity
         jobsList = new JobsList(InternAPI.getAPI());
         jobsList.ShowList(this);
 
-        TextView test =(TextView)findViewById(R.id.hello);
-
         SearchView simpleSearchView = (SearchView) findViewById(R.id.searchBar);
 
         // perform set on query text listener event
         simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                test.setText(query);
-// do something on text submit
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-// do something when text changes
-
+            // do something when text changes
+                if(newText.equals("")){ jobsList.ShowList(MainActivity.this);  }
+                else{ jobsList.ShowFilteredList(MainActivity.this, newText);}
                 return false;
             }
         });
