@@ -43,6 +43,10 @@ public class ContactUsActivity extends AppCompatActivity {
         onInit();
     }
 
+    public void setApi(InternAPI api) {
+        this.api = api;
+    }
+
     /**
      * Send message button click listener
      * sends a message to the server.
@@ -60,7 +64,6 @@ public class ContactUsActivity extends AppCompatActivity {
             .subscribe(response -> {
                 Toast.makeText(this, "Message was sent successfully", Toast.LENGTH_LONG).show();
             }, error -> {
-                Log.i("error", error.toString());
                 List<ServerError> errors = ServerError.getErrorsFromServerException(error);
 
                 for (ServerError se : errors) {
