@@ -1,7 +1,7 @@
 package intern.apply.internapply.view.mainactivity;
 
-import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
@@ -31,7 +31,7 @@ public class JobsList {
                     CustomListAdapter listAdapter = new CustomListAdapter(activity, response);
                     ListView listView = activity.findViewById(R.id.JobsListView);
                     listView.setAdapter(listAdapter);
-                }, error -> Log.i("error", error.toString()));
+                }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
     }
 
     public void ShowFilteredList(MainActivity activity,String filter) {

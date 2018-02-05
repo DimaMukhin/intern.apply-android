@@ -1,5 +1,6 @@
 package intern.apply.internapply.view.mainactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,12 +20,14 @@ import android.widget.TextView;
 import android.view.View;
 
 import intern.apply.internapply.R;
+import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import intern.apply.internapply.api.InternAPI;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private JobsList jobsList;
+    private InternAPI internAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,20 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        jobsList = new JobsList(InternAPI.getAPI());
+        boolean test = getIntent().getBooleanExtra("TEST", false);
+        if (!test) {
+            internAPI = InternAPI.getAPI();
+            ShowJobs();
+        }
+    }
+
+    public void SetAPI(InternAPI api) {
+        internAPI = api;
+        ShowJobs();
+    }
+
+    public void ShowJobs() {
+        jobsList = new JobsList(internAPI);
         jobsList.ShowList(this);
 
         SearchView simpleSearchView = (SearchView) findViewById(R.id.searchBar);
@@ -104,6 +120,9 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_contact_us) {
+            Intent contactUsIntent = new Intent(MainActivity.this, ContactUsActivity.class);
+            startActivity(contactUsIntent);
         }
 
         return super.onOptionsItemSelected(item);

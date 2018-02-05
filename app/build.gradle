@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 26
     defaultConfig {
         applicationId "intern.apply.internapply"
         minSdkVersion 27
@@ -17,8 +17,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
     productFlavors {
     }
@@ -39,4 +39,7 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.3.1'
+    androidTestCompile 'org.mockito:mockito-android:2.7.22'
 }
