@@ -14,6 +14,9 @@ public interface InternAPIClient {
     @GET("/api/job")
     Observable<List<Job>> getAllJobs();
 
+    @POST("/api/job")
+    Observable<Job> addJob(@Body Job job);
+
     @POST("/api/contactMessage")
     Observable<ContactMessage> sendContactMessage(@Body ContactMessage cm);
 }

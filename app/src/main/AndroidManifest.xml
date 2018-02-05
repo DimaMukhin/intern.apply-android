@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.contactusactivity.ContactUsActivity" />
-        <activity android:name=".view.addjobactivity.AddJobActivity"></activity>
+        <activity
+            android:name=".view.addjobactivity.AddJobActivity"
+            android:parentActivityName=".view.mainactivity.MainActivity"></activity>
     </application>
 
 </manifest>

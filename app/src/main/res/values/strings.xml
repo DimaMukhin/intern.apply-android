@@ -25,5 +25,6 @@
     <string name="job_title">Title</string>
     <string name="job_description">Description</string>
     <string name="add_job_button">Submit</string>
+    <string name="job_location">Location</string>
 
 </resources>

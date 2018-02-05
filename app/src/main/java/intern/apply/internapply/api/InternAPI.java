@@ -13,7 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InternAPI {
     private static InternAPI instance = null;
 
-    private final String BASE_URL = "https://intern-apply.herokuapp.com/";
+    //    private final String BASE_URL = "https://intern-apply.herokuapp.com/";
+    private final String BASE_URL = "http://10.0.2.2:3000";
+
     private InternAPIClient internAPIClient;
 
     private InternAPI() {
@@ -28,6 +30,7 @@ public class InternAPI {
 
     /**
      * intern api singleton provider method
+     *
      * @return an intern api singleton object
      */
     public static InternAPI getAPI() {
@@ -40,6 +43,7 @@ public class InternAPI {
 
     /**
      * get all jobs from the server
+     *
      * @return list of jobs
      */
     public Observable<List<Job>> getAllJobs() {
@@ -48,10 +52,24 @@ public class InternAPI {
 
     /**
      * send a "contact-us" message to the server
+     *
      * @param cm the contact-us message
      * @return the message sent to the server
      */
-    public Observable<ContactMessage> sendContactMessage(ContactMessage cm) { return internAPIClient.sendContactMessage(cm); }
+    public Observable<ContactMessage> sendContactMessage(ContactMessage cm) {
+        return internAPIClient.sendContactMessage(cm);
+    }
+
+
+    /**
+     * Sends a job the server
+     *
+     * @param job the new job
+     * @return servers response
+     */
+    public Observable<Job> addJob(Job job) {
+        return internAPIClient.addJob((job));
+    }
 
     //endregion
 }
