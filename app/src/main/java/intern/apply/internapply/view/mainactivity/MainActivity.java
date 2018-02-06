@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.view.View;
@@ -61,36 +64,49 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void SetAPI(InternAPI api) {
+    public void SetAPI(InternAPI api,Boolean testSearch) {
         internAPI = api;
-        ShowJobs();
+        if(testSearch) { ShowFilteredJobs(testSearch); }
+        else { ShowJobs();}
+
+    }
+    public void ShowFilteredJobs(Boolean searchTest)
+    {
+        EditText searchBox = (EditText)findViewById(R.id.searchBox);
+
+        searchBox.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String query= s.toString();
+                if(query.equals("")){ jobsList.ShowList(MainActivity.this);  }
+                else{ jobsList.ShowFilteredList(MainActivity.this, query);}
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+
+            }
+        });
+
+        if(searchTest)
+        {
+            jobsList = new JobsList(internAPI);
+            String query=searchBox.getText().toString();
+            jobsList.ShowFilteredList(this, query);
+        }
     }
 
     public void ShowJobs() {
         jobsList = new JobsList(internAPI);
         jobsList.ShowList(this);
-
-        SearchView simpleSearchView = (SearchView) findViewById(R.id.searchBar);
-
-        // perform set on query text listener event
-        simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-            // do something when text changes
-                if(newText.equals("")){ jobsList.ShowList(MainActivity.this);  }
-                else{ jobsList.ShowFilteredList(MainActivity.this, newText);}
-                return false;
-            }
-        });
-
-
-
+        ShowFilteredJobs(false);
     }
 
     @Override

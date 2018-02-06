@@ -9,19 +9,19 @@
     tools:showIn="@layout/app_bar_main">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="509dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="368dp">
+        tools:layout_editor_absoluteX="368dp"
+        tools:layout_editor_absoluteY="2dp">
 
-        <SearchView
-            android:id="@+id/searchBar"
+        <EditText
+            android:id="@+id/searchBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp">
-
-        </SearchView>
+            android:hint="Search Jobs"
+            android:inputType="text" />
 
         <ListView
             android:id="@+id/JobsListView"

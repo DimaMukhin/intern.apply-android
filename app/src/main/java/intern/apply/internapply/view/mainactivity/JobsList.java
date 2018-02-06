@@ -1,10 +1,15 @@
 package intern.apply.internapply.view.mainactivity;
 
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.model.Job;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -35,6 +40,7 @@ public class JobsList {
     }
 
     public void ShowFilteredList(MainActivity activity,String filter) {
+        Observable<List<Job>> job = api.getAllJobs(filter);
         api.getAllJobs(filter).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
