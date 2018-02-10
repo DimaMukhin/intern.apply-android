@@ -50,7 +50,7 @@ public class ServerError {
             return gError;
         } catch (Exception ex) {
             List<ServerError> unknownError = new LinkedList<>();
-            unknownError.add(new ServerError(0, "unkown server error"));
+            unknownError.add(new ServerError(0, "unknown server error"));
             return unknownError;
         }
     }
