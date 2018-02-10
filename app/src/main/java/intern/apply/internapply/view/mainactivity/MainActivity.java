@@ -10,19 +10,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import intern.apply.internapply.R;
+import intern.apply.internapply.model.Job;
 import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private JobsList jobsList;
     private InternAPI internAPI;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +68,23 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void ShowJobs() {
+        listView = findViewById(R.id.JobsListView);
         jobsList = new JobsList(internAPI);
         jobsList.ShowList(this);
+        onJobClick();
+    }
+
+    /**
+     * navigates to the page of a specific job
+     */
+    public void onJobClick() {
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            Job job = (Job) adapterView.getItemAtPosition(i);
+
+            Intent intent = new Intent(this, ViewJobActivity.class);
+            intent.putExtra("jobId", job.getId());
+            startActivity(intent);
+        });
     }
 
     @Override

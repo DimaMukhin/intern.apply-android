@@ -19,5 +19,5 @@ public interface InternAPIClient {
     Observable<ContactMessage> sendContactMessage(@Body ContactMessage cm);
 
     @GET("/api/job/{id}")
-    Observable<Job> getJob(@Path("id") int jobId);
+    Observable<List<Job>> getJob(@Path("id") int jobId);
 }

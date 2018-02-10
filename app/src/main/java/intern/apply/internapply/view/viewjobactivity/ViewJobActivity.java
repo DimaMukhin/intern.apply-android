@@ -3,6 +3,7 @@ package intern.apply.internapply.view.viewjobactivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.api.InternAPIClient;
+import intern.apply.internapply.model.Job;
 import intern.apply.internapply.view.mainactivity.CustomListAdapter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -30,6 +32,7 @@ public class ViewJobActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_job);
         onInit();
+        displayJob();
     }
 
     private void onInit(){
@@ -49,11 +52,13 @@ public class ViewJobActivity extends AppCompatActivity {
         api.getJob(jobId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    jobTitle.setText(response.getTitle());
-                    jobOrgnization.setText(response.getCompanyName());
-                    jobLocation.setText(response.);
+                    Job job = response.get(0);
+                    jobTitle.setText(job.getTitle());
+                    jobOrgnization.setText(job.getCompanyName());
+                    jobLocation.setText(job.getLocation());
+                    jobDescription.setText(job.getDescription());
                 }, error -> {
-                    Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
                 });
     }
 
@@ -61,7 +66,7 @@ public class ViewJobActivity extends AppCompatActivity {
      * checking if intent exists
      * @return true if intent exists
      */
-    private boolean getJobId(){
+    private void getJobId(){
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 

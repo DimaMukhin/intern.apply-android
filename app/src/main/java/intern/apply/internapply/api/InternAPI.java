@@ -58,6 +58,6 @@ public class InternAPI {
      * @param jobId the id of the job
      * @return the job with the given id
      */
-    public Observable<Job> getJob(int jobId){ return internAPIClient.getJob(jobId); }
+    public Observable<List<Job>> getJob(int jobId){ return internAPIClient.getJob(jobId); }
     //endregion
 }
