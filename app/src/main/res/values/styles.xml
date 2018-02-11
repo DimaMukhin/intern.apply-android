@@ -11,9 +11,7 @@
     <style name="AppTheme.NoActionBar">
         false
         true
-        @android:color/transparent
-        <item name="windowNoTitle">true</item>
-    </style>
+        @android:color/transparent</style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
