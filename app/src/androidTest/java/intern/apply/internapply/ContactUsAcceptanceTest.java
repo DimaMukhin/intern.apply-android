@@ -29,7 +29,7 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
     private static final String TEXT_NOT_FOUND = "text not found";
 
     private Solo solo;
-    private InternAPI api;
+    private final InternAPI api;
 
     public ContactUsAcceptanceTest() {
         super(ContactUsActivity.class);
@@ -39,12 +39,14 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
 
     @Override
     public void setUp() throws Exception {
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @Override
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
+        super.tearDown();
     }
 
     public void testValidMessageSent() {
@@ -90,13 +92,13 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
         solo.waitForActivity(ContactUsActivity.class);
 
         List<ServerError> errors = new ArrayList<>();
-        errors.add(new ServerError(2, "Invalid title (max 25 characters)"));
+        errors.add(new ServerError(2, "Invalid title (max 100 characters)"));
         Observable<ContactMessage> output = Observable.error(CreateHttpException(errors));
         when(api.sendContactMessage(any())).thenReturn(output);
         getActivity().setApi(api);
 
         solo.clickOnButton("Send");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid title"));
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid job title"));
     }
 
     public void testInvalidBodySendMessage() {

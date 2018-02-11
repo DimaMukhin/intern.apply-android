@@ -51,7 +51,6 @@ public class AddJobActivity extends AppCompatActivity {
         String location = etJobLoc.getText().toString();
 
 
-
         Job newJob = new Job(organization, title, location, description);
 
         api.addJob(newJob)
@@ -65,22 +64,20 @@ public class AddJobActivity extends AppCompatActivity {
                             Log.i("error", error.toString());
                             List<ServerError> errors = ServerError.getErrorsFromServerException(error);
 
-                            for (ServerError se : errors) {
-                                if (se.getCode() == 11)
+                            if (errors.size() == 0 || errors.get(0).getCode() == 0)
+                                Toast.makeText(this, R.string.InternalServerError, Toast.LENGTH_LONG).show();
+                            else {
+                                if (errors.get(0).getCode() == 11)
                                     Toast.makeText(this, "Invalid job organization", Toast.LENGTH_LONG).show();
-                                else if (se.getCode() == 12)
-                                    Toast.makeText(this, "Invalid job title (max 100 characters)", Toast.LENGTH_LONG).show();
-                                else if (se.getCode() == 13)
-                                    Toast.makeText(this, "Invalid job location (max 45 characters)", Toast.LENGTH_LONG).show();
-                                else if (se.getCode() == 14)
-                                    Toast.makeText(this, "Invalid job description (max 2000 characters)", Toast.LENGTH_LONG).show();
-                                else
-                                    Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
-                                break;
+                                else if (errors.get(0).getCode() == 12)
+                                    Toast.makeText(this, R.string.InvalidTitle, Toast.LENGTH_LONG).show();
+                                else if (errors.get(0).getCode() == 13)
+                                    Toast.makeText(this, R.string.InvalidJobLocation, Toast.LENGTH_LONG).show();
+                                else if (errors.get(0).getCode() == 14)
+                                    Toast.makeText(this, R.string.InvalidJobDescription, Toast.LENGTH_LONG).show();
                             }
                         }
                 );
-
     }
 
     private void resetForm() {

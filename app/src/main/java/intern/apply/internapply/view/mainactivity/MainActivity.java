@@ -2,32 +2,27 @@ package intern.apply.internapply.view.mainactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import intern.apply.internapply.R;
-import intern.apply.internapply.view.addjobactivity.AddJobActivity;
-import intern.apply.internapply.model.Job;
-import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.model.Job;
+import intern.apply.internapply.view.addjobactivity.AddJobActivity;
+import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private JobsList jobsList;
     private InternAPI internAPI;
     private ListView listView;
 
@@ -37,7 +32,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -60,9 +54,9 @@ public class MainActivity extends AppCompatActivity
         ShowJobs();
     }
 
-    public void ShowJobs() {
+    private void ShowJobs() {
         listView = findViewById(R.id.JobsListView);
-        jobsList = new JobsList(internAPI);
+        JobsList jobsList = new JobsList(internAPI);
         jobsList.ShowList(this);
         onJobClick();
     }
@@ -70,7 +64,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * navigates to the page of a specific job
      */
-    public void onJobClick() {
+    private void onJobClick() {
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Job job = (Job) adapterView.getItemAtPosition(i);
 
@@ -117,7 +111,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 

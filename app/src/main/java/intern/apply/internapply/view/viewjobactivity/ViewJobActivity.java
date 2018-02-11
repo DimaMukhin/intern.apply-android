@@ -1,8 +1,8 @@
 package intern.apply.internapply.view.viewjobactivity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,7 +30,7 @@ public class ViewJobActivity extends AppCompatActivity {
         displayJob();
     }
 
-    private void onInit(){
+    private void onInit() {
         getJobId();
         api = InternAPI.getAPI();
         jobTitle = findViewById(R.id.jobTitle);
@@ -43,11 +43,11 @@ public class ViewJobActivity extends AppCompatActivity {
     /**
      * displays a job in the view
      */
-    private void displayJob(){
+    private void displayJob() {
         api.getJob(jobId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    if(response.size() != 0) {
+                    if (response.size() != 0) {
                         Job job = response.get(0);
                         jobTitle.setText(job.getTitle());
                         jobOrganization.setText(job.getOrganization());
@@ -56,7 +56,7 @@ public class ViewJobActivity extends AppCompatActivity {
 
                         // changed to visible here so rendering would be at the same time
                         jobApply.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         finish();
                     }
                 }, error -> finish());
@@ -65,12 +65,12 @@ public class ViewJobActivity extends AppCompatActivity {
     /**
      * getting the intent that has the job id
      */
-    private void getJobId(){
+    private void getJobId() {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
-        if(extras != null){
-            if(extras.containsKey("jobId"))
+        if (extras != null) {
+            if (extras.containsKey("jobId"))
                 jobId = extras.getInt("jobId");
             else
                 jobId = 0;

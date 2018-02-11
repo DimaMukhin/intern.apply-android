@@ -13,11 +13,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InternAPI {
     private static InternAPI instance = null;
 
-    private final String BASE_URL = "https://intern-apply.herokuapp.com/";
-
-    private InternAPIClient internAPIClient;
+    private final InternAPIClient internAPIClient;
 
     private InternAPI() {
+        String BASE_URL = "https://intern-apply.herokuapp.com/";
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -72,9 +71,12 @@ public class InternAPI {
 
     /**
      * get a specific job by id
+     *
      * @param jobId the id of the job
      * @return the job with the given id
      */
-    public Observable<List<Job>> getJob(int jobId){ return internAPIClient.getJob(jobId); }
+    public Observable<List<Job>> getJob(int jobId) {
+        return internAPIClient.getJob(jobId);
+    }
     //endregion
 }
