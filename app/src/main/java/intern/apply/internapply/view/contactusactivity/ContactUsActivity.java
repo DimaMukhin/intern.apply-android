@@ -1,12 +1,10 @@
 package intern.apply.internapply.view.contactusactivity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 import java.util.List;
 
@@ -33,7 +31,9 @@ public class ContactUsActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etTitle = findViewById(R.id.etTitle);
         etMessage = findViewById(R.id.etMessage);
-        api = InternAPI.getAPI();
+        boolean test = getIntent().getBooleanExtra("TEST", false);
+        if (!test)
+            api = InternAPI.getAPI();
     }
 
     @Override

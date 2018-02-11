@@ -14,7 +14,6 @@ import java.util.List;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.ServerError;
-import intern.apply.internapply.model.ServerErrorException;
 import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import io.reactivex.Observable;
 import okhttp3.MediaType;
@@ -78,13 +77,40 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
 
         List<ServerError> errors = new ArrayList<>();
         errors.add(new ServerError(1, "Invalid email address"));
-
         Observable<ContactMessage> output = Observable.error(CreateHttpException(errors));
         when(api.sendContactMessage(any())).thenReturn(output);
         getActivity().setApi(api);
 
         solo.clickOnButton("Send");
         assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid email address"));
+    }
+
+    public void testInvalidTitleSendMessage() {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, ContactUsActivity.class);
+        solo.waitForActivity(ContactUsActivity.class);
+
+        List<ServerError> errors = new ArrayList<>();
+        errors.add(new ServerError(2, "Invalid title (max 25 characters)"));
+        Observable<ContactMessage> output = Observable.error(CreateHttpException(errors));
+        when(api.sendContactMessage(any())).thenReturn(output);
+        getActivity().setApi(api);
+
+        solo.clickOnButton("Send");
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid title"));
+    }
+
+    public void testInvalidBodySendMessage() {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, ContactUsActivity.class);
+        solo.waitForActivity(ContactUsActivity.class);
+
+        List<ServerError> errors = new ArrayList<>();
+        errors.add(new ServerError(3, "Invalid message body (max 300 characters)"));
+        Observable<ContactMessage> output = Observable.error(CreateHttpException(errors));
+        when(api.sendContactMessage(any())).thenReturn(output);
+        getActivity().setApi(api);
+
+        solo.clickOnButton("Send");
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid message body"));
     }
 
     private HttpException CreateHttpException(List<ServerError> errors) {
@@ -102,34 +128,5 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
                         ResponseBody.create(
                                 MediaType.parse("application/json; charset=utf-8"),
                                 errorBody.toString())));
-    }
-
-
-    public void testInvalidTitleSendMessage() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, ContactUsActivity.class);
-        solo.waitForActivity(ContactUsActivity.class);
-
-        ServerErrorException errs = new ServerErrorException();
-        errs.addErrorCode(2);
-        Observable<ContactMessage> output = Observable.error(errs);
-        when(api.sendContactMessage(any())).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.clickOnButton("Send");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid title"));
-    }
-
-    public void testInvalidBodySendMessage() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, ContactUsActivity.class);
-        solo.waitForActivity(ContactUsActivity.class);
-
-        ServerErrorException errs = new ServerErrorException();
-        errs.addErrorCode(3);
-        Observable<ContactMessage> output = Observable.error(errs);
-        when(api.sendContactMessage(any())).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.clickOnButton("Send");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid message body"));
     }
 }

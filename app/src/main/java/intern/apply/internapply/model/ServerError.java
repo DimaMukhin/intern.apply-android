@@ -37,9 +37,6 @@ public class ServerError {
      * @return the list of server errors found in the error object
      */
     public static List<ServerError> getErrorsFromServerException(Throwable error) {
-        if (error instanceof ServerErrorException)
-            return ((ServerErrorException) error).getErrors();
-
         try {
             HttpException e = (HttpException)error;
             String errorBody;
