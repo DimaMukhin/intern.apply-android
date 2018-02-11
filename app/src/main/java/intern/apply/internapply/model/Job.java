@@ -7,12 +7,17 @@ public class Job {
     private String location;
     private String description;
 
+    public Job(String title, String organization) {
+        this.title = title;
+        this.organization = organization;
+    }
+
     public Job(String organization, String title, String location, String description) {
         this.organization = organization;
         this.title = title;
         this.location = location;
         this.description = description;
-}
+    }
 
     public int getId() {
         return id;
