@@ -61,11 +61,8 @@ public class ContactUsActivity extends AppCompatActivity {
         api.sendContactMessage(cm)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> Toast.makeText(this, "Message was sent successfully", Toast.LENGTH_LONG).show(), error -> {
-                Log.i("error", error.toString());
-            .subscribe(response -> {
-                Toast.makeText(this, "Message was sent successfully", Toast.LENGTH_LONG).show();
-            }, error -> {
+                .subscribe(response -> Toast.makeText(this, "Message was sent successfully", Toast.LENGTH_LONG).show()
+                        , error -> {
                 List<ServerError> errors = ServerError.getErrorsFromServerException(error);
 
                     if (errors.size() == 0)

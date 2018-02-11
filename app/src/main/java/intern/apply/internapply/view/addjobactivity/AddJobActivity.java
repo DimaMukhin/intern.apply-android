@@ -51,7 +51,6 @@ public class AddJobActivity extends AppCompatActivity {
         String location = etJobLoc.getText().toString();
 
 
-
         Job newJob = new Job(organization, title, location, description);
 
         api.addJob(newJob)

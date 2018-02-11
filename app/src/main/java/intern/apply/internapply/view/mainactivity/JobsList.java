@@ -1,16 +1,10 @@
 package intern.apply.internapply.view.mainactivity;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
-import intern.apply.internapply.model.Job;
-import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
