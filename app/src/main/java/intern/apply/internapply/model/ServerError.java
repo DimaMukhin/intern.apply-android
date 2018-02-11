@@ -39,11 +39,10 @@ public class ServerError {
             errorBody = e.response().errorBody().string();
             Gson gson = new Gson();
             Type type = new TypeToken<List<ServerError>>() {}.getType();
-            List<ServerError> gError = gson.fromJson(errorBody, type);
-            return gError;
+            return gson.fromJson(errorBody, type);
         } catch (Exception ex) {
             List<ServerError> unknownError = new LinkedList<>();
-            unknownError.add(new ServerError(0, "unkown server error"));
+            unknownError.add(new ServerError(0, "unknown server error"));
             return unknownError;
         }
     }

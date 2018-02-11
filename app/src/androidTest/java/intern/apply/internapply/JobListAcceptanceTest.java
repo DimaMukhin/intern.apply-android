@@ -37,12 +37,14 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
     }
 
     public void setUp() throws Exception {
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @Override
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
+        super.tearDown();
     }
 
     private void findStrings(String[] expectedStrings) {

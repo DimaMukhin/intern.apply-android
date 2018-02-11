@@ -1,9 +1,5 @@
 package intern.apply.internapply.model;
 
-/**
- * Created by Unknown on 2018-01-19.
- */
-
 public class Job {
     private String title;
     private String organization;
