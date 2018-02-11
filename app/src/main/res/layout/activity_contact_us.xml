@@ -8,7 +8,6 @@
     tools:context="intern.apply.internapply.view.contactusactivity.ContactUsActivity">
 
     <TextView
-        android:id="@+id/tvAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/address"
@@ -16,7 +15,6 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvActualAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/_66_chancellors_cir_winnipeg_mb_r3t_2n2"
@@ -24,7 +22,6 @@
         tools:text="66 Chancellors Cir, Winnipeg, MB R3T 2N2" />
 
     <TextView
-        android:id="@+id/tvPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/phone"
@@ -32,7 +29,6 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/_1_204_1234_567"
@@ -40,7 +36,6 @@
         tools:text="+1 (204) 1234-567" />
 
     <TextView
-        android:id="@+id/tvEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/email"
@@ -48,14 +43,12 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvActualEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/intern_apply_com"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/tvSendUsAMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/send_us_a_message"
@@ -94,7 +87,6 @@
         android:inputType="textMultiLine|textShortMessage" />
 
     <Button
-        android:id="@+id/btSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="sendMessage"

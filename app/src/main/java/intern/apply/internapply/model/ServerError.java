@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ServerError {
-    private int code;
-    private String message;
+    private final int code;
+    private final String message;
 
     public ServerError(int code, String message) {
         this.code = code;
