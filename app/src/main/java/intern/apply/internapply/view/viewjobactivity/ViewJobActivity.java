@@ -76,11 +76,4 @@ public class ViewJobActivity extends AppCompatActivity {
                 jobId = 0;
         }
     }
-
-    /**
-     * checking for empty or blank string
-     */
-    private boolean isBlank(CharSequence charSequence){
-        return charSequence.toString().matches("\\s*");
-    }
 }
