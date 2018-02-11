@@ -9,6 +9,7 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface InternAPIClient {
     @GET("/api/job")
@@ -19,4 +20,7 @@ public interface InternAPIClient {
 
     @POST("/api/contactMessage")
     Observable<ContactMessage> sendContactMessage(@Body ContactMessage cm);
+
+    @GET("/api/job/{id}")
+    Observable<List<Job>> getJob(@Path("id") int jobId);
 }

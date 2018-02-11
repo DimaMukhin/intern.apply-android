@@ -18,7 +18,6 @@
     <string name="message">Message</string>
     <string name="send">Send</string>
 
-
     <!-- Strings related to Add Job -->
     <string name="add_job_title">Add Job</string>
     <string name="job_organization">Organization</string>
@@ -26,5 +25,7 @@
     <string name="job_description">Description</string>
     <string name="add_job_button">Submit</string>
     <string name="job_location">Location</string>
+
+    <string name="apply">apply</string>
 
 </resources>
