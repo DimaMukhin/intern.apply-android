@@ -23,7 +23,6 @@ import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private JobsList jobsList;
     private InternAPI internAPI;
     private ListView listView;
 
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity
 
     public void ShowJobs() {
         listView = findViewById(R.id.JobsListView);
-        jobsList = new JobsList(internAPI);
+        JobsList jobsList = new JobsList(internAPI);
         jobsList.ShowList(this);
         onJobClick();
     }

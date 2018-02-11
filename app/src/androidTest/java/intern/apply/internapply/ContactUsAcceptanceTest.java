@@ -39,12 +39,14 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
 
     @Override
     public void setUp() throws Exception {
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @Override
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
+        super.tearDown();
     }
 
     public void testValidMessageSent() {

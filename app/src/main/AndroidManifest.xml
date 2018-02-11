@@ -25,8 +25,8 @@
         <activity android:name=".view.contactusactivity.ContactUsActivity" />
         <activity
             android:name=".view.addjobactivity.AddJobActivity"
-            android:parentActivityName=".view.mainactivity.MainActivity"></activity>
-        <activity android:name=".view.viewjobactivity.ViewJobActivity"></activity>
+            android:parentActivityName=".view.mainactivity.MainActivity" />
+        <activity android:name=".view.viewjobactivity.ViewJobActivity" />
 
     </application>
 

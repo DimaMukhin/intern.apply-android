@@ -59,23 +59,22 @@ public class ContactUsActivity extends AppCompatActivity {
 
         ContactMessage cm = new ContactMessage(email, title, message);
         api.sendContactMessage(cm)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> Toast.makeText(this, "Message was sent successfully", Toast.LENGTH_LONG).show()
                         , error -> {
-                List<ServerError> errors = ServerError.getErrorsFromServerException(error);
+                            List<ServerError> errors = ServerError.getErrorsFromServerException(error);
 
-                    if (errors.size() == 0)
-                        Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
-                    else {
-                        if (errors.get(0).getCode() == 1)
-                            Toast.makeText(this, "Invalid email address", Toast.LENGTH_LONG).show();
-                        else if (errors.get(0).getCode() == 2)
-                            Toast.makeText(this, "Invalid title (max 25 characters)", Toast.LENGTH_LONG).show();
-                        else if (errors.get(0).getCode() == 3)
-                            Toast.makeText(this, "Invalid message body (max 300 characters)", Toast.LENGTH_LONG).show();
-                        else Toast.makeText(this, "Unknown server error", Toast.LENGTH_LONG).show();
-                }
-            });
+                            if (errors.size() == 0 || errors.get(0).getCode() == 0)
+                                Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
+                            else {
+                                if (errors.get(0).getCode() == 1)
+                                    Toast.makeText(this, "Invalid email address", Toast.LENGTH_LONG).show();
+                                else if (errors.get(0).getCode() == 2)
+                                    Toast.makeText(this, "Invalid title (max 25 characters)", Toast.LENGTH_LONG).show();
+                                else if (errors.get(0).getCode() == 3)
+                                    Toast.makeText(this, "Invalid message body (max 300 characters)", Toast.LENGTH_LONG).show();
+                            }
+                        });
     }
 }
