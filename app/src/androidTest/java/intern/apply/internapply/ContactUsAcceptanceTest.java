@@ -92,13 +92,13 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
         solo.waitForActivity(ContactUsActivity.class);
 
         List<ServerError> errors = new ArrayList<>();
-        errors.add(new ServerError(2, "Invalid title (max 25 characters)"));
+        errors.add(new ServerError(2, "Invalid title (max 100 characters)"));
         Observable<ContactMessage> output = Observable.error(CreateHttpException(errors));
         when(api.sendContactMessage(any())).thenReturn(output);
         getActivity().setApi(api);
 
         solo.clickOnButton("Send");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid title"));
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid job title"));
     }
 
     public void testInvalidBodySendMessage() {

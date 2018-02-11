@@ -65,16 +65,16 @@ public class AddJobActivity extends AppCompatActivity {
                             List<ServerError> errors = ServerError.getErrorsFromServerException(error);
 
                             if (errors.size() == 0 || errors.get(0).getCode() == 0)
-                                Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
+                                Toast.makeText(this, R.string.InternalServerError, Toast.LENGTH_LONG).show();
                             else {
                                 if (errors.get(0).getCode() == 11)
                                     Toast.makeText(this, "Invalid job organization", Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 12)
-                                    Toast.makeText(this, "Invalid job title (max 100 characters)", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this, R.string.InvalidTitle, Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 13)
-                                    Toast.makeText(this, "Invalid job location (max 45 characters)", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this, R.string.InvalidJobLocation, Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 14)
-                                    Toast.makeText(this, "Invalid job description (max 2000 characters)", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this, R.string.InvalidJobDescription, Toast.LENGTH_LONG).show();
                             }
                         }
                 );
