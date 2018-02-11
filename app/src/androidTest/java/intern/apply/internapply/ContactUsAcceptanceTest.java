@@ -29,7 +29,7 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
     private static final String TEXT_NOT_FOUND = "text not found";
 
     private Solo solo;
-    private InternAPI api;
+    private final InternAPI api;
 
     public ContactUsAcceptanceTest() {
         super(ContactUsActivity.class);

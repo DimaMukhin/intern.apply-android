@@ -22,7 +22,7 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
     private static final String TEXT_NOT_FOUND = "text not found";
     private Solo solo;
 
-    private InternAPI api;
+    private final InternAPI api;
 
     private String[] singleJobData;
     private String[] multipleJobsData;
@@ -88,7 +88,7 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
         solo.waitForView(R.id.JobsListView);
     }
 
-    public void PopulateFakeJobs() {
+    private void PopulateFakeJobs() {
         singleJobData = new String[]{
                 "Software Engineering", "Facebook"
         };

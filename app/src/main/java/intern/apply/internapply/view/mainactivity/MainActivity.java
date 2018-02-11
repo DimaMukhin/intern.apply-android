@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         ShowJobs();
     }
 
-    public void ShowJobs() {
+    private void ShowJobs() {
         listView = findViewById(R.id.JobsListView);
         JobsList jobsList = new JobsList(internAPI);
         jobsList.ShowList(this);
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * navigates to the page of a specific job
      */
-    public void onJobClick() {
+    private void onJobClick() {
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Job job = (Job) adapterView.getItemAtPosition(i);
 

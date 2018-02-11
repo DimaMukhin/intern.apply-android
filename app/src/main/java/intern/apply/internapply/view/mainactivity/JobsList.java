@@ -17,8 +17,8 @@ import io.reactivex.schedulers.Schedulers;
  * @since 2018-01-30
  */
 
-public class JobsList {
-    private InternAPI api;
+class JobsList {
+    private final InternAPI api;
     private ListView listView;
 
     public JobsList(InternAPI api) {

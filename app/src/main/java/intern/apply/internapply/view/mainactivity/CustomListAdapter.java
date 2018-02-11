@@ -22,7 +22,7 @@ import intern.apply.internapply.model.Job;
  * @since 2018-01-30
  */
 
-public class CustomListAdapter extends ArrayAdapter {
+class CustomListAdapter extends ArrayAdapter {
     //to reference the Activity
     private final Activity context;
     private final List<Job> jobs;

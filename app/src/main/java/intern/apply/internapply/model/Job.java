@@ -2,22 +2,14 @@ package intern.apply.internapply.model;
 
 public class Job {
     private int id;
-    private String organization;
-    private String title;
+    private final String organization;
+    private final String title;
     private String location;
     private String description;
 
     public Job(String title, String organization) {
         this.title = title;
         this.organization = organization;
-    }
-
-    public Job(String title, String organization, String location, String description, int id) {
-        this.title = title;
-        this.organization = organization;
-        this.location = location;
-        this.description = description;
-        this.id = id;
     }
 
     public Job(String organization, String title, String location, String description) {
