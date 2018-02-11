@@ -19,6 +19,10 @@ public class ServerError {
         this.message = message;
     }
 
+    public ServerError(int code) {
+        this.code = code;
+    }
+
     public int getCode() {
         return code;
     }
