@@ -27,8 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="left"
-            android:paddingLeft="26dip"
+            android:gravity="start"
+            android:paddingStart="26dip"
+            android:paddingEnd="0dip"
             android:text="TextView" />
 
     </LinearLayout>
