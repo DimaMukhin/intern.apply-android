@@ -34,7 +34,7 @@ public class CustomListAdapter extends ArrayAdapter {
 
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.jobs_listview_row, null, true);
+        View rowView = inflater.inflate(R.layout.jobs_listview_row, parent, false);
 
         TextView titleField = rowView.findViewById(R.id.TitleTextView);
         TextView companyField = rowView.findViewById(R.id.CompanyTextView);
