@@ -53,5 +53,11 @@ public class InternAPI {
      */
     public Observable<ContactMessage> sendContactMessage(ContactMessage cm) { return internAPIClient.sendContactMessage(cm); }
 
+    /**
+     * get a specific job by id
+     * @param jobId the id of the job
+     * @return the job with the given id
+     */
+    public Observable<List<Job>> getJob(int jobId){ return internAPIClient.getJob(jobId); }
     //endregion
 }
