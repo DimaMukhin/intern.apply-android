@@ -19,6 +19,10 @@ public class ServerError {
         this.message = message;
     }
 
+    public ServerError(int code) {
+        this.code = code;
+    }
+
     public int getCode() {
         return code;
     }
@@ -43,7 +47,7 @@ public class ServerError {
             return gError;
         } catch (Exception ex) {
             List<ServerError> unknownError = new LinkedList<>();
-            unknownError.add(new ServerError(0, "unkown server error"));
+            unknownError.add(new ServerError(0, "unknown server error"));
             return unknownError;
         }
     }

@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private JobsList jobsList;
+    private InternAPI internAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,20 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        jobsList = new JobsList(InternAPI.getAPI());
+        boolean test = getIntent().getBooleanExtra("TEST", false);
+        if (!test) {
+            internAPI = InternAPI.getAPI();
+            ShowJobs();
+        }
+    }
+
+    public void SetAPI(InternAPI api) {
+        internAPI = api;
+        ShowJobs();
+    }
+
+    public void ShowJobs() {
+        jobsList = new JobsList(internAPI);
         jobsList.ShowList(this);
     }
 
