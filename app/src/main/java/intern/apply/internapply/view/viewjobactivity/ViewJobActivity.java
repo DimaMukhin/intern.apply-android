@@ -50,7 +50,7 @@ public class ViewJobActivity extends AppCompatActivity {
                     if(response.size() == 0) {
                         Job job = response.get(0);
                         jobTitle.setText(job.getTitle());
-                        jobOrganization.setText(job.getCompanyName());
+                        jobOrganization.setText(job.getOrganization());
                         jobLocation.setText(job.getLocation());
                         jobDescription.setText(job.getDescription());
 

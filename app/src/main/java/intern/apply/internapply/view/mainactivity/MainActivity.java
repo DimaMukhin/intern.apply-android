@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import intern.apply.internapply.R;
+import intern.apply.internapply.view.addjobactivity.AddJobActivity;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import intern.apply.internapply.api.InternAPI;
@@ -140,6 +141,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.action_add_job) {
+            Intent addJobIntent = new Intent(MainActivity.this, AddJobActivity.class);
+            startActivity(addJobIntent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

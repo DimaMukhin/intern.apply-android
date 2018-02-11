@@ -40,7 +40,7 @@ public class CustomListAdapter extends ArrayAdapter {
         TextView companyField = rowView.findViewById(R.id.CompanyTextView);
 
         titleField.setText(jobs.get(position).getTitle());
-        companyField.setText(jobs.get(position).getCompanyName());
+        companyField.setText(jobs.get(position).getOrganization());
 
         return rowView;
     }

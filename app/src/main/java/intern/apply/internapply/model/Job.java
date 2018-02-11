@@ -1,15 +1,16 @@
 package intern.apply.internapply.model;
 
-/**
- * Created by Unknown on 2018-01-19.
- */
-
 public class Job {
-    private String title;
+    private int id;
     private String organization;
+    private String title;
     private String location;
     private String description;
-    private int id;
+
+    public Job(String title, String organization) {
+        this.title = title;
+        this.organization = organization;
+    }
 
     public Job(String title, String organization, String location, String description, int id) {
         this.title = title;
@@ -19,7 +20,18 @@ public class Job {
         this.id = id;
     }
 
-    public String getCompanyName() {
+    public Job(String organization, String title, String location, String description) {
+        this.organization = organization;
+        this.title = title;
+        this.location = location;
+        this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getOrganization() {
         return organization;
     }
 
@@ -27,9 +39,11 @@ public class Job {
         return title;
     }
 
-    public String getLocation() { return location; }
+    public String getLocation() {
+        return location;
+    }
 
-    public String getDescription() { return description; }
-
-    public int getId() { return id; }
+    public String getDescription() {
+        return description;
+    }
 }
