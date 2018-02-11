@@ -3,19 +3,13 @@ package intern.apply.internapply.view.viewjobactivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
-import intern.apply.internapply.api.InternAPIClient;
 import intern.apply.internapply.model.Job;
-import intern.apply.internapply.view.mainactivity.CustomListAdapter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -23,7 +17,7 @@ public class ViewJobActivity extends AppCompatActivity {
     private int jobId;
     private InternAPI api;
     private TextView jobTitle;
-    private TextView jobOrgnization;
+    private TextView jobOrganization;
     private TextView jobLocation;
     private TextView jobDescription;
     private Button jobApply;
@@ -40,7 +34,7 @@ public class ViewJobActivity extends AppCompatActivity {
         getJobId();
         api = InternAPI.getAPI();
         jobTitle = findViewById(R.id.jobTitle);
-        jobOrgnization = findViewById(R.id.jobOrganization);
+        jobOrganization = findViewById(R.id.jobOrganization);
         jobLocation = findViewById(R.id.jobLocation);
         jobDescription = findViewById(R.id.jobDescription);
         jobApply = findViewById(R.id.jobApply);
@@ -56,7 +50,7 @@ public class ViewJobActivity extends AppCompatActivity {
                     if(response.size() == 0) {
                         Job job = response.get(0);
                         jobTitle.setText(job.getTitle());
-                        jobOrgnization.setText(job.getCompanyName());
+                        jobOrganization.setText(job.getCompanyName());
                         jobLocation.setText(job.getLocation());
                         jobDescription.setText(job.getDescription());
 
