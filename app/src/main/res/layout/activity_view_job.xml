@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/jobTitle"
-        android:layout_width="554dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:layout_marginTop="16dp"
@@ -59,7 +59,7 @@
 
     <TextView
         android:id="@+id/jobDescription"
-        android:layout_width="554dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -78,7 +78,7 @@
 
     <Button
         android:id="@+id/jobApply"
-        android:layout_width="575dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"

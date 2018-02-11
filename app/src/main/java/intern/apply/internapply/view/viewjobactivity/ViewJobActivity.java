@@ -47,7 +47,7 @@ public class ViewJobActivity extends AppCompatActivity {
         api.getJob(jobId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    if(response.size() == 0) {
+                    if(response.size() != 0) {
                         Job job = response.get(0);
                         jobTitle.setText(job.getTitle());
                         jobOrganization.setText(job.getOrganization());
