@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -52,19 +53,23 @@ public class ViewJobActivity extends AppCompatActivity {
         api.getJob(jobId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    Job job = response.get(0);
-                    jobTitle.setText(job.getTitle());
-                    jobOrgnization.setText(job.getCompanyName());
-                    jobLocation.setText(job.getLocation());
-                    jobDescription.setText(job.getDescription());
-                }, error -> {
-                    Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
-                });
+                    if(response.size() == 0) {
+                        Job job = response.get(0);
+                        jobTitle.setText(job.getTitle());
+                        jobOrgnization.setText(job.getCompanyName());
+                        jobLocation.setText(job.getLocation());
+                        jobDescription.setText(job.getDescription());
+
+                        // changed to visible here so rendering would be at the same time
+                        jobApply.setVisibility(View.VISIBLE);
+                    }else{
+                        finish();
+                    }
+                }, error -> finish());
     }
 
     /**
-     * checking if intent exists
-     * @return true if intent exists
+     * getting the intent that has the job id
      */
     private void getJobId(){
         Intent intent = getIntent();
@@ -76,5 +81,12 @@ public class ViewJobActivity extends AppCompatActivity {
             else
                 jobId = 0;
         }
+    }
+
+    /**
+     * checking for empty or blank string
+     */
+    private boolean isBlank(CharSequence charSequence){
+        return charSequence.toString().matches("\\s*");
     }
 }
