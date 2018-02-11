@@ -16,10 +16,6 @@ import intern.apply.internapply.model.Job;
 /**
  * CustomListAdapter Class
  * Adapter class to convert from Job to rows.
- *
- * @author Syed Habib
- * @version 1.0
- * @since 2018-01-30
  */
 
 class CustomListAdapter extends ArrayAdapter {

@@ -11,10 +11,6 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * JobsList Class
  * ListView to show job list.
- *
- * @author Syed Habib
- * @version 1.0
- * @since 2018-01-30
  */
 
 class JobsList {
