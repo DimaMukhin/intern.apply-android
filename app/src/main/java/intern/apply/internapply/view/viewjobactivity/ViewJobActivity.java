@@ -56,6 +56,10 @@ public class ViewJobActivity extends AppCompatActivity {
 
                         // changed to visible here so rendering would be at the same time
                         jobApply.setVisibility(View.VISIBLE);
+
+                        // making sure view is not taking any space if those are empty
+                        jobOrganization.setVisibility(View.VISIBLE);
+                        jobLocation.setVisibility(View.VISIBLE);
                     } else {
                         finish();
                     }
