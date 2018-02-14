@@ -10,6 +10,7 @@ import android.widget.TextView;
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.view.jobcommentsactivity.JobCommentsActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -64,6 +65,16 @@ public class ViewJobActivity extends AppCompatActivity {
                         finish();
                     }
                 }, error -> finish());
+    }
+
+    /**
+     * "Comments" button click listener
+     * Navigate to the comments section of the job
+     */
+    public void viewComments(View view) {
+        Intent intent = new Intent(this, JobCommentsActivity.class);
+        intent.putExtra("jobId", jobId);
+        startActivity(intent);
     }
 
     /**

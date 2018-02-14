@@ -1,94 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context="intern.apply.internapply.view.viewjobactivity.ViewJobActivity">
 
-    <TextView
-        android:id="@+id/jobTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginTop="16dp"
-        android:padding="0dp"
-        android:scrollHorizontally="false"
-        android:textAlignment="viewStart"
-        android:textColor="@android:color/background_dark"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/jobOrganization"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:padding="0dp"
-        android:text=""
-        android:textAlignment="viewStart"
-        android:textColor="@android:color/background_dark"
-        android:textSize="24sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobTitle" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/jobLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:padding="0dp"
-        android:text=""
-        android:textAlignment="viewStart"
-        android:textColor="@android:color/background_dark"
-        android:textSize="24sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobOrganization" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/jobDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:gravity="top"
-        android:padding="0dp"
-        android:textColor="@android:color/background_dark"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobLocation"
-        tools:text="" />
+            <TextView
+                android:id="@+id/jobTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="16dp"
+                android:padding="0dp"
+                android:scrollHorizontally="false"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/background_dark"
+                android:textSize="36sp"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/jobApply"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:padding="0dp"
-        android:text="@string/apply"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobDescription"
-        app:layout_constraintVertical_bias="0.0" />
-</android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/jobOrganization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:padding="0dp"
+                android:text=""
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/jobLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:padding="0dp"
+                android:text=""
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/jobDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:gravity="top"
+                android:padding="0dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp"
+                tools:text="" />
+
+            <Button
+                android:id="@+id/jobApply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:padding="0dp"
+                android:text="@string/apply"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/btComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="viewComments"
+                android:text="@string/comments" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
