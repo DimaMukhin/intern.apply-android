@@ -27,4 +27,7 @@ interface InternAPIClient {
 
     @GET("/api/job/{id}/comments")
     Observable<List<Comment>> getJobComments(@Path("id") int jobId);
+
+    @POST("/api/comment")
+    Observable<Comment> addJobComment(@Body Comment comment);
 }

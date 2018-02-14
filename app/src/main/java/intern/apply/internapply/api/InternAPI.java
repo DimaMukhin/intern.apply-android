@@ -17,7 +17,7 @@ public class InternAPI {
     private final InternAPIClient internAPIClient;
 
     private InternAPI() {
-        String BASE_URL = "http://192.168.1.2:3000/";
+        String BASE_URL = "https://intern-apply.herokuapp.com/";
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -87,5 +87,12 @@ public class InternAPI {
      * @return  a list of comments of the specified job
      */
     public Observable<List<Comment>> getJobComments(int jobId) { return internAPIClient.getJobComments(jobId); }
+
+    /**
+     * Add a comment to a job
+     * @param comment   the comment to add
+     * @return  the added comment
+     */
+    public Observable<Comment> addJobComment(Comment comment) { return internAPIClient.addJobComment(comment); }
     //endregion
 }
