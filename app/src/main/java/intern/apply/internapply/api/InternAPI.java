@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
 
+import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
 import io.reactivex.Observable;
@@ -16,7 +17,7 @@ public class InternAPI {
     private final InternAPIClient internAPIClient;
 
     private InternAPI() {
-        String BASE_URL = "https://intern-apply.herokuapp.com/";
+        String BASE_URL = "http://192.168.1.2:3000/";
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -78,5 +79,13 @@ public class InternAPI {
     public Observable<List<Job>> getJob(int jobId) {
         return internAPIClient.getJob(jobId);
     }
+
+    /**
+     * get all the comments of a specific job
+     *
+     * @param jobId the id of the job
+     * @return  a list of comments of the specified job
+     */
+    public Observable<List<Comment>> getJobComments(int jobId) { return internAPIClient.getJobComments(jobId); }
     //endregion
 }
