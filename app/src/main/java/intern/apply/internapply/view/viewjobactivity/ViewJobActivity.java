@@ -37,12 +37,10 @@ public class ViewJobActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_job);
         onInit();
-        displayJob();
     }
 
     private void onInit() {
         getJobId();
-        api = InternAPI.getAPI();
         jobTitle = findViewById(R.id.jobTitle);
         jobOrganization = findViewById(R.id.jobOrganization);
         jobLocation = findViewById(R.id.jobLocation);
@@ -50,6 +48,17 @@ public class ViewJobActivity extends AppCompatActivity {
         jobApply = findViewById(R.id.jobApply);
         etName = findViewById(R.id.etName);
         etMessage = findViewById(R.id.etMessageComment);
+
+        boolean test = getIntent().getBooleanExtra("TEST", false);
+        if (!test) {
+            api = InternAPI.getAPI();
+            displayJob();
+        }
+    }
+
+    public void setApi(InternAPI api) {
+        this.api = api;
+        displayJob();
     }
 
     /**

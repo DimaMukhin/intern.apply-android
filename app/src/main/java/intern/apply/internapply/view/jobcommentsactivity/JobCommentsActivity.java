@@ -26,9 +26,17 @@ public class JobCommentsActivity extends AppCompatActivity {
 
     private void onInit() {
         getJobId();
-        api = InternAPI.getAPI();
-
         commentsListView = findViewById(R.id.commentsListView);
+
+        boolean test = getIntent().getBooleanExtra("TEST", false);
+        if (!test) {
+            api = InternAPI.getAPI();
+            getAllComments();
+        }
+    }
+
+    public void setApi(InternAPI api) {
+        this.api = api;
         getAllComments();
     }
 

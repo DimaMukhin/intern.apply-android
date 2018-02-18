@@ -14,6 +14,8 @@ public class AcceptanceTests {
         TestSuite suite = new TestSuite("Acceptance tests");
         suite.addTestSuite(JobListAcceptanceTest.class);
         suite.addTestSuite(ContactUsAcceptanceTest.class);
+        suite.addTestSuite(AddJobCommentAcceptanceTest.class);
+        suite.addTestSuite(JobCommentsAcceptanceTest.class);
         return suite;
     }
 }
