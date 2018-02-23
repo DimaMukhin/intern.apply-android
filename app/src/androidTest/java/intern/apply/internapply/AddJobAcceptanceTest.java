@@ -117,6 +117,20 @@ public class AddJobAcceptanceTest extends ActivityInstrumentationTestCase2<AddJo
         assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid job location"));
     }
 
+    public void testInvalidJobDescription() {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, AddJobActivity.class);
+        solo.waitForActivity(AddJobActivity.class);
+
+        List<ServerError> errors = new ArrayList<>();
+        errors.add(new ServerError(14, "Invalid job description (max 2000 characters)"));
+        Observable<Job> output = Observable.error(CreateHttpException(errors));
+        when(api.addJob(any())).thenReturn(output);
+        getActivity().setApi(api);
+
+        solo.clickOnButton("Submit");
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid job description"));
+    }
+
     private HttpException CreateHttpException(List<ServerError> errors) {
         JsonArray errorBody = new JsonArray();
 
