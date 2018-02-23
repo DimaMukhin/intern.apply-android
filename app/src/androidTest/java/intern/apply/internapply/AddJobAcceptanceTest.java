@@ -62,4 +62,34 @@ public class AddJobAcceptanceTest extends ActivityInstrumentationTestCase2<AddJo
         solo.clickOnButton("Submit");
         assertTrue(TEXT_NOT_FOUND, solo.searchText("Job added successfully"));
     }
+
+    public void testInternalServerError(){
+        solo.assertCurrentActivity(ACTIVITY_ERROR, AddJobActivity.class);
+        solo.waitForActivity(AddJobActivity.class);
+
+        Observable<Job> output = Observable.error(new Error());
+        when(api.addJob(any())).thenReturn(output);
+        getActivity().setApi(api);
+
+        solo.clickOnButton("Submit");
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Internal server error, please try again later"));
+    }
+
+    private HttpException CreateHttpException(List<ServerError> errors) {
+        JsonArray errorBody = new JsonArray();
+
+        for (ServerError error : errors) {
+            JsonObject jsonError = new JsonObject();
+            jsonError.addProperty("code", error.getCode());
+            jsonError.addProperty("message", error.getMessage());
+            errorBody.add(jsonError);
+        }
+
+        return new HttpException(
+                Response.error(400,
+                        ResponseBody.create(
+                                MediaType.parse("application/json; charset=utf-8"),
+                                errorBody.toString())));
+    }
+
 }
