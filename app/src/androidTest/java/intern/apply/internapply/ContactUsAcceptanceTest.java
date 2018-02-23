@@ -98,7 +98,7 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
         getActivity().setApi(api);
 
         solo.clickOnButton("Send");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid job title"));
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid title"));
     }
 
     public void testInvalidBodySendMessage() {

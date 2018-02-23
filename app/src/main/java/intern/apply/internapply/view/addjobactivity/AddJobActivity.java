@@ -40,6 +40,10 @@ public class AddJobActivity extends AppCompatActivity {
         onInit();
     }
 
+    public void setApi(InternAPI api) {
+        this.api = api;
+    }
+
     /**
      * Send the new job to the server.
      */
@@ -68,9 +72,9 @@ public class AddJobActivity extends AppCompatActivity {
                                 Toast.makeText(this, R.string.InternalServerError, Toast.LENGTH_LONG).show();
                             else {
                                 if (errors.get(0).getCode() == 11)
-                                    Toast.makeText(this, "Invalid job organization", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this, R.string.InvalidJobOrganization, Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 12)
-                                    Toast.makeText(this, R.string.InvalidTitle, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this, R.string.InvalidJobTitle, Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 13)
                                     Toast.makeText(this, R.string.InvalidJobLocation, Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 14)
