@@ -32,6 +32,7 @@
     <string name="job_description">Description</string>
     <string name="add_job_button">Submit</string>
     <string name="job_location">Location</string>
+    <string name="InvalidJobOrganization">Invalid job organization (max 45 characters)</string>
     <string name="InvalidJobTitle">Invalid job title (max 100 characters)</string>
     <string name="InvalidJobLocation">Invalid job location (max 45 characters)</string>
     <string name="InvalidJobDescription">Invalid job description (max 2000 characters)</string>
