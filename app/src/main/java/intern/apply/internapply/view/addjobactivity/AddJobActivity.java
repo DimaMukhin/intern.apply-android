@@ -40,6 +40,10 @@ public class AddJobActivity extends AppCompatActivity {
         onInit();
     }
 
+    public void setApi(InternAPI api) {
+        this.api = api;
+    }
+
     /**
      * Send the new job to the server.
      */
