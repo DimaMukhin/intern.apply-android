@@ -74,7 +74,7 @@ public class AddJobActivity extends AppCompatActivity {
                                 if (errors.get(0).getCode() == 11)
                                     Toast.makeText(this, "Invalid job organization", Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 12)
-                                    Toast.makeText(this, R.string.InvalidTitle, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this, R.string.InvalidJobTitle, Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 13)
                                     Toast.makeText(this, R.string.InvalidJobLocation, Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 14)
