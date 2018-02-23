@@ -63,7 +63,7 @@ public class AddJobAcceptanceTest extends ActivityInstrumentationTestCase2<AddJo
         assertTrue(TEXT_NOT_FOUND, solo.searchText("Job added successfully"));
     }
 
-    public void testInternalServerError(){
+    public void testInternalServerError() {
         solo.assertCurrentActivity(ACTIVITY_ERROR, AddJobActivity.class);
         solo.waitForActivity(AddJobActivity.class);
 
@@ -73,6 +73,20 @@ public class AddJobAcceptanceTest extends ActivityInstrumentationTestCase2<AddJo
 
         solo.clickOnButton("Submit");
         assertTrue(TEXT_NOT_FOUND, solo.searchText("Internal server error, please try again later"));
+    }
+
+    public void testInvalidJobOrganization() {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, AddJobActivity.class);
+        solo.waitForActivity(AddJobActivity.class);
+
+        List<ServerError> errors = new ArrayList<>();
+        errors.add(new ServerError(11, "Invalid job organization (max 45 characters)"));
+        Observable<Job> output = Observable.error(CreateHttpException(errors));
+        when(api.addJob(any())).thenReturn(output);
+        getActivity().setApi(api);
+
+        solo.clickOnButton("Submit");
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid job organization"));
     }
 
     private HttpException CreateHttpException(List<ServerError> errors) {
