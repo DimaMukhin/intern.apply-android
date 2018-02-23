@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
 
+import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
 import io.reactivex.Observable;
@@ -78,5 +79,20 @@ public class InternAPI {
     public Observable<List<Job>> getJob(int jobId) {
         return internAPIClient.getJob(jobId);
     }
+
+    /**
+     * get all the comments of a specific job
+     *
+     * @param jobId the id of the job
+     * @return  a list of comments of the specified job
+     */
+    public Observable<List<Comment>> getJobComments(int jobId) { return internAPIClient.getJobComments(jobId); }
+
+    /**
+     * Add a comment to a job
+     * @param comment   the comment to add
+     * @return  the added comment
+     */
+    public Observable<Comment> addJobComment(Comment comment) { return internAPIClient.addJobComment(comment); }
     //endregion
 }

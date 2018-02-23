@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class JobCommentsActivity extends AppCompatActivity {
 
@@ -23,9 +26,33 @@ public class JobCommentsActivity extends AppCompatActivity {
 
     private void onInit() {
         getJobId();
-        api = InternAPI.getAPI();
-
         commentsListView = findViewById(R.id.commentsListView);
+
+        boolean test = getIntent().getBooleanExtra("TEST", false);
+        if (!test) {
+            api = InternAPI.getAPI();
+            getAllComments();
+        }
+    }
+
+    public void setApi(InternAPI api) {
+        this.api = api;
+        getAllComments();
+    }
+
+    /**
+     * get and display all comments
+     */
+    private void getAllComments() {
+        api.getJobComments(jobId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    CommentsCustomListAdapter listAdapter = new CommentsCustomListAdapter(this, response);
+                    commentsListView.setAdapter(listAdapter);
+                }, error -> {
+                    Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
+                });
     }
 
     /**

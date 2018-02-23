@@ -3,6 +3,7 @@ package intern.apply.internapply.api;
 
 import java.util.List;
 
+import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
 import io.reactivex.Observable;
@@ -23,4 +24,10 @@ interface InternAPIClient {
 
     @GET("/api/job/{id}")
     Observable<List<Job>> getJob(@Path("id") int jobId);
+
+    @GET("/api/job/{id}/comments")
+    Observable<List<Comment>> getJobComments(@Path("id") int jobId);
+
+    @POST("/api/comment")
+    Observable<Comment> addJobComment(@Body Comment comment);
 }

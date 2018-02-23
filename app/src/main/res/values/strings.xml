@@ -24,6 +24,9 @@
     <string name="InvalidEmail">Invalid email address</string>
     <string name="InvalidTitle">Invalid job title (max 100 characters)</string>
     <string name="InvalidMessage">Invalid message body (max 300 characters)</string>
+    <string name="CommentSuccess">Comment was sent successfully</string>
+    <string name="InvalidCommentBody">Invalid comment body (max 300 characters)</string>
+    <string name="InvalidCommentName">Invalid name (max 25 characters)</string>
 
     <!-- Strings related to Add Job -->
     <string name="add_job_title">Add Job</string>
@@ -38,5 +41,7 @@
 
     <string name="apply">apply</string>
     <string name="comments">Comments</string>
+    <string name="add_a_comment">Add a comment</string>
+    <string name="your_name">Your Name</string>
 
 </resources>
