@@ -89,6 +89,20 @@ public class AddJobAcceptanceTest extends ActivityInstrumentationTestCase2<AddJo
         assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid job organization"));
     }
 
+    public void testInvalidJobTitle() {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, AddJobActivity.class);
+        solo.waitForActivity(AddJobActivity.class);
+
+        List<ServerError> errors = new ArrayList<>();
+        errors.add(new ServerError(12, "Invalid job title (max 100 characters)"));
+        Observable<Job> output = Observable.error(CreateHttpException(errors));
+        when(api.addJob(any())).thenReturn(output);
+        getActivity().setApi(api);
+
+        solo.clickOnButton("Submit");
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid job title"));
+    }
+
     private HttpException CreateHttpException(List<ServerError> errors) {
         JsonArray errorBody = new JsonArray();
 
