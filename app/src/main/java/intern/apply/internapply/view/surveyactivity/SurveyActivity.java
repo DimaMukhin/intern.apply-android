@@ -2,10 +2,8 @@ package intern.apply.internapply.view.surveyactivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 
 import java.util.List;
 
@@ -28,10 +26,8 @@ public class SurveyActivity extends AppCompatActivity {
     private void onInit() {
         boolean test = getIntent().getBooleanExtra("TEST", false);
         if (!test) {
-            api = InternAPI.getAPI();
-            questionList = new SurveyList(api);
-            questionList.ShowList(this);
-        };
+            setApi(InternAPI.getAPI());
+        }
     }
 
     public void setApi(InternAPI api) {
