@@ -21,6 +21,15 @@ public class Job {
         this.description = description;
     }
 
+    public Job(String organization, String title, String location, String description, double salary, int numSalaries) {
+        this.organization = organization;
+        this.title = title;
+        this.location = location;
+        this.description = description;
+        this.salary = salary;
+        this.numSalaries = numSalaries;
+    }
+
     public int getId() {
         return id;
     }
