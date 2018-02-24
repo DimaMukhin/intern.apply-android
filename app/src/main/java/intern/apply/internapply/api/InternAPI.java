@@ -51,10 +51,21 @@ public class InternAPI {
         return internAPIClient.getAllJobs();
     }
 
+    /**
+     * get the survey questions with allowed responses from the server
+     *
+     * @return the survey questions with their allowed responses
+     */
     public Observable<List<SurveyQuestion>> getSurvey() {
         return internAPIClient.getSurvey();
     }
 
+    /**
+     * send a completed survey to the server
+     *
+     * @param survey the completed survey
+     * @return the survey sent to the server
+     */
     public Observable<CompletedSurvey> sendCompletedSurvey(CompletedSurvey survey) {
         return internAPIClient.sendCompletedSurvey(survey);
     }

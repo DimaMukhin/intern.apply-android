@@ -18,8 +18,6 @@ import intern.apply.internapply.model.SurveyQuestion;
 
 
 public class SurveyListAdapter extends ArrayAdapter {
-    private static final int defaultValSelect = 0;
-
     //to reference the Activity
     private final Activity context;
     private final List<SurveyQuestion> questions;
@@ -58,6 +56,7 @@ public class SurveyListAdapter extends ArrayAdapter {
 
         layout.addView(radioGroup, param);
 
+        //set the user answers according to their selection of radio button
         radioGroup.setOnCheckedChangeListener(
                 new RadioGroup.OnCheckedChangeListener() {
                     @Override
@@ -68,16 +67,15 @@ public class SurveyListAdapter extends ArrayAdapter {
                 }
         );
 
+        //make the radio buttons, if they are supposed to be selected, set them checked
         for(int i = 0; i < responses.size(); i++) {
             RadioButton radioButtonView = new RadioButton(context);
             radioButtonView.setText(responses.get(i));
             radioGroup.addView(radioButtonView, param);
 
-            if (responses.get(i).equals(userAnswers.get(position)) || (userAnswers.get(position).equals("") && i == defaultValSelect))
+            if (responses.get(i).equals(userAnswers.get(position)))
                 radioButtonView.setChecked(true);
         }
-
         return radioGroup;
     }
-
 }

@@ -26,16 +26,14 @@ public class SurveyList {
         api.getSurvey().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    this.userAnswers = new ArrayList<String>(Collections.nCopies(response.size(), ""));
+                    this.userAnswers = new ArrayList<String>(Collections.nCopies(response.size(), null));
                     SurveyListAdapter listAdapter = new SurveyListAdapter(activity, response, this.userAnswers);
                     ListView listView = activity.findViewById(R.id.SurveyListView);
                     listView.setAdapter(listAdapter);
                 }, error -> {
-                    Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
-                    Log.i("error", error.toString());
+                    Toast.makeText(activity, R.string.InternalServerError, Toast.LENGTH_LONG).show();
                 });
     }
 
     public List<String> getResponses(){ return userAnswers; }
-
 }
