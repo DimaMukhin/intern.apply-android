@@ -6,6 +6,8 @@ public class Job {
     private final String title;
     private String location;
     private String description;
+    private double salary;
+    private int numSalaries;
 
     public Job(String title, String organization) {
         this.title = title;
@@ -33,6 +35,14 @@ public class Job {
 
     public String getLocation() {
         return location;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public int getNumSalaries() {
+        return numSalaries;
     }
 
     public String getDescription() {
