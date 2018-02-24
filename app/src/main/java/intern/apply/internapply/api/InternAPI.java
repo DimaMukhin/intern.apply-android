@@ -19,12 +19,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InternAPI {
     private static InternAPI instance = null;
 
-
-    //private final String BASE_URL = "http://192.168.0.14:3000";
+    
     private InternAPIClient internAPIClient;
 
     private InternAPI() {
-        String BASE_URL = "http://192.168.0.14:3000";
+        String BASE_URL = "https://intern-apply.herokuapp.com/";
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
