@@ -8,8 +8,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,16 +21,21 @@ import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.ListView;
 
 import intern.apply.internapply.R;
-import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.model.Job;
+import intern.apply.internapply.view.addjobactivity.AddJobActivity;
+import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
+import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private JobsList jobsList;
     private InternAPI internAPI;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +53,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -103,10 +109,25 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void ShowJobs() {
-        jobsList = new JobsList(internAPI);
+    private void ShowJobs() {
+        listView = findViewById(R.id.JobsListView);
+        JobsList jobsList = new JobsList(internAPI);
         jobsList.ShowList(this);
         ShowFilteredJobs(false);
+        onJobClick();
+    }
+
+    /**
+     * navigates to the page of a specific job
+     */
+    private void onJobClick() {
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            Job job = (Job) adapterView.getItemAtPosition(i);
+
+            Intent intent = new Intent(this, ViewJobActivity.class);
+            intent.putExtra("jobId", job.getId());
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -146,22 +167,13 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.action_add_job) {
+            Intent addJobIntent = new Intent(MainActivity.this, AddJobActivity.class);
+            startActivity(addJobIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

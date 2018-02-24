@@ -1,7 +1,6 @@
 package intern.apply.internapply.model;
 
 public class ContactMessage {
-    private int id;
     private String email;
     private String title;
     private String message;
@@ -12,10 +11,6 @@ public class ContactMessage {
         this.email = email;
         this.title = title;
         this.message = message;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getEmail() {

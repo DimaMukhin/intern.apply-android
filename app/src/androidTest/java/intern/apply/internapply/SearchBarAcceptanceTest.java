@@ -73,7 +73,7 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
 
         Observable<List<Job>> output = Observable.fromArray(allJob);
 
-        View searchView = solo.getView(R.id.searchBar);
+        View searchView = solo.getView(R.id.searchBox);
 
         solo.enterText((EditText) solo.getView(R.id.searchBox),"");
         when(api.getAllJobs("")).thenReturn(output);
@@ -93,7 +93,7 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
 
         Observable<List<Job>> output = Observable.fromArray(multipleJobs);
 
-        View searchView = solo.getView(R.id.searchBar);
+        View searchView = solo.getView(R.id.searchBox);
 
         solo.enterText((EditText) solo.getView(R.id.searchBox),"Soft Dev");
         when(api.getAllJobs("Soft Dev")).thenReturn(output);
@@ -112,7 +112,7 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
 
         Observable<List<Job>> output = Observable.fromArray(emptyJob);
 
-        View searchView = solo.getView(R.id.searchBar);
+        View searchView = solo.getView(R.id.searchBox);
 
         solo.enterText((EditText) solo.getView(R.id.searchBox),"Random Text");
         when(api.getAllJobs("Random Text")).thenReturn(output);
