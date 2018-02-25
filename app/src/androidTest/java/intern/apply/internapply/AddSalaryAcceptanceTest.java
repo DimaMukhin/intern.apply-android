@@ -14,6 +14,7 @@ import java.util.List;
 
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
@@ -46,11 +47,7 @@ public class AddSalaryAcceptanceTest extends ActivityInstrumentationTestCase2<Vi
         setActivityIntent(new Intent().putExtra("TEST", true));
         solo = new Solo(getInstrumentation(), getActivity());
 
-        Job fakeJob = new Job(
-                "fake org",
-                "fake title",
-                "fake location",
-                "fake description", 1, 1);
+        Job fakeJob = new JobBuilder().setOrganization("fake org").setTitle("fake title").setLocation("fake location").setDescription("fake description").setSalary(1).setNumSalaries(1).createJob();
         List<Job> fakeJobList = new ArrayList<>();
         fakeJobList.add(fakeJob);
         Observable<List<Job>> output = Observable.just(fakeJobList);

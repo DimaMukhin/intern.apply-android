@@ -9,18 +9,6 @@ public class Job {
     private double salary;
     private int numSalaries;
 
-    public Job(String title, String organization) {
-        this.title = title;
-        this.organization = organization;
-    }
-
-    public Job(String organization, String title, String location, String description) {
-        this.organization = organization;
-        this.title = title;
-        this.location = location;
-        this.description = description;
-    }
-
     public Job(String organization, String title, String location, String description, double salary, int numSalaries) {
         this.organization = organization;
         this.title = title;

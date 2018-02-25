@@ -11,6 +11,7 @@ import java.util.List;
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.model.ServerError;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -54,7 +55,7 @@ public class AddJobActivity extends AppCompatActivity {
         String location = etJobLoc.getText().toString();
 
 
-        Job newJob = new Job(organization, title, location, description);
+        Job newJob = new JobBuilder().setOrganization(organization).setTitle(title).setLocation(location).setDescription(description).createJob();
 
         api.addJob(newJob)
                 .subscribeOn(Schedulers.io())

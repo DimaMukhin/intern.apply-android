@@ -9,12 +9,12 @@ import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 import io.reactivex.Observable;
@@ -45,11 +45,7 @@ public class AddJobCommentAcceptanceTest extends ActivityInstrumentationTestCase
         setActivityIntent(new Intent().putExtra("TEST", true));
         solo = new Solo(getInstrumentation(), getActivity());
 
-        Job fakeJob = new Job(
-                "fake org",
-                "fake title",
-                "fake location",
-                "fake description");
+        Job fakeJob = new JobBuilder().setOrganization("fake org").setTitle("fake title").setLocation("fake location").setDescription("fake description").createJob();
         List<Job> fakeJobList = new ArrayList<Job>();
         fakeJobList.add(fakeJob);
         Observable<List<Job>> output = Observable.just(fakeJobList);
