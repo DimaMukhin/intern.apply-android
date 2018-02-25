@@ -15,6 +15,8 @@ import intern.apply.internapply.view.mainactivity.MainActivity;
 import io.reactivex.Observable;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -55,22 +57,33 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
     }
 
     public void testEmptySearch() {
-        testHelper("", allJob, allJobsData, allJob);
-    }
-
-    public void testFoundSearchResult() {
-        testHelper("Soft Dev", multipleJobs, multipleJobsData, new ArrayList<>());
-    }
-
-    public void testNotFoundSearchResult() {
-        testHelper("Random Text", emptyJob, emptyJobsData, new ArrayList<>());
-    }
-
-    private void testHelper(String filterText, List<Job> filteredJobs, String[] filteredJobsData, List<Job> nonFilteredJobs) {
         solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);
         solo.waitForActivity(MainActivity.class);
 
-        when(api.getAllJobs()).thenReturn(Observable.fromArray(nonFilteredJobs));
+        when(api.getAllJobs()).thenReturn(Observable.fromArray(), Observable.fromArray(allJob));
+
+        getActivity().SetAPI(api);
+        solo.waitForView(R.id.JobsListView);
+
+        solo.enterText((EditText) solo.getView(R.id.searchBox), "");
+        findStrings(allJobsData);
+
+        verify(api, times(2)).getAllJobs();
+    }
+
+    public void testFoundSearchResult() {
+        testHelper("Soft Dev", multipleJobs, multipleJobsData);
+    }
+
+    public void testNotFoundSearchResult() {
+        testHelper("Random Text", emptyJob, emptyJobsData);
+    }
+
+    private void testHelper(String filterText, List<Job> filteredJobs, String[] filteredJobsData) {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);
+        solo.waitForActivity(MainActivity.class);
+
+        when(api.getAllJobs()).thenReturn(Observable.fromArray());
         when(api.getAllJobs(filterText)).thenReturn(Observable.fromArray(filteredJobs));
 
         getActivity().SetAPI(api);
@@ -78,6 +91,9 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
 
         solo.enterText((EditText) solo.getView(R.id.searchBox), filterText);
         findStrings(filteredJobsData);
+
+        verify(api, times(1)).getAllJobs();
+        verify(api, times(1)).getAllJobs(filterText);
     }
 
     public void PopulateFakeJobs() {
