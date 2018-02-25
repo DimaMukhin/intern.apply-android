@@ -1,6 +1,11 @@
 package intern.apply.internapply.api;
 
+import android.util.Log;
+
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -17,7 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InternAPI {
     private static InternAPI instance = null;
 
-    private final InternAPIClient internAPIClient;
+
+    private InternAPIClient internAPIClient;
 
     private InternAPI() {
         String BASE_URL = "https://intern-apply.herokuapp.com/";
@@ -51,6 +57,8 @@ public class InternAPI {
     public Observable<List<Job>> getAllJobs() {
         return internAPIClient.getAllJobs();
     }
+
+    public Observable<List<Job>> getAllJobs(String filter) { return internAPIClient.getAllJobs(filter); }
 
     /**
      * get the survey questions with allowed responses from the server

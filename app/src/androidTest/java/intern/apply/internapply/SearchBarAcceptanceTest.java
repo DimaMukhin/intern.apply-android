@@ -2,6 +2,7 @@ package intern.apply.internapply;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
@@ -15,22 +16,26 @@ import intern.apply.internapply.view.mainactivity.MainActivity;
 import io.reactivex.Observable;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
     private Solo solo;
 
-    private final InternAPI api;
-
-    private String[] singleJobData;
+    private InternAPI api;
     private String[] multipleJobsData;
-    private List<Job> singleJob;
-    private List<Job> multipleJobs;
+    private String[] emptyJobsData;
+    private String[] allJobsData;
 
-    public JobListAcceptanceTest() {
+    private List<Job> multipleJobs;
+    private List<Job> allJob;
+    private List<Job> emptyJob;
+
+    public SearchBarAcceptanceTest() {
         super(MainActivity.class);
         api = mock(InternAPI.class);
         setActivityIntent(new Intent().putExtra("TEST", true));
@@ -38,14 +43,12 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
     }
 
     public void setUp() throws Exception {
-        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @Override
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
-        super.tearDown();
     }
 
     private void findStrings(String[] expectedStrings) {
@@ -54,49 +57,54 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
         }
     }
 
-    public void testOneJobShowing() {
+    public void testEmptySearch() {
         solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);
         solo.waitForActivity(MainActivity.class);
 
-        Observable<List<Job>> output = Observable.fromArray(singleJob);
-        when(api.getAllJobs()).thenReturn(output);
-        getActivity().SetAPI(api);
+        when(api.getAllJobs()).thenReturn(Observable.fromArray(), Observable.fromArray(allJob));
 
+        getActivity().SetAPI(api);
         solo.waitForView(R.id.JobsListView);
-        findStrings(singleJobData);
+
+        solo.enterText((EditText) solo.getView(R.id.searchBox), "");
+        findStrings(allJobsData);
+
+        verify(api, times(2)).getAllJobs();
     }
 
-    public void testMultipleJobsShowing() {
+    public void testFoundSearchResult() {
+        testHelper("Soft Dev", multipleJobs, multipleJobsData);
+    }
+
+    public void testNotFoundSearchResult() {
+        testHelper("Random Text", emptyJob, emptyJobsData);
+    }
+
+    private void testHelper(String filterText, List<Job> filteredJobs, String[] filteredJobsData) {
         solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);
         solo.waitForActivity(MainActivity.class);
 
-        Observable<List<Job>> output = Observable.fromArray(multipleJobs);
-        when(api.getAllJobs()).thenReturn(output);
-        getActivity().SetAPI(api);
+        when(api.getAllJobs()).thenReturn(Observable.fromArray());
+        when(api.getAllJobs(filterText)).thenReturn(Observable.fromArray(filteredJobs));
 
+        getActivity().SetAPI(api);
         solo.waitForView(R.id.JobsListView);
-        findStrings(multipleJobsData);
+
+        solo.enterText((EditText) solo.getView(R.id.searchBox), filterText);
+        findStrings(filteredJobsData);
+
+        verify(api, times(1)).getAllJobs();
+        verify(api, times(1)).getAllJobs(filterText);
     }
 
-    public void testEmptyJobListShowing() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);
-        solo.waitForActivity(MainActivity.class);
-
-        Observable<List<Job>> output = Observable.fromArray(new ArrayList<Job>());
-        when(api.getAllJobs()).thenReturn(output);
-        getActivity().SetAPI(api);
-
-        solo.waitForView(R.id.JobsListView);
-    }
-
-    private void PopulateFakeJobs() {
-        singleJobData = new String[]{
-                "Software Engineering", "Facebook"
+    public void PopulateFakeJobs() {
+        emptyJobsData = new String[]{};
+        emptyJob = new ArrayList<>();
+        allJobsData = new String[]{
+                "Soft Dev", "Google",
+                "Soft Dev", "Microsoft",
+                "Soft Dev", "Facebook"
         };
-        singleJob = new ArrayList<>();
-        for (int i = 0; i < singleJobData.length; i += 2)
-            singleJob.add(new JobBuilder().setTitle(singleJobData[i]).setOrganization(singleJobData[i + 1]).createJob());
-
         multipleJobsData = new String[]{
                 "T1", "C1",
                 "Title 2", "Company 2",
@@ -105,5 +113,9 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
         multipleJobs = new ArrayList<>();
         for (int i = 0; i < multipleJobsData.length; i += 2)
             multipleJobs.add(new JobBuilder().setTitle(multipleJobsData[i]).setOrganization(multipleJobsData[i + 1]).createJob());
+
+        allJob = new ArrayList<>();
+        for (int i = 0; i < allJobsData.length; i += 2)
+            allJob.add(new JobBuilder().setTitle(allJobsData[i]).setOrganization(allJobsData[i + 1]).createJob());
     }
 }

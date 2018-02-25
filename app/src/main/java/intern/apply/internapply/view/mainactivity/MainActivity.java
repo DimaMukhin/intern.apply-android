@@ -9,8 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import intern.apply.internapply.R;
@@ -24,6 +27,7 @@ import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private JobsList jobsList;
     private InternAPI internAPI;
     private ListView listView;
 
@@ -46,20 +50,51 @@ public class MainActivity extends AppCompatActivity
         boolean test = getIntent().getBooleanExtra("TEST", false);
         if (!test) {
             internAPI = InternAPI.getAPI();
-            ShowJobs();
+            onInit();
         }
     }
 
-    public void SetAPI(InternAPI api) {
-        internAPI = api;
+    private void onInit() {
         ShowJobs();
     }
 
     private void ShowJobs() {
         listView = findViewById(R.id.JobsListView);
-        JobsList jobsList = new JobsList(internAPI);
+        jobsList = new JobsList(internAPI);
         jobsList.ShowList(this);
+        ShowFilteredJobs();
         onJobClick();
+    }
+
+    public void SetAPI(InternAPI api) {
+        internAPI = api;
+        onInit();
+    }
+
+    public void ShowFilteredJobs() {
+        EditText searchBox = findViewById(R.id.searchBox);
+
+        searchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                String query = s.toString();
+                if (query.equals("")) {
+                    jobsList.ShowList(MainActivity.this);
+                } else {
+                    jobsList.ShowFilteredList(MainActivity.this, query);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
     }
 
     /**
