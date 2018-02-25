@@ -16,9 +16,9 @@ import android.widget.ListView;
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
-import intern.apply.internapply.view.surveyactivity.SurveyActivity;
 import intern.apply.internapply.view.addjobactivity.AddJobActivity;
 import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
+import intern.apply.internapply.view.surveyactivity.SurveyActivity;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 
 public class MainActivity extends AppCompatActivity

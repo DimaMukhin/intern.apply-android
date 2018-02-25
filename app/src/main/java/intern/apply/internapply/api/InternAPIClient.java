@@ -3,12 +3,12 @@ package intern.apply.internapply.api;
 
 import java.util.List;
 
-import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.Comment;
+import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
-import intern.apply.internapply.model.SurveyQuestion;
 import intern.apply.internapply.model.Salary;
+import intern.apply.internapply.model.SurveyQuestion;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

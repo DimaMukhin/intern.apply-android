@@ -62,8 +62,8 @@ public class SurveyAcceptanceTest extends ActivityInstrumentationTestCase2<Surve
                 "To test or not to test?"
         };
         responsesData = new ArrayList<>(Arrays.asList(
-                new String[]{ "True", "False"},
-                new String[]{ "Wow", "I", "Test"}
+                new String[]{"True", "False"},
+                new String[]{"Wow", "I", "Test"}
         ));
 
         questionsList = new ArrayList<>();
@@ -82,7 +82,7 @@ public class SurveyAcceptanceTest extends ActivityInstrumentationTestCase2<Surve
         solo.waitForView(R.id.SurveyListView);
         findStrings(questionsData);
 
-        for (String[] responses: responsesData)
+        for (String[] responses : responsesData)
             findStrings(responses);
     }
 

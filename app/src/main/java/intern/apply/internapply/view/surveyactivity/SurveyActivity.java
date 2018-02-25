@@ -1,7 +1,7 @@
 package intern.apply.internapply.view.surveyactivity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -51,7 +51,7 @@ public class SurveyActivity extends AppCompatActivity {
 
     public void sendSurvey(View view) {
         CompletedSurvey survey = new CompletedSurvey(questionList.getResponses());
-        
+
         api.sendCompletedSurvey(survey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
