@@ -10,6 +10,7 @@ import java.util.List;
 
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.view.mainactivity.MainActivity;
 import io.reactivex.Observable;
 
@@ -94,7 +95,7 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
         };
         singleJob = new ArrayList<>();
         for (int i = 0; i < singleJobData.length; i += 2)
-            singleJob.add(new Job(singleJobData[i], singleJobData[i + 1]));
+            singleJob.add(new JobBuilder().setTitle(singleJobData[i]).setOrganization(singleJobData[i + 1]).createJob());
 
         multipleJobsData = new String[]{
                 "T1", "C1",
@@ -103,6 +104,6 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
         };
         multipleJobs = new ArrayList<>();
         for (int i = 0; i < multipleJobsData.length; i += 2)
-            multipleJobs.add(new Job(multipleJobsData[i], multipleJobsData[i + 1]));
+            multipleJobs.add(new JobBuilder().setTitle(multipleJobsData[i]).setOrganization(multipleJobsData[i + 1]).createJob());
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.view.mainactivity.MainActivity;
 import io.reactivex.Observable;
 
@@ -111,10 +112,10 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
         };
         multipleJobs = new ArrayList<>();
         for (int i = 0; i < multipleJobsData.length; i += 2)
-            multipleJobs.add(new Job(multipleJobsData[i], multipleJobsData[i + 1]));
+            multipleJobs.add(new JobBuilder().setTitle(multipleJobsData[i]).setOrganization(multipleJobsData[i + 1]).createJob());
 
         allJob = new ArrayList<>();
         for (int i = 0; i < allJobsData.length; i += 2)
-            allJob.add(new Job(allJobsData[i], allJobsData[i + 1]));
+            allJob.add(new JobBuilder().setTitle(allJobsData[i]).setOrganization(allJobsData[i + 1]).createJob());
     }
 }

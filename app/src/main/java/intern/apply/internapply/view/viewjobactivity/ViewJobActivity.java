@@ -2,10 +2,13 @@ package intern.apply.internapply.view.viewjobactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.jobcommentsactivity.JobCommentsActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -26,6 +30,7 @@ public class ViewJobActivity extends AppCompatActivity {
     private TextView jobTitle;
     private TextView jobOrganization;
     private TextView jobLocation;
+    private TextView jobSalary;
     private TextView jobDescription;
     private Button jobApply;
 
@@ -44,10 +49,12 @@ public class ViewJobActivity extends AppCompatActivity {
         jobTitle = findViewById(R.id.jobTitle);
         jobOrganization = findViewById(R.id.jobOrganization);
         jobLocation = findViewById(R.id.jobLocation);
+        jobSalary = findViewById(R.id.jobSalary);
         jobDescription = findViewById(R.id.jobDescription);
         jobApply = findViewById(R.id.jobApply);
         etName = findViewById(R.id.etName);
         etMessage = findViewById(R.id.etMessageComment);
+        setupDialogForSalary();
 
         boolean test = getIntent().getBooleanExtra("TEST", false);
         if (!test) {
@@ -73,8 +80,13 @@ public class ViewJobActivity extends AppCompatActivity {
                         jobTitle.setText(job.getTitle());
                         jobOrganization.setText(job.getOrganization());
                         jobLocation.setText(job.getLocation());
-                        jobDescription.setText(job.getDescription());
 
+                        if (job.getNumSalaries() > 0)
+                            jobSalary.setText("Average Salary: " + job.getSalary() + "k per year (" + job.getNumSalaries() + " submits)");
+                        else
+                            jobSalary.setVisibility(View.GONE);
+
+                        jobDescription.setText(job.getDescription());
                         // changed to visible here so rendering would be at the same time
                         jobApply.setVisibility(View.VISIBLE);
 
@@ -121,6 +133,53 @@ public class ViewJobActivity extends AppCompatActivity {
                                     Toast.makeText(this, R.string.InvalidCommentName, Toast.LENGTH_LONG).show();
                             }
                         });
+    }
+
+    private void setupDialogForSalary() {
+        Button salaryDialog = findViewById(R.id.salaryButton);
+        salaryDialog.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(ViewJobActivity.this);
+            View mView = getLayoutInflater().inflate(R.layout.dialog_salary, null);
+            EditText salaryInput = mView.findViewById(R.id.salaryInput);
+
+            Spinner dropdown = mView.findViewById(R.id.salaryTypeInput);
+            String[] items = new String[]{"Choose a pay duration", "Yearly", "Monthly", "Biweekly", "Hourly"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(ViewJobActivity.this, android.R.layout.simple_spinner_item, items);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            dropdown.setAdapter(adapter);
+
+            Button salarySumbit = mView.findViewById(R.id.salarySubmit);
+            builder.setView(mView);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            salarySumbit.setOnClickListener(view1 -> {
+                Salary newSalary = new Salary(jobId, salaryInput.getText().toString(), dropdown.getSelectedItemPosition() - 1);
+                api.addJobSalary(newSalary)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(response ->
+                                {
+                                    jobSalary.setVisibility(View.VISIBLE);
+                                    jobSalary.setText("Average Salary: " + response.getSalary() + "k per year (" + response.getSalaryType() + " submits)");
+                                    dialog.dismiss();
+                                    Toast.makeText(ViewJobActivity.this, R.string.SalarySuccess, Toast.LENGTH_LONG).show();
+                                }
+                                , error -> {
+                                    List<ServerError> errors = ServerError.getErrorsFromServerException(error);
+
+                                    if (errors.size() == 0 || errors.get(0).getCode() == 0 || errors.get(0).getCode() == 4)
+                                        Toast.makeText(ViewJobActivity.this, R.string.InternalServerError, Toast.LENGTH_LONG).show();
+                                    else {
+                                        if (errors.get(0).getCode() == 41)
+                                            Toast.makeText(ViewJobActivity.this, R.string.InvalidSalary, Toast.LENGTH_LONG).show();
+                                        else if (errors.get(0).getCode() == 42)
+                                            Toast.makeText(ViewJobActivity.this, R.string.InvalidSalaryType, Toast.LENGTH_LONG).show();
+                                    }
+                                });
+            });
+
+        });
     }
 
     /**

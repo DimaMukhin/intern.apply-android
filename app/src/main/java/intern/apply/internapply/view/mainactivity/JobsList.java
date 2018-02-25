@@ -27,6 +27,7 @@ class JobsList {
                 .subscribe(response -> {
                     CustomListAdapter listAdapter = new CustomListAdapter(activity, response);
                     listView = activity.findViewById(R.id.JobsListView);
+
                     listView.setAdapter(listAdapter);
                 }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
     }

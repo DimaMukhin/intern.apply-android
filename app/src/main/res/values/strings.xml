@@ -3,6 +3,9 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="survey_header">Intern.apply Customer Survey</string>
+    <string name="action_survey">Survey</string>
+    <string name="submit">Submit</string>
 
     <string name="InternalServerError">Internal server error, please try again later</string>
 
@@ -21,12 +24,14 @@
     <string name="message">Message</string>
     <string name="send">Send</string>
     <string name="MessageSuccess">Message was sent successfully</string>
+    <string name="SurveySuccess">Survey was sent successfully</string>
     <string name="InvalidEmail">Invalid email address</string>
     <string name="InvalidTitle">Invalid title (max 100 characters)</string>
     <string name="InvalidMessage">Invalid message body (max 300 characters)</string>
     <string name="CommentSuccess">Comment was sent successfully</string>
     <string name="InvalidCommentBody">Invalid comment body (max 300 characters)</string>
     <string name="InvalidCommentName">Invalid name (max 25 characters)</string>
+    <string name="InvalidSurvey">Please respond to every question</string>
 
     <!-- Strings related to Add Job -->
     <string name="add_job_title">Add Job</string>
@@ -39,6 +44,10 @@
     <string name="InvalidJobTitle">Invalid job title (max 100 characters)</string>
     <string name="InvalidJobLocation">Invalid job location (max 45 characters)</string>
     <string name="InvalidJobDescription">Invalid job description (max 2000 characters)</string>
+
+    <string name="SalarySuccess">Salary submitted successfully</string>
+    <string name="InvalidSalary">Invalid salary (should be greater than 0)</string>
+    <string name="InvalidSalaryType">Please pick a pay duration</string>
 
 
     <string name="apply">apply</string>
