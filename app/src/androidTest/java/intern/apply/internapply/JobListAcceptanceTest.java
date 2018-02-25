@@ -59,7 +59,7 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
 
         Observable<List<Job>> output = Observable.fromArray(singleJob);
         when(api.getAllJobs()).thenReturn(output);
-        getActivity().SetAPI(api,false);
+        getActivity().SetAPI(api);
 
         solo.waitForView(R.id.JobsListView);
         findStrings(singleJobData);
@@ -71,7 +71,7 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
 
         Observable<List<Job>> output = Observable.fromArray(multipleJobs);
         when(api.getAllJobs()).thenReturn(output);
-        getActivity().SetAPI(api,false);
+        getActivity().SetAPI(api);
 
         solo.waitForView(R.id.JobsListView);
         findStrings(multipleJobsData);
@@ -83,7 +83,7 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
 
         Observable<List<Job>> output = Observable.fromArray(new ArrayList<Job>());
         when(api.getAllJobs()).thenReturn(output);
-        getActivity().SetAPI(api,false);
+        getActivity().SetAPI(api);
 
         solo.waitForView(R.id.JobsListView);
     }
