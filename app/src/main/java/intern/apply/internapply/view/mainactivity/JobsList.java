@@ -1,15 +1,10 @@
 package intern.apply.internapply.view.mainactivity;
 
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
-import intern.apply.internapply.model.Job;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -37,13 +32,12 @@ class JobsList {
     }
 
     public void ShowFilteredList(MainActivity activity,String filter) {
-        Observable<List<Job>> job = api.getAllJobs(filter);
         api.getAllJobs(filter).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     CustomListAdapter listAdapter = new CustomListAdapter(activity, response);
                     ListView listView = activity.findViewById(R.id.JobsListView);
                     listView.setAdapter(listAdapter);
-                }, error -> Log.i("error", error.toString()));
+                }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
     }
 }

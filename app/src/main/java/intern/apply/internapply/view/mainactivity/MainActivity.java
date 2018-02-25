@@ -2,12 +2,6 @@ package intern.apply.internapply.view.mainactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,12 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.SearchView;
-import android.widget.TextView;
-import android.view.View;
 import android.widget.ListView;
 
 import intern.apply.internapply.R;
@@ -41,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -50,33 +43,45 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         boolean test = getIntent().getBooleanExtra("TEST", false);
         if (!test) {
             internAPI = InternAPI.getAPI();
-            ShowJobs();
+            onInit();
         }
     }
 
-    public void SetAPI(InternAPI api,Boolean testSearch) {
-        internAPI = api;
-        if(testSearch) { ShowFilteredJobs(testSearch); }
-        else { ShowJobs();}
-
+    private void onInit() {
+        ShowJobs();
     }
-    public void ShowFilteredJobs(Boolean searchTest)
-    {
-        EditText searchBox = (EditText)findViewById(R.id.searchBox);
+
+    private void ShowJobs() {
+        listView = findViewById(R.id.JobsListView);
+        jobsList = new JobsList(internAPI);
+        jobsList.ShowList(this);
+        ShowFilteredJobs();
+        onJobClick();
+    }
+
+    public void SetAPI(InternAPI api) {
+        internAPI = api;
+        onInit();
+    }
+
+    public void ShowFilteredJobs() {
+        EditText searchBox = findViewById(R.id.searchBox);
 
         searchBox.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void afterTextChanged(Editable s) {
-                String query= s.toString();
-                if(query.equals("")){ jobsList.ShowList(MainActivity.this);  }
-                else{ jobsList.ShowFilteredList(MainActivity.this, query);}
+                String query = s.toString();
+                if (query.equals("")) {
+                    jobsList.ShowList(MainActivity.this);
+                } else {
+                    jobsList.ShowFilteredList(MainActivity.this, query);
+                }
             }
 
             @Override
@@ -87,24 +92,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-
             }
         });
-
-        if(searchTest)
-        {
-            jobsList = new JobsList(internAPI);
-            String query=searchBox.getText().toString();
-            jobsList.ShowFilteredList(this, query);
-        }
-    }
-
-    private void ShowJobs() {
-        listView = findViewById(R.id.JobsListView);
-        jobsList = new JobsList(internAPI);
-        jobsList.ShowList(this);
-        ShowFilteredJobs(false);
-        onJobClick();
     }
 
     /**
@@ -122,7 +111,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -166,7 +155,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(addJobIntent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
