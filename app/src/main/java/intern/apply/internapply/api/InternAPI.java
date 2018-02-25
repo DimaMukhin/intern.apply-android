@@ -4,9 +4,11 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
 
+import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.SurveyQuestion;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -47,6 +49,25 @@ public class InternAPI {
      */
     public Observable<List<Job>> getAllJobs() {
         return internAPIClient.getAllJobs();
+    }
+
+    /**
+     * get the survey questions with allowed responses from the server
+     *
+     * @return the survey questions with their allowed responses
+     */
+    public Observable<List<SurveyQuestion>> getSurvey() {
+        return internAPIClient.getSurvey();
+    }
+
+    /**
+     * send a completed survey to the server
+     *
+     * @param survey the completed survey
+     * @return the survey sent to the server
+     */
+    public Observable<CompletedSurvey> sendCompletedSurvey(CompletedSurvey survey) {
+        return internAPIClient.sendCompletedSurvey(survey);
     }
 
     /**

@@ -16,6 +16,7 @@ import android.widget.ListView;
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.view.surveyactivity.SurveyActivity;
 import intern.apply.internapply.view.addjobactivity.AddJobActivity;
 import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
@@ -101,6 +102,9 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_survey) {
+            Intent surveyIntent = new Intent(MainActivity.this, SurveyActivity.class);
+            startActivity(surveyIntent);
         } else if (id == R.id.action_contact_us) {
             Intent contactUsIntent = new Intent(MainActivity.this, ContactUsActivity.class);
             startActivity(contactUsIntent);

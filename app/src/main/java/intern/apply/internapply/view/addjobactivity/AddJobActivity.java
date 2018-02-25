@@ -65,7 +65,6 @@ public class AddJobActivity extends AppCompatActivity {
                             resetForm();
                             Toast.makeText(this, "Job added successfully", Toast.LENGTH_LONG).show();
                         }, error -> {
-                            Log.i("error", error.toString());
                             List<ServerError> errors = ServerError.getErrorsFromServerException(error);
 
                             if (errors.size() == 0 || errors.get(0).getCode() == 0)
