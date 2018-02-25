@@ -45,6 +45,10 @@
     <string name="InvalidJobLocation">Invalid job location (max 45 characters)</string>
     <string name="InvalidJobDescription">Invalid job description (max 2000 characters)</string>
 
+    <string name="SalarySuccess">Salary submitted successfully</string>
+    <string name="InvalidSalary">Invalid salary (should be greater than 0)</string>
+    <string name="InvalidSalaryType">Please pick a pay duration</string>
+
 
     <string name="apply">apply</string>
     <string name="comments">Comments</string>

@@ -10,7 +10,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import intern.apply.internapply.R;
@@ -43,7 +42,7 @@ public class SurveyListAdapter extends ArrayAdapter {
 
         TextView titleField = rowView.findViewById(R.id.QuestionTextView);
 
-        titleField.setText(position+1 + ". " + questions.get(position).getQuestion());
+        titleField.setText(position + 1 + ". " + questions.get(position).getQuestion());
 
         return rowView;
     }
@@ -68,7 +67,7 @@ public class SurveyListAdapter extends ArrayAdapter {
         );
 
         //make the radio buttons, if they are supposed to be selected, set them checked
-        for(int i = 0; i < responses.size(); i++) {
+        for (int i = 0; i < responses.size(); i++) {
             RadioButton radioButtonView = new RadioButton(context);
             radioButtonView.setText(responses.get(i));
             radioGroup.addView(radioButtonView, param);

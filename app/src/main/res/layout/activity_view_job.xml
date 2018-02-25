@@ -57,6 +57,26 @@
                 android:visibility="gone" />
 
             <TextView
+                android:id="@+id/jobSalary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:gravity="top"
+                android:padding="0dp"
+                android:textColor="@android:color/background_dark"
+                android:textStyle="italic"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/salaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter your salary" />
+
+            <TextView
                 android:id="@+id/jobDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

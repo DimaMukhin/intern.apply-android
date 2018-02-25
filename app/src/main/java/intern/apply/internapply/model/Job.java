@@ -6,17 +6,16 @@ public class Job {
     private final String title;
     private String location;
     private String description;
+    private double salary;
+    private int numSalaries;
 
-    public Job(String title, String organization) {
-        this.title = title;
-        this.organization = organization;
-    }
-
-    public Job(String organization, String title, String location, String description) {
+    public Job(String organization, String title, String location, String description, double salary, int numSalaries) {
         this.organization = organization;
         this.title = title;
         this.location = location;
         this.description = description;
+        this.salary = salary;
+        this.numSalaries = numSalaries;
     }
 
     public int getId() {
@@ -33,6 +32,14 @@ public class Job {
 
     public String getLocation() {
         return location;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public int getNumSalaries() {
+        return numSalaries;
     }
 
     public String getDescription() {

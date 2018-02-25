@@ -1,6 +1,5 @@
 package intern.apply.internapply.view.surveyactivity;
 
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,5 +34,7 @@ public class SurveyList {
                 });
     }
 
-    public List<String> getResponses(){ return userAnswers; }
+    public List<String> getResponses() {
+        return userAnswers;
+    }
 }
