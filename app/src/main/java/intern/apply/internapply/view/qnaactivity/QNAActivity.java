@@ -1,72 +1,64 @@
-package intern.apply.internapply.view.jobcommentsactivity;
+package intern.apply.internapply.view.qnaactivity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.view.addquestionactivity.AddQuestionActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class JobCommentsActivity extends AppCompatActivity {
+public class QNAActivity extends AppCompatActivity {
 
-    private int jobId;
     private InternAPI api;
-    private ListView commentsListView;
+    private ListView questionsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_comments);
+        setContentView(R.layout.activity_qna);
         onInit();
     }
 
     private void onInit() {
-        getJobId();
-        commentsListView = findViewById(R.id.commentsListView);
-
+        questionsListView = findViewById(R.id.questionsListView);
         boolean test = getIntent().getBooleanExtra("TEST", false);
         if (!test) {
             api = InternAPI.getAPI();
-            getAllComments();
+            getAllQuestions();
         }
     }
 
     public void setApi(InternAPI api) {
         this.api = api;
-        getAllComments();
+        getAllQuestions();
     }
 
     /**
-     * get and display all comments
+     * Get all the questions from intern api and show them in a list
      */
-    private void getAllComments() {
-        api.getJobComments(jobId)
+    private void getAllQuestions() {
+        api.getAllQuestions()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    CommentsCustomListAdapter listAdapter = new CommentsCustomListAdapter(this, response);
-                    commentsListView.setAdapter(listAdapter);
+                    QuestionsCustomListAdapter listAdapter = new QuestionsCustomListAdapter(this, response);
+                    questionsListView.setAdapter(listAdapter);
                 }, error -> {
                     Toast.makeText(this, R.string.InternalServerError, Toast.LENGTH_LONG).show();
                 });
     }
 
     /**
-     * getting the intent that has the job id
+     * on add button click, navigate to new question creation intent
      */
-    private void getJobId() {
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-
-        if (extras != null) {
-            if (extras.containsKey("jobId"))
-                jobId = extras.getInt("jobId");
-            else
-                jobId = 0;
-        }
+    public void addNewQuestion(View view) {
+        Intent addJobIntent = new Intent(QNAActivity.this, AddQuestionActivity.class);
+        startActivity(addJobIntent);
     }
 }

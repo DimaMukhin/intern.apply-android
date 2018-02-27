@@ -13,6 +13,7 @@ import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.Question;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.SurveyQuestion;
 import io.reactivex.Observable;
@@ -134,5 +135,11 @@ public class InternAPI {
     public Observable<Salary> addJobSalary(Salary salary) {
         return internAPIClient.addJobSalary(salary);
     }
+
+    /**
+     * Get all the questions from the server
+     * @return list of questions
+     */
+    public Observable<List<Question>> getAllQuestions() { return internAPIClient.getAllQuestions(); }
     //endregion
 }
