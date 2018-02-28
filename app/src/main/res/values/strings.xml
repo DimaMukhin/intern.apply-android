@@ -40,7 +40,10 @@
     <string name="InvalidJobLocation">Invalid job location (max 45 characters)</string>
     <string name="InvalidJobDescription">Invalid job description (max 2000 characters)</string>
 
-
+    <!-- Strings related to viewing a job -->
+    <string name="ratedSuccessfully">Job was rated successfully</string>
+    <string name="votes">votes</string>
+    <string name="ratingError">There was an error rating this job</string>
     <string name="apply">apply</string>
     <string name="comments">Comments</string>
     <string name="add_a_comment">Add a comment</string>

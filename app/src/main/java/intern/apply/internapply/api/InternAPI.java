@@ -7,6 +7,7 @@ import java.util.List;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobRating;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -90,9 +91,24 @@ public class InternAPI {
 
     /**
      * Add a comment to a job
-     * @param comment   the comment to add
+     * @param comment the comment to add
      * @return  the added comment
      */
     public Observable<Comment> addJobComment(Comment comment) { return internAPIClient.addJobComment(comment); }
+
+    /**
+     * get a job rating
+     * @param jobId
+     * @return
+     */
+    public Observable<List<JobRating>> getJobRating(int jobId){ return internAPIClient.getJobRating(jobId); }
+
+    /**
+     * rate a job
+     * @param jobId
+     * @param score
+     * @return
+     */
+    public Observable<JobRating> rateJob(int jobId, JobRating jobRating){ return internAPIClient.rateJob(jobId, jobRating); }
     //endregion
 }

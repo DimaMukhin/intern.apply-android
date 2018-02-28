@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id = "@+id/jobView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -55,6 +56,34 @@
                 android:textColor="@android:color/background_dark"
                 android:textSize="24sp"
                 android:visibility="gone" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="1"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/votes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/ratingBar"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp"
+                    android:visibility="visible" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/jobDescription"

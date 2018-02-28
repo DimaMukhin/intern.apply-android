@@ -3,11 +3,17 @@ package intern.apply.internapply.view.viewjobactivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.JsonReader;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -15,6 +21,7 @@ import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobRating;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.jobcommentsactivity.JobCommentsActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -27,7 +34,9 @@ public class ViewJobActivity extends AppCompatActivity {
     private TextView jobOrganization;
     private TextView jobLocation;
     private TextView jobDescription;
+    private TextView votes;
     private Button jobApply;
+    private RatingBar rating;
 
     private EditText etName;
     private EditText etMessage;
@@ -48,18 +57,25 @@ public class ViewJobActivity extends AppCompatActivity {
         jobApply = findViewById(R.id.jobApply);
         etName = findViewById(R.id.etName);
         etMessage = findViewById(R.id.etMessageComment);
+        rating = findViewById(R.id.ratingBar);
+        votes = findViewById(R.id.votes);
 
         boolean test = getIntent().getBooleanExtra("TEST", false);
         if (!test) {
             api = InternAPI.getAPI();
             displayJob();
+            displayJobRating();
         }
     }
 
+    /*
+    TESTING
+     */
     public void setApi(InternAPI api) {
         this.api = api;
         displayJob();
     }
+
 
     /**
      * displays a job in the view
@@ -85,6 +101,37 @@ public class ViewJobActivity extends AppCompatActivity {
                         finish();
                     }
                 }, error -> finish());
+    }
+
+    /**
+     * displays job's rating
+     */
+    private void displayJobRating() {
+        api.getJobRating(jobId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    rating.setRating(Math.round(response.get(0).getScore()));
+                    votes.setText(response.get(0).getVotes() + " " + getResources().getString(R.string.votes));
+                    rateJob();
+                }, error -> finish());
+    }
+
+    /**
+     * rate a job
+     */
+    private void rateJob() {
+        rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            // make sure the user is the one changing the rating bar
+            if (fromUser) {
+                JobRating jobRating = new JobRating(Math.round(rating));
+                api.rateJob(jobId, jobRating).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(response -> {
+                            Toast.makeText(this, R.string.ratedSuccessfully, Toast.LENGTH_LONG).show();
+                            displayJobRating();
+                        }, err -> Toast.makeText(this, R.string.ratingError, Toast.LENGTH_LONG).show());
+            }
+        });
     }
 
     /**
