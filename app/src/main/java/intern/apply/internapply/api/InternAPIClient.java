@@ -55,4 +55,10 @@ interface InternAPIClient {
 
     @GET("/api/question")
     Observable<List<Question>> getAllQuestions();
+
+    @POST("/api/question")
+    Observable<Question> addNewQuestion(@Body Question question);
+
+    @GET("/api/question/{id}")
+    Observable<Question> getQuestion(@Path("id") int questionId);
 }

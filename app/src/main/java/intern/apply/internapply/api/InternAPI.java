@@ -141,5 +141,19 @@ public class InternAPI {
      * @return list of questions
      */
     public Observable<List<Question>> getAllQuestions() { return internAPIClient.getAllQuestions(); }
+
+    /**
+     * Add a new question to the Q&A board
+     * @param question  the question to add
+     * @return  the added question on success
+     */
+    public Observable<Question> addNewQuestion(Question question) { return internAPIClient.addNewQuestion(question); }
+
+    /**
+     * Get a question by its id from the server
+     * @param questionId the id of the question to get
+     * @return  the question
+     */
+    public Observable<Question> getQuestion(int questionId) { return internAPIClient.getQuestion(questionId); }
     //endregion
 }

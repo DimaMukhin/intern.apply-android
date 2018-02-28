@@ -12,6 +12,16 @@ public class Question {
     private String author;
     private String creationTime;
 
+    public Question() {
+
+    }
+
+    public Question(String title, String body, String author) {
+        this.title = title;
+        this.body = body;
+        this.author = author;
+    }
+
     public int getId() {
         return id;
     }

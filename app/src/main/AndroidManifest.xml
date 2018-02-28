@@ -30,7 +30,8 @@
         <activity android:name=".view.viewjobactivity.ViewJobActivity" />
         <activity android:name=".view.jobcommentsactivity.JobCommentsActivity" />
         <activity android:name=".view.qnaactivity.QNAActivity" />
-        <activity android:name=".view.addquestionactivity.AddQuestionActivity"></activity>
+        <activity android:name=".view.addquestionactivity.AddQuestionActivity" />
+        <activity android:name=".view.viewquestionactivity.ViewQuestionActivity"></activity>
     </application>
 
 </manifest>

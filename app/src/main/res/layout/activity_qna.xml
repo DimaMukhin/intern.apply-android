@@ -20,15 +20,14 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/floatingAddQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:backgroundTint="@color/colorPrimary"
         android:clickable="true"
         android:onClick="addNewQuestion"
+        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_add" />
-
 
 </FrameLayout>

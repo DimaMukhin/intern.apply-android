@@ -9,7 +9,9 @@ import android.widget.Toast;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.model.Question;
 import intern.apply.internapply.view.addquestionactivity.AddQuestionActivity;
+import intern.apply.internapply.view.viewquestionactivity.ViewQuestionActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -25,18 +27,38 @@ public class QNAActivity extends AppCompatActivity {
         onInit();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAllQuestions();
+    }
+
     private void onInit() {
         questionsListView = findViewById(R.id.questionsListView);
+        onQuestionClick();
         boolean test = getIntent().getBooleanExtra("TEST", false);
         if (!test) {
             api = InternAPI.getAPI();
-            getAllQuestions();
         }
     }
 
     public void setApi(InternAPI api) {
         this.api = api;
         getAllQuestions();
+    }
+
+    /**
+     * on question click handler,
+     * Navigate to the question view
+     */
+    private void onQuestionClick() {
+        questionsListView.setOnItemClickListener((adapterView, view, i, l) -> {
+            Question question = (Question) adapterView.getItemAtPosition(i);
+
+            Intent intent = new Intent(this, ViewQuestionActivity.class);
+            intent.putExtra("questionId", question.getId());
+            startActivity(intent);
+        });
     }
 
     /**
