@@ -18,6 +18,7 @@ public class AcceptanceTests {
         suite.addTestSuite(AddJobCommentAcceptanceTest.class);
         suite.addTestSuite(JobCommentsAcceptanceTest.class);
         suite.addTestSuite(ViewJobAcceptanceTests.class);
+        suite.addTestSuite(RateJobAcceptanceTest.class);
         return suite;
     }
 }
