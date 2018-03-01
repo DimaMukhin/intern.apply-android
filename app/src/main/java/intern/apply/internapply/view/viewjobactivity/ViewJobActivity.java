@@ -82,29 +82,30 @@ public class ViewJobActivity extends AppCompatActivity {
         api.getJob(jobId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    if (response.size() != 0) {
-                        Job job = response.get(0);
-                        jobTitle.setText(job.getTitle());
-                        jobOrganization.setText(job.getOrganization());
-                        jobLocation.setText(job.getLocation());
+                            if (response.size() != 0) {
+                                Job job = response.get(0);
+                                jobTitle.setText(job.getTitle());
+                                jobOrganization.setText(job.getOrganization());
+                                jobLocation.setText(job.getLocation());
 
-                        if (job.getNumSalaries() > 0)
-                            jobSalary.setText("Average Salary: " + job.getSalary() + "k per year (" + job.getNumSalaries() + " submits)");
-                        else
-                            jobSalary.setVisibility(View.GONE);
+                                if (job.getNumSalaries() > 0)
+                                    jobSalary.setText("Average Salary: " + job.getSalary() + "k per year (" + job.getNumSalaries() + " submits)");
+                                else
+                                    jobSalary.setVisibility(View.GONE);
 
-                        jobDescription.setText(job.getDescription());
+                                jobDescription.setText(job.getDescription());
 
-                        // changed to visible here so rendering would be at the same time
-                        jobApply.setVisibility(View.VISIBLE);
+                                // changed to visible here so rendering would be at the same time
+                                jobApply.setVisibility(View.VISIBLE);
 
-                        // making sure view is not taking any space if those are empty
-                        jobOrganization.setVisibility(View.VISIBLE);
-                        jobLocation.setVisibility(View.VISIBLE);
-                    } else {
-                        finish();
-                    }
-                }, error -> finish());
+                                // making sure view is not taking any space if those are empty
+                                jobOrganization.setVisibility(View.VISIBLE);
+                                jobLocation.setVisibility(View.VISIBLE);
+                            } else {
+                                finish();
+                            }
+                        }, error -> finish()
+                );
     }
 
     /**
@@ -114,28 +115,38 @@ public class ViewJobActivity extends AppCompatActivity {
         api.getJobRating(jobId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    rating.setRating(Math.round(response.get(0).getScore()));
-                    votes.setText(response.get(0).getVotes() + " " + getResources().getString(R.string.votes));
-                    rateJob();
-                }, error -> finish());
-    }
+                    if (response.size() > 0)
+                        setRating(response.get(0));
+                    else
+                        setRating(new JobRating(0, 0));
+                }, error -> {
+                    finish();
+                });
 
-    /**
-     * rate a job
-     */
-    private void rateJob() {
         rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            // make sure the user is the one changing the rating bar
             if (fromUser) {
                 JobRating jobRating = new JobRating(Math.round(rating));
                 api.rateJob(jobId, jobRating).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(response -> {
+                        .subscribe((JobRating response) -> {
                             Toast.makeText(this, R.string.ratedSuccessfully, Toast.LENGTH_LONG).show();
-                            displayJobRating();
+                            api.getJobRating(jobId).subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(response2 -> {
+                                        if (response2.size() > 0)
+                                            setRating(response2.get(0));
+                                        else
+                                            setRating(new JobRating(0, 0));
+                                    }, error ->
+                                            finish());
                         }, err -> Toast.makeText(this, R.string.ratingError, Toast.LENGTH_LONG).show());
             }
         });
+    }
+
+    private void setRating(JobRating jobRating) {
+        rating.setRating(Math.round(jobRating.getScore()));
+        votes.setText(jobRating.getVotes() + " " + getResources().getString(R.string.votes));
     }
 
     /**
