@@ -32,7 +32,7 @@ class JobsList {
                 }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
     }
 
-    public void ShowFilteredList(MainActivity activity,String filter) {
+    public void ShowFilteredList(MainActivity activity, String filter) {
         api.getAllJobs(filter).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {

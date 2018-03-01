@@ -1,26 +1,21 @@
 package intern.apply.internapply.api;
 
 
-import android.content.Context;
-
-import org.json.JSONObject;
-
 import java.util.List;
 
-import intern.apply.internapply.R;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobRating;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.SurveyQuestion;
-import intern.apply.internapply.model.JobRating;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 interface InternAPIClient {
     @GET("/api/job")

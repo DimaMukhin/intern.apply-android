@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.JsonReader;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,16 +13,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.GsonBuilder;
-
 import java.util.List;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.Job;
-import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.JobRating;
+import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.jobcommentsactivity.JobCommentsActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -75,8 +70,8 @@ public class ViewJobActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    TESTING
+    /**
+     * TESTING
      */
     public void setApi(InternAPI api) {
         this.api = api;
