@@ -27,6 +27,17 @@ class JobsList {
                 .subscribe(response -> {
                     CustomListAdapter listAdapter = new CustomListAdapter(activity, response);
                     listView = activity.findViewById(R.id.JobsListView);
+
+                    listView.setAdapter(listAdapter);
+                }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
+    }
+
+    public void ShowFilteredList(MainActivity activity,String filter) {
+        api.getAllJobs(filter).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    CustomListAdapter listAdapter = new CustomListAdapter(activity, response);
+                    ListView listView = activity.findViewById(R.id.JobsListView);
                     listView.setAdapter(listAdapter);
                 }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
     }

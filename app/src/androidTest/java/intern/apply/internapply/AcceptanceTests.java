@@ -16,9 +16,12 @@ public class AcceptanceTests {
         suite.addTestSuite(AddJobAcceptanceTest.class);
         suite.addTestSuite(ContactUsAcceptanceTest.class);
         suite.addTestSuite(AddJobCommentAcceptanceTest.class);
+        suite.addTestSuite(AddSalaryAcceptanceTest.class);
+        suite.addTestSuite(ContactUsAcceptanceTest.class);
         suite.addTestSuite(JobCommentsAcceptanceTest.class);
-        suite.addTestSuite(ViewJobAcceptanceTests.class);
-        suite.addTestSuite(RateJobAcceptanceTest.class);
+        suite.addTestSuite(JobListAcceptanceTest.class);
+        suite.addTestSuite(SearchBarAcceptanceTest.class);
+        suite.addTestSuite(SurveyAcceptanceTest.class);
         return suite;
     }
 }

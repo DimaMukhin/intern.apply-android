@@ -1,6 +1,5 @@
 package intern.apply.internapply;
 
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.google.gson.JsonArray;
@@ -13,6 +12,7 @@ import java.util.List;
 
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.addjobactivity.AddJobActivity;
 import io.reactivex.Observable;
@@ -55,7 +55,7 @@ public class AddJobAcceptanceTest extends ActivityInstrumentationTestCase2<AddJo
         solo.assertCurrentActivity(ACTIVITY_ERROR, AddJobActivity.class);
         solo.waitForActivity(AddJobActivity.class);
 
-        Observable<Job> output = Observable.just(new Job(null, null));
+        Observable<Job> output = Observable.just(new JobBuilder().setTitle(null).setOrganization(null).createJob());
         when(api.addJob(any())).thenReturn(output);
         getActivity().setApi(api);
 

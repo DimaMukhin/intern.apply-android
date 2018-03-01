@@ -1,12 +1,20 @@
 package intern.apply.internapply.api;
 
+import android.util.Log;
+
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
 import intern.apply.internapply.model.Comment;
+import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.Salary;
+import intern.apply.internapply.model.SurveyQuestion;
 import intern.apply.internapply.model.JobRating;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -48,6 +56,27 @@ public class InternAPI {
      */
     public Observable<List<Job>> getAllJobs() {
         return internAPIClient.getAllJobs();
+    }
+
+    public Observable<List<Job>> getAllJobs(String filter) { return internAPIClient.getAllJobs(filter); }
+
+    /**
+     * get the survey questions with allowed responses from the server
+     *
+     * @return the survey questions with their allowed responses
+     */
+    public Observable<List<SurveyQuestion>> getSurvey() {
+        return internAPIClient.getSurvey();
+    }
+
+    /**
+     * send a completed survey to the server
+     *
+     * @param survey the completed survey
+     * @return the survey sent to the server
+     */
+    public Observable<CompletedSurvey> sendCompletedSurvey(CompletedSurvey survey) {
+        return internAPIClient.sendCompletedSurvey(survey);
     }
 
     /**
@@ -110,5 +139,15 @@ public class InternAPI {
      * @return
      */
     public Observable<JobRating> rateJob(int jobId, JobRating jobRating){ return internAPIClient.rateJob(jobId, jobRating); }
+
+    /**
+     * Add a salary to a job
+     *
+     * @param salary the salary to add
+     * @return the added comment
+     */
+    public Observable<Salary> addJobSalary(Salary salary) {
+        return internAPIClient.addJobSalary(salary);
+    }
     //endregion
 }

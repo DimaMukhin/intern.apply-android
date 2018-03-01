@@ -2,6 +2,7 @@ package intern.apply.internapply;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -12,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import intern.apply.internapply.api.InternAPI;
-import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
+import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 import io.reactivex.Observable;
@@ -27,14 +28,15 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AddJobCommentAcceptanceTest extends ActivityInstrumentationTestCase2<ViewJobActivity> {
+
+public class AddSalaryAcceptanceTest extends ActivityInstrumentationTestCase2<ViewJobActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
 
     private Solo solo;
     private final InternAPI api;
 
-    public AddJobCommentAcceptanceTest() {
+    public AddSalaryAcceptanceTest() {
         super(ViewJobActivity.class);
         api = mock(InternAPI.class);
     }
@@ -45,8 +47,8 @@ public class AddJobCommentAcceptanceTest extends ActivityInstrumentationTestCase
         setActivityIntent(new Intent().putExtra("TEST", true));
         solo = new Solo(getInstrumentation(), getActivity());
 
-        Job fakeJob = new JobBuilder().setOrganization("fake org").setTitle("fake title").setLocation("fake location").setDescription("fake description").createJob();
-        List<Job> fakeJobList = new ArrayList<Job>();
+        Job fakeJob = new JobBuilder().setOrganization("fake org").setTitle("fake title").setLocation("fake location").setDescription("fake description").setSalary(1).setNumSalaries(1).createJob();
+        List<Job> fakeJobList = new ArrayList<>();
         fakeJobList.add(fakeJob);
         Observable<List<Job>> output = Observable.just(fakeJobList);
         when(api.getJob(anyInt())).thenReturn(output);
@@ -58,56 +60,81 @@ public class AddJobCommentAcceptanceTest extends ActivityInstrumentationTestCase
         super.tearDown();
     }
 
-    public void testValidCommentAdded() {
+    public void testValidSalaryAdded() {
         solo.assertCurrentActivity(ACTIVITY_ERROR, ViewJobActivity.class);
         solo.waitForActivity(ViewJobActivity.class);
 
-        Observable<Comment> output = Observable.just(new Comment());
-        when(api.addJobComment(any())).thenReturn(output);
+        Observable<Salary> output = Observable.just(new Salary(2, "5", 1));
+        when(api.addJobSalary(any())).thenReturn(output);
         getActivity().setApi(api);
 
-        solo.clickOnButton("Send");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Comment was sent successfully"));
+        solo.clickOnView(solo.getView(R.id.salaryButton));
+
+        EditText salaryInput = (EditText) (solo.getView(R.id.salaryInput));
+        salaryInput.setText("5000");
+        solo.pressSpinnerItem(0, 1);
+
+        solo.clickOnButton("Submit");
+        assertTrue(TEXT_NOT_FOUND, solo.searchText(solo.getString(R.string.SalarySuccess)));
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Average Salary: 5k per year (1"));
     }
 
-    public void testAddCommentInternalServerError() {
+    public void testAddSalaryWithInternalServerError() {
         solo.assertCurrentActivity(ACTIVITY_ERROR, ViewJobActivity.class);
         solo.waitForActivity(ViewJobActivity.class);
 
-        Observable<Comment> output = Observable.error(new Error());
-        when(api.addJobComment(any())).thenReturn(output);
+        Observable<Salary> output = Observable.error(new Error());
+        when(api.addJobSalary(any())).thenReturn(output);
         getActivity().setApi(api);
 
-        solo.clickOnButton("Send");
+        solo.clickOnView(solo.getView(R.id.salaryButton));
+
+        EditText salaryInput = (EditText) (solo.getView(R.id.salaryInput));
+        salaryInput.setText("5000");
+        solo.pressSpinnerItem(0, 1);
+
+        solo.clickOnButton("Submit");
         assertTrue(TEXT_NOT_FOUND, solo.searchText("Internal server error, please try again later"));
     }
 
-    public void testAddCommentWithInvalidName() {
+    public void testAddSalaryWithInvalidSalary() {
         solo.assertCurrentActivity(ACTIVITY_ERROR, ViewJobActivity.class);
         solo.waitForActivity(ViewJobActivity.class);
 
         List<ServerError> errors = new ArrayList<>();
-        errors.add(new ServerError(6, ""));
-        Observable<Comment> output = Observable.error(CreateHttpException(errors));
-        when(api.addJobComment(any())).thenReturn(output);
+        errors.add(new ServerError(41, ""));
+        Observable<Salary> output = Observable.error(CreateHttpException(errors));
+        when(api.addJobSalary(any())).thenReturn(output);
         getActivity().setApi(api);
 
-        solo.clickOnButton("Send");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid name"));
+        solo.clickOnView(solo.getView(R.id.salaryButton));
+
+        EditText salaryInput = (EditText) (solo.getView(R.id.salaryInput));
+        salaryInput.setText("-5000");
+        solo.pressSpinnerItem(0, 1);
+
+        solo.clickOnButton("Submit");
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid salary"));
     }
 
-    public void testAddCommentWithInvalidBody() {
+    public void testAddSalaryWithInvalidSalaryType() {
         solo.assertCurrentActivity(ACTIVITY_ERROR, ViewJobActivity.class);
         solo.waitForActivity(ViewJobActivity.class);
 
         List<ServerError> errors = new ArrayList<>();
-        errors.add(new ServerError(5, ""));
-        Observable<Comment> output = Observable.error(CreateHttpException(errors));
-        when(api.addJobComment(any())).thenReturn(output);
+        errors.add(new ServerError(42, ""));
+        Observable<Salary> output = Observable.error(CreateHttpException(errors));
+        when(api.addJobSalary(any())).thenReturn(output);
         getActivity().setApi(api);
 
-        solo.clickOnButton("Send");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid comment body"));
+        solo.clickOnView(solo.getView(R.id.salaryButton));
+
+        EditText salaryInput = (EditText) (solo.getView(R.id.salaryInput));
+        salaryInput.setText("5000");
+        solo.pressSpinnerItem(0, 0);
+
+        solo.clickOnButton("Submit");
+        assertTrue(TEXT_NOT_FOUND, solo.searchText("Please pick a pay duration"));
     }
 
     private HttpException CreateHttpException(List<ServerError> errors) {
