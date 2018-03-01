@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.JsonReader;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,8 +12,6 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -99,6 +94,7 @@ public class ViewJobActivity extends AppCompatActivity {
                             jobSalary.setVisibility(View.GONE);
 
                         jobDescription.setText(job.getDescription());
+
                         // changed to visible here so rendering would be at the same time
                         jobApply.setVisibility(View.VISIBLE);
 

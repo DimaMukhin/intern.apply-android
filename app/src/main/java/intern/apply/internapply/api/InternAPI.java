@@ -1,11 +1,6 @@
 package intern.apply.internapply.api;
 
-import android.util.Log;
-
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -59,7 +54,9 @@ public class InternAPI {
         return internAPIClient.getAllJobs();
     }
 
-    public Observable<List<Job>> getAllJobs(String filter) { return internAPIClient.getAllJobs(filter); }
+    public Observable<List<Job>> getAllJobs(String filter) {
+        return internAPIClient.getAllJobs(filter);
+    }
 
     /**
      * get the survey questions with allowed responses from the server
@@ -89,7 +86,6 @@ public class InternAPI {
     public Observable<ContactMessage> sendContactMessage(ContactMessage cm) {
         return internAPIClient.sendContactMessage(cm);
     }
-
 
     /**
      * Sends a job the server
@@ -121,10 +117,20 @@ public class InternAPI {
 
     /**
      * Add a comment to a job
-     * @param comment   the comment to add
+     * @param comment the comment to add
      * @return  the added comment
      */
     public Observable<Comment> addJobComment(Comment comment) { return internAPIClient.addJobComment(comment); }
+
+    /**
+     * Add a salary to a job
+     *
+     * @param salary the salary to add
+     * @return the added comment
+     */
+    public Observable<Salary> addJobSalary(Salary salary) {
+        return internAPIClient.addJobSalary(salary);
+    }
 
     /**
      * get a job rating
@@ -136,19 +142,9 @@ public class InternAPI {
     /**
      * rate a job
      * @param jobId
-     * @param score
+     * @param jobRating
      * @return
      */
     public Observable<JobRating> rateJob(int jobId, JobRating jobRating){ return internAPIClient.rateJob(jobId, jobRating); }
-
-    /**
-     * Add a salary to a job
-     *
-     * @param salary the salary to add
-     * @return the added comment
-     */
-    public Observable<Salary> addJobSalary(Salary salary) {
-        return internAPIClient.addJobSalary(salary);
-    }
     //endregion
 }

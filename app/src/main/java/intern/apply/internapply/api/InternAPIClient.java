@@ -1,13 +1,8 @@
 package intern.apply.internapply.api;
 
 
-import android.content.Context;
-
-import org.json.JSONObject;
-
 import java.util.List;
 
-import intern.apply.internapply.R;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
@@ -19,8 +14,8 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 interface InternAPIClient {
     @GET("/api/job")
@@ -50,12 +45,12 @@ interface InternAPIClient {
     @POST("/api/comment")
     Observable<Comment> addJobComment(@Body Comment comment);
 
+    @POST("/api/salary")
+    Observable<Salary> addJobSalary(@Body Salary salary);
+
     @GET("/api/job/{id}/rating")
     Observable<List<JobRating>> getJobRating(@Path("id") int jobId);
 
     @POST("/api/job/{id}/rating")
     Observable<JobRating> rateJob(@Path("id") int jobId, @Body JobRating jobRating);
-
-    @POST("/api/salary")
-    Observable<Salary> addJobSalary(@Body Salary salary);
 }
