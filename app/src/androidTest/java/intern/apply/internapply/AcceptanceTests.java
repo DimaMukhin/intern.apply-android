@@ -22,6 +22,8 @@ public class AcceptanceTests {
         suite.addTestSuite(JobListAcceptanceTest.class);
         suite.addTestSuite(SearchBarAcceptanceTest.class);
         suite.addTestSuite(SurveyAcceptanceTest.class);
+       // suite.addTestSuite(RateJobAcceptanceTest.class);
+        suite.addTestSuite(ViewJobAcceptanceTests.class);
         return suite;
     }
 }

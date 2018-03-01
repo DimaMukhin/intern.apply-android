@@ -18,6 +18,13 @@ public class Job {
         this.numSalaries = numSalaries;
     }
 
+    public Job(String organization, String title, String location, String description) {
+        this.organization = organization;
+        this.title = title;
+        this.location = location;
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }
