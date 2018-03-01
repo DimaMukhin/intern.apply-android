@@ -8,9 +8,28 @@
     tools:context="intern.apply.internapply.view.mainactivity.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <ListView
-        android:id="@+id/JobsListView"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="368dp"
+        tools:layout_editor_absoluteY="2dp">
+
+        <EditText
+            android:id="@+id/searchBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search Jobs"
+            android:inputType="text" />
+
+        <ListView
+            android:id="@+id/JobsListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="39dp" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

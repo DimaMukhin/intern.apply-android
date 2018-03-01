@@ -12,11 +12,14 @@ import junit.framework.TestSuite;
 public class AcceptanceTests {
     public static Test suite() {
         TestSuite suite = new TestSuite("Acceptance tests");
-        suite.addTestSuite(JobListAcceptanceTest.class);
         suite.addTestSuite(AddJobAcceptanceTest.class);
-        suite.addTestSuite(ContactUsAcceptanceTest.class);
         suite.addTestSuite(AddJobCommentAcceptanceTest.class);
+        suite.addTestSuite(AddSalaryAcceptanceTest.class);
+        suite.addTestSuite(ContactUsAcceptanceTest.class);
         suite.addTestSuite(JobCommentsAcceptanceTest.class);
+        suite.addTestSuite(JobListAcceptanceTest.class);
+        suite.addTestSuite(SearchBarAcceptanceTest.class);
+        suite.addTestSuite(SurveyAcceptanceTest.class);
         suite.addTestSuite(ViewJobAcceptanceTests.class);
         return suite;
     }

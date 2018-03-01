@@ -2,7 +2,6 @@ package intern.apply.internapply.view.addjobactivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +11,7 @@ import java.util.List;
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.model.ServerError;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -55,7 +55,7 @@ public class AddJobActivity extends AppCompatActivity {
         String location = etJobLoc.getText().toString();
 
 
-        Job newJob = new Job(organization, title, location, description);
+        Job newJob = new JobBuilder().setOrganization(organization).setTitle(title).setLocation(location).setDescription(description).createJob();
 
         api.addJob(newJob)
                 .subscribeOn(Schedulers.io())
@@ -65,7 +65,6 @@ public class AddJobActivity extends AppCompatActivity {
                             resetForm();
                             Toast.makeText(this, "Job added successfully", Toast.LENGTH_LONG).show();
                         }, error -> {
-                            Log.i("error", error.toString());
                             List<ServerError> errors = ServerError.getErrorsFromServerException(error);
 
                             if (errors.size() == 0 || errors.get(0).getCode() == 0)
