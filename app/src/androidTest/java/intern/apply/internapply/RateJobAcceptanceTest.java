@@ -6,7 +6,11 @@ import android.widget.RatingBar;
 
 import com.robotium.solo.Solo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobRating;
 import intern.apply.internapply.view.mainactivity.MainActivity;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
@@ -34,9 +38,19 @@ public class RateJobAcceptanceTest extends ActivityInstrumentationTestCase2<View
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        setActivityIntent(new Intent().putExtra("TEST", true));
         solo = new Solo(getInstrumentation(), getActivity());
         jobRating = new JobRating(1.00, 1);
-        setActivityIntent(new Intent().putExtra("TEST", true));
+
+        Job fakeJob = new Job(
+                "fake org",
+                "fake title",
+                "fake location",
+                "fake description");
+        List<Job> fakeJobList = new ArrayList<Job>();
+        fakeJobList.add(fakeJob);
+        Observable<List<Job>> output = Observable.just(fakeJobList);
+        when(api.getJob(anyInt())).thenReturn(output);
     }
 
     @Override
@@ -50,8 +64,10 @@ public class RateJobAcceptanceTest extends ActivityInstrumentationTestCase2<View
         solo.assertCurrentActivity(ACTIVITY_ERROR, ViewJobActivity.class);
         solo.waitForActivity(ViewJobActivity.class);
 
-        Observable<JobRating> output = Observable.just(jobRating);
-        when(api.rateJob(anyInt(), eq(jobRating))).thenReturn(output);
+        ArrayList<JobRating> fakeRating = new ArrayList<>();
+        fakeRating.add(jobRating);
+        Observable<List<JobRating>> output = Observable.just(fakeRating);
+        when(api.getJobRating(anyInt())).thenReturn(output);
         getActivity().setApi(api);
 
         solo.clickOnView(solo.getView(R.id.ratingBar));
