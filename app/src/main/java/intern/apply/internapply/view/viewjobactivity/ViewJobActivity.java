@@ -45,7 +45,11 @@ public class ViewJobActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_job);
-        onInit();
+        boolean test = getIntent().getBooleanExtra("TEST", false);
+        if (!test) {
+            api = InternAPI.getAPI();
+            onInit();
+        }
     }
 
     private void onInit() {
@@ -61,18 +65,14 @@ public class ViewJobActivity extends AppCompatActivity {
         rating = findViewById(R.id.ratingBar);
         votes = findViewById(R.id.votes);
         setupDialogForSalary();
-
-        boolean test = getIntent().getBooleanExtra("TEST", false);
-        if (!test) {
-            api = InternAPI.getAPI();
-            displayJob();
-            displayJobRating();
-        }
+        displayJob();
+        displayJobRating();
     }
+
 
     public void setApi(InternAPI api) {
         this.api = api;
-        displayJob();
+        onInit();
     }
 
     /**

@@ -13,10 +13,10 @@ import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.model.JobRating;
-import intern.apply.internapply.view.mainactivity.MainActivity;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 import io.reactivex.Observable;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -64,6 +64,7 @@ public class RateJobAcceptanceTest extends ActivityInstrumentationTestCase2<View
         fakeJobRatings.add(new JobRating(2.00, 1));
         Observable ratingOutput = Observable.just(fakeJobRatings);
         when(api.getJobRating(anyInt())).thenReturn(ratingOutput);
+        when(api.rateJob(anyInt(), any())).thenReturn(ratingOutput);
 
         Observable<JobRating> output = Observable.just(new JobRating(3.00, 2));
         when(api.rateJob(anyInt(), eq(jobRating))).thenReturn(output);
@@ -74,6 +75,6 @@ public class RateJobAcceptanceTest extends ActivityInstrumentationTestCase2<View
         ratingBar = (RatingBar)solo.getView(R.id.ratingBar);
 
         assertTrue(RATING_ERROR,ratingBar.getRating() == jobRating.getScore());
-        assertTrue(VOTES_ERROR, solo.searchText(jobRating + " votes"));
+        assertTrue(VOTES_ERROR, solo.searchText(jobRating.getVotes() + " votes"));
     }
 }
