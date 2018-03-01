@@ -11,6 +11,7 @@ import java.util.List;
 
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 import io.reactivex.Observable;
 
@@ -30,15 +31,17 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
     public ViewJobAcceptanceTests(){
         super(ViewJobActivity.class);
         api = mock(InternAPI.class);
-        setActivityIntent(new Intent().putExtra("TEST", true));
         createFakeJob();
     }
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
+        setActivityIntent(new Intent().putExtra("TEST", true));
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
+    @Override
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
         super.tearDown();
@@ -65,7 +68,7 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
                 "description"
         };
 
-        job.add(new Job(jobData[0], jobData[1], jobData[2], jobData[3]));
+        job.add(new JobBuilder().setOrganization(jobData[0]).setTitle(jobData[1]).setLocation(jobData[2]).setDescription(jobData[3]).createJob());
     }
 
     private void findStrings(String[] expectedStrings) {
