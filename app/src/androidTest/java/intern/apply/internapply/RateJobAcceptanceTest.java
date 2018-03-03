@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.RatingBar;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
@@ -13,8 +16,12 @@ import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.model.JobRating;
+import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -54,6 +61,53 @@ public class RateJobAcceptanceTest extends ActivityInstrumentationTestCase2<View
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
         super.tearDown();
+    }
+
+    public void testInternalServerError(){
+        solo.assertCurrentActivity(ACTIVITY_ERROR, ViewJobActivity.class);
+        solo.waitForActivity(ViewJobActivity.class);
+
+        Observable ratingOutput = Observable.error(new Error());
+        when(api.getJobRating(anyInt())).thenReturn(ratingOutput);
+        getActivity().setApi(api);
+
+        solo.waitForView(R.id.jobView);
+        ratingBar = (RatingBar)solo.getView(R.id.ratingBar);
+
+        assertTrue(VOTES_ERROR, solo.searchText("There was an error rating this job"));
+    }
+
+    public void testNoJobRating() {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, ViewJobActivity.class);
+        solo.waitForActivity(ViewJobActivity.class);
+
+        List<JobRating> fakeJobRatings = new ArrayList<>();
+        Observable ratingOutput = Observable.just(fakeJobRatings);
+        when(api.getJobRating(anyInt())).thenReturn(ratingOutput);
+        getActivity().setApi(api);
+
+        solo.waitForView(R.id.jobView);
+        ratingBar = (RatingBar)solo.getView(R.id.ratingBar);
+
+        assertTrue(RATING_ERROR,ratingBar.getRating() == 0.0);
+        assertTrue(VOTES_ERROR, solo.searchText(0 + " votes"));
+    }
+
+    public void testShowJobRating() {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, ViewJobActivity.class);
+        solo.waitForActivity(ViewJobActivity.class);
+
+        List<JobRating> fakeJobRatings = new ArrayList<>();
+        fakeJobRatings.add(jobRating);
+        Observable ratingOutput = Observable.just(fakeJobRatings);
+        when(api.getJobRating(anyInt())).thenReturn(ratingOutput);
+        getActivity().setApi(api);
+
+        solo.waitForView(R.id.jobView);
+        ratingBar = (RatingBar)solo.getView(R.id.ratingBar);
+
+        assertTrue(RATING_ERROR,ratingBar.getRating() == jobRating.getScore());
+        assertTrue(VOTES_ERROR, solo.searchText(jobRating.getVotes() + " votes"));
     }
 
     public void testRateJob() {

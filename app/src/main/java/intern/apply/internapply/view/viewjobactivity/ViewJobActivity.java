@@ -112,6 +112,7 @@ public class ViewJobActivity extends AppCompatActivity {
      * displays job's rating
      */
     private void displayJobRating() {
+        // initial rating
         api.getJobRating(jobId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
@@ -120,7 +121,7 @@ public class ViewJobActivity extends AppCompatActivity {
                     else
                         setRating(new JobRating(0, 0));
                 }, error -> {
-                    finish();
+                    Toast.makeText(this, R.string.ratingError, Toast.LENGTH_LONG).show();
                 });
 
         rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
@@ -138,7 +139,7 @@ public class ViewJobActivity extends AppCompatActivity {
                                         else
                                             setRating(new JobRating(0, 0));
                                     }, error ->
-                                            finish());
+                                            Toast.makeText(this, R.string.ratingError, Toast.LENGTH_LONG).show());
                         }, err -> Toast.makeText(this, R.string.ratingError, Toast.LENGTH_LONG).show());
             }
         });
