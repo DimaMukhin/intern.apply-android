@@ -16,6 +16,11 @@ public class Question {
 
     }
 
+    public Question(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
     public Question(String title, String body, String author) {
         this.title = title;
         this.body = body;

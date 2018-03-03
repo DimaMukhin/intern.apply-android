@@ -30,7 +30,10 @@ public class QNAActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getAllQuestions();
+        boolean test = getIntent().getBooleanExtra("TEST", false);
+        if (!test) {
+            getAllQuestions();
+        }
     }
 
     private void onInit() {
