@@ -16,6 +16,7 @@ import java.util.List;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.Salary;
@@ -26,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ViewJobActivity extends AppCompatActivity {
     private int jobId;
-    private InternAPI api;
+    private InternAPIProvider api;
     private TextView jobTitle;
     private TextView jobOrganization;
     private TextView jobLocation;
@@ -63,7 +64,7 @@ public class ViewJobActivity extends AppCompatActivity {
         }
     }
 
-    public void setApi(InternAPI api) {
+    public void setApi(InternAPIProvider api) {
         this.api = api;
         displayJob();
     }

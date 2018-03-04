@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.model.SurveyQuestion;
@@ -31,7 +31,7 @@ public class SurveyAcceptanceTest extends ActivityInstrumentationTestCase2<Surve
     private static final String TEXT_NOT_FOUND = "text not found";
 
     private Solo solo;
-    private final InternAPI api;
+    private final InternAPIProvider api;
 
     private String[] questionsData;
     private List<String[]> responsesData;
@@ -39,7 +39,7 @@ public class SurveyAcceptanceTest extends ActivityInstrumentationTestCase2<Surve
 
     public SurveyAcceptanceTest() {
         super(SurveyActivity.class);
-        api = mock(InternAPI.class);
+        api = mock(InternAPIProvider.class);
         populateFakeQuestions();
     }
 

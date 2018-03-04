@@ -19,7 +19,7 @@ import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class InternAPI {
+public class InternAPI implements InternAPIProvider {
     private static InternAPI instance = null;
 
 
