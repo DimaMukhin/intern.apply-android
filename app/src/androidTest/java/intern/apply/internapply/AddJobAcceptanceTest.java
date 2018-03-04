@@ -10,7 +10,7 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
-import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.model.ServerError;
@@ -29,12 +29,12 @@ public class AddJobAcceptanceTest extends ActivityInstrumentationTestCase2<AddJo
     private static final String TEXT_NOT_FOUND = "text not found";
 
     private Solo solo;
-    private final InternAPI api;
+    private final InternAPIProvider api;
 
 
     public AddJobAcceptanceTest() {
         super(AddJobActivity.class);
-        api = mock(InternAPI.class);
+        api = mock(InternAPIProvider.class);
     }
 
 

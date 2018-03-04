@@ -11,7 +11,7 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
-import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
@@ -29,11 +29,11 @@ public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<Co
     private static final String TEXT_NOT_FOUND = "text not found";
 
     private Solo solo;
-    private final InternAPI api;
+    private final InternAPIProvider api;
 
     public ContactUsAcceptanceTest() {
         super(ContactUsActivity.class);
-        api = mock(InternAPI.class);
+        api = mock(InternAPIProvider.class);
         setActivityIntent(new Intent().putExtra("TEST", true));
     }
 

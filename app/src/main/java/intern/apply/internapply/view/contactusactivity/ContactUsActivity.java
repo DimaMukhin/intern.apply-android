@@ -10,6 +10,7 @@ import java.util.List;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.ServerError;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -25,7 +26,7 @@ public class ContactUsActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etTitle;
     private EditText etMessage;
-    private InternAPI api;
+    private InternAPIProvider api;
 
     private void onInit() {
         etEmail = findViewById(R.id.etEmail);
@@ -43,7 +44,7 @@ public class ContactUsActivity extends AppCompatActivity {
         onInit();
     }
 
-    public void setApi(InternAPI api) {
+    public void setApi(InternAPIProvider api) {
         this.api = api;
     }
 
