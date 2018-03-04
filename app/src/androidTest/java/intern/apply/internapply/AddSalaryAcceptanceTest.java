@@ -52,6 +52,7 @@ public class AddSalaryAcceptanceTest extends ActivityInstrumentationTestCase2<Vi
         fakeJobList.add(fakeJob);
         Observable<List<Job>> output = Observable.just(fakeJobList);
         when(api.getJob(anyInt())).thenReturn(output);
+        when(api.getJobRating(anyInt())).thenReturn(Observable.fromArray());
     }
 
     @Override

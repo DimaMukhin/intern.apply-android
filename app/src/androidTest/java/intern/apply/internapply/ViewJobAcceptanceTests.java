@@ -39,6 +39,7 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
         super.setUp();
         setActivityIntent(new Intent().putExtra("TEST", true));
         solo = new Solo(getInstrumentation(), getActivity());
+        when(api.getJobRating(anyInt())).thenReturn(Observable.fromArray());
     }
 
     @Override
