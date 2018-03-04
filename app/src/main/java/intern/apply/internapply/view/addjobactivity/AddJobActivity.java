@@ -10,6 +10,7 @@ import java.util.List;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.model.ServerError;
@@ -18,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AddJobActivity extends AppCompatActivity {
     private EditText etJobOrg, etJobTitle, etJobDesc, etJobLoc;
-    private InternAPI api;
+    private InternAPIProvider api;
 
     private void onInit() {
         etJobOrg = findViewById(R.id.etJobOrg);
@@ -40,7 +41,7 @@ public class AddJobActivity extends AppCompatActivity {
         onInit();
     }
 
-    public void setApi(InternAPI api) {
+    public void setApi(InternAPIProvider api) {
         this.api = api;
     }
 

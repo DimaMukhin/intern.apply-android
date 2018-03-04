@@ -17,6 +17,7 @@ import java.util.List;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobRating;
@@ -28,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ViewJobActivity extends AppCompatActivity {
     private int jobId;
-    private InternAPI api;
+    private InternAPIProvider api;
     private TextView jobTitle;
     private TextView jobOrganization;
     private TextView jobLocation;
@@ -69,8 +70,7 @@ public class ViewJobActivity extends AppCompatActivity {
         displayJobRating();
     }
 
-
-    public void setApi(InternAPI api) {
+    public void setApi(InternAPIProvider api) {
         this.api = api;
         onInit();
     }
@@ -82,30 +82,28 @@ public class ViewJobActivity extends AppCompatActivity {
         api.getJob(jobId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                            if (response.size() != 0) {
-                                Job job = response.get(0);
-                                jobTitle.setText(job.getTitle());
-                                jobOrganization.setText(job.getOrganization());
-                                jobLocation.setText(job.getLocation());
+                    if (response.size() != 0) {
+                        Job job = response.get(0);
+                        jobTitle.setText(job.getTitle());
+                        jobOrganization.setText(job.getOrganization());
+                        jobLocation.setText(job.getLocation());
 
-                                if (job.getNumSalaries() > 0)
-                                    jobSalary.setText("Average Salary: " + job.getSalary() + "k per year (" + job.getNumSalaries() + " submits)");
-                                else
-                                    jobSalary.setVisibility(View.GONE);
+                        if (job.getNumSalaries() > 0)
+                            jobSalary.setText("Average Salary: " + job.getSalary() + "k per year (" + job.getNumSalaries() + " submits)");
+                        else
+                            jobSalary.setVisibility(View.GONE);
 
-                                jobDescription.setText(job.getDescription());
+                        jobDescription.setText(job.getDescription());
+                        // changed to visible here so rendering would be at the same time
+                        jobApply.setVisibility(View.VISIBLE);
 
-                                // changed to visible here so rendering would be at the same time
-                                jobApply.setVisibility(View.VISIBLE);
-
-                                // making sure view is not taking any space if those are empty
-                                jobOrganization.setVisibility(View.VISIBLE);
-                                jobLocation.setVisibility(View.VISIBLE);
-                            } else {
-                                finish();
-                            }
-                        }, error -> finish()
-                );
+                        // making sure view is not taking any space if those are empty
+                        jobOrganization.setVisibility(View.VISIBLE);
+                        jobLocation.setVisibility(View.VISIBLE);
+                    } else {
+                        finish();
+                    }
+                }, error -> finish());
     }
 
     /**

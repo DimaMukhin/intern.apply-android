@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.view.addjobactivity.AddJobActivity;
 import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private JobsList jobsList;
-    private InternAPI internAPI;
+    private InternAPIProvider internAPI;
     private ListView listView;
 
     @Override
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         onJobClick();
     }
 
-    public void SetAPI(InternAPI api) {
+    public void SetAPI(InternAPIProvider api) {
         internAPI = api;
         onInit();
     }

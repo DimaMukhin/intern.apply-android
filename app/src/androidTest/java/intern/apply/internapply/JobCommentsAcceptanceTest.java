@@ -8,7 +8,7 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
-import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.view.jobcommentsactivity.JobCommentsActivity;
 import io.reactivex.Observable;
@@ -22,7 +22,7 @@ public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<
     private static final String TEXT_NOT_FOUND = "text not found";
 
     private Solo solo;
-    private final InternAPI api;
+    private final InternAPIProvider api;
 
     private String[] singleCommentData;
     private String[] multipleCommentsData;
@@ -31,7 +31,7 @@ public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<
 
     public JobCommentsAcceptanceTest() {
         super(JobCommentsActivity.class);
-        api = mock(InternAPI.class);
+        api = mock(InternAPIProvider.class);
         populateFakeComments();
     }
 
