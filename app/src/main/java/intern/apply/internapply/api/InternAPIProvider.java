@@ -6,6 +6,7 @@ import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobRating;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.SurveyQuestion;
 import io.reactivex.Observable;
@@ -75,6 +76,7 @@ public interface InternAPIProvider {
      */
     public Observable<List<Comment>> getJobComments(int jobId);
 
+
     /**
      * Add a comment to a job
      *
@@ -88,6 +90,23 @@ public interface InternAPIProvider {
      *
      * @param salary the salary to add
      * @return the added comment
+
      */
     public Observable<Salary> addJobSalary(Salary salary);
+
+    /**
+     * getting the rating of a specific job
+     * @param jobId
+     * @return
+     */
+    public Observable<List<JobRating>> getJobRating(int jobId);
+
+
+    /**
+     * rate a job
+     * @param jobId
+     * @param jobRating
+     * @return
+     */
+    public Observable<JobRating> rateJob(int jobId, JobRating jobRating);
 }

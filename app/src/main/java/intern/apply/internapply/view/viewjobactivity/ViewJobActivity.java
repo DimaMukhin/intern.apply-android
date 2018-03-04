@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobRating;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.jobcommentsactivity.JobCommentsActivity;
@@ -33,7 +35,9 @@ public class ViewJobActivity extends AppCompatActivity {
     private TextView jobLocation;
     private TextView jobSalary;
     private TextView jobDescription;
+    private TextView votes;
     private Button jobApply;
+    private RatingBar rating;
 
     private EditText etName;
     private EditText etMessage;
@@ -42,7 +46,11 @@ public class ViewJobActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_job);
-        onInit();
+        boolean test = getIntent().getBooleanExtra("TEST", false);
+        if (!test) {
+            api = InternAPI.getAPI();
+            onInit();
+        }
     }
 
     private void onInit() {
@@ -55,18 +63,16 @@ public class ViewJobActivity extends AppCompatActivity {
         jobApply = findViewById(R.id.jobApply);
         etName = findViewById(R.id.etName);
         etMessage = findViewById(R.id.etMessageComment);
+        rating = findViewById(R.id.ratingBar);
+        votes = findViewById(R.id.votes);
         setupDialogForSalary();
-
-        boolean test = getIntent().getBooleanExtra("TEST", false);
-        if (!test) {
-            api = InternAPI.getAPI();
-            displayJob();
-        }
+        displayJob();
+        displayJobRating();
     }
 
     public void setApi(InternAPIProvider api) {
         this.api = api;
-        displayJob();
+        onInit();
     }
 
     /**
@@ -98,6 +104,48 @@ public class ViewJobActivity extends AppCompatActivity {
                         finish();
                     }
                 }, error -> finish());
+    }
+
+    /**
+     * displays job's rating
+     */
+    private void displayJobRating() {
+        // initial rating
+        api.getJobRating(jobId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    if (response.size() > 0)
+                        setRating(response.get(0));
+                    else
+                        setRating(new JobRating(0, 0));
+                }, error -> {
+                    Toast.makeText(this, R.string.ratingError, Toast.LENGTH_LONG).show();
+                });
+
+        rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            if (fromUser) {
+                JobRating jobRating = new JobRating(Math.round(rating));
+                api.rateJob(jobId, jobRating).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe((JobRating response) -> {
+                            Toast.makeText(this, R.string.ratedSuccessfully, Toast.LENGTH_LONG).show();
+                            api.getJobRating(jobId).subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(response2 -> {
+                                        if (response2.size() > 0)
+                                            setRating(response2.get(0));
+                                        else
+                                            setRating(new JobRating(0, 0));
+                                    }, error ->
+                                            Toast.makeText(this, R.string.ratingError, Toast.LENGTH_LONG).show());
+                        }, err -> Toast.makeText(this, R.string.ratingError, Toast.LENGTH_LONG).show());
+            }
+        });
+    }
+
+    private void setRating(JobRating jobRating) {
+        rating.setRating(Math.round(jobRating.getScore()));
+        votes.setText(jobRating.getVotes() + " " + getResources().getString(R.string.votes));
     }
 
     /**

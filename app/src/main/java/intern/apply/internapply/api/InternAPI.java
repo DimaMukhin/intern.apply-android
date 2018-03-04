@@ -1,11 +1,6 @@
 package intern.apply.internapply.api;
 
-import android.util.Log;
-
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -13,6 +8,7 @@ import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.JobRating;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.SurveyQuestion;
 import io.reactivex.Observable;
@@ -58,7 +54,9 @@ public class InternAPI implements InternAPIProvider {
         return internAPIClient.getAllJobs();
     }
 
-    public Observable<List<Job>> getAllJobs(String filter) { return internAPIClient.getAllJobs(filter); }
+    public Observable<List<Job>> getAllJobs(String filter) {
+        return internAPIClient.getAllJobs(filter);
+    }
 
     /**
      * get the survey questions with allowed responses from the server
@@ -88,7 +86,6 @@ public class InternAPI implements InternAPIProvider {
     public Observable<ContactMessage> sendContactMessage(ContactMessage cm) {
         return internAPIClient.sendContactMessage(cm);
     }
-
 
     /**
      * Sends a job the server
@@ -120,7 +117,7 @@ public class InternAPI implements InternAPIProvider {
 
     /**
      * Add a comment to a job
-     * @param comment   the comment to add
+     * @param comment the comment to add
      * @return  the added comment
      */
     public Observable<Comment> addJobComment(Comment comment) { return internAPIClient.addJobComment(comment); }
@@ -134,5 +131,20 @@ public class InternAPI implements InternAPIProvider {
     public Observable<Salary> addJobSalary(Salary salary) {
         return internAPIClient.addJobSalary(salary);
     }
+
+    /**
+     * get a job rating
+     * @param jobId
+     * @return
+     */
+    public Observable<List<JobRating>> getJobRating(int jobId){ return internAPIClient.getJobRating(jobId); }
+
+    /**
+     * rate a job
+     * @param jobId
+     * @param jobRating
+     * @return
+     */
+    public Observable<JobRating> rateJob(int jobId, JobRating jobRating){ return internAPIClient.rateJob(jobId, jobRating); }
     //endregion
 }
