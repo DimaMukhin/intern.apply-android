@@ -19,11 +19,8 @@ import static org.mockito.Mockito.when;
 
 public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<JobCommentsActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
-    private static final String TEXT_NOT_FOUND = "text not found";
-
-    private Solo solo;
     private final InternAPIProvider api;
-
+    private Solo solo;
     private String[] singleCommentData;
     private String[] multipleCommentsData;
     private List<Comment> singleComment;
@@ -49,38 +46,26 @@ public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<
     }
 
     public void testOneCommentShowing() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, JobCommentsActivity.class);
-        solo.waitForActivity(JobCommentsActivity.class);
-
-        Observable<List<Comment>> output = Observable.fromArray(singleComment);
-        when(api.getJobComments(anyInt())).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.waitForView(R.id.commentsListView);
-        findStrings(singleCommentData);
+        testHelper(Observable.fromArray(singleComment), singleCommentData);
     }
 
     public void testMultipleJobsShowing() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, JobCommentsActivity.class);
-        solo.waitForActivity(JobCommentsActivity.class);
-
-        Observable<List<Comment>> output = Observable.fromArray(multipleComments);
-        when(api.getJobComments(anyInt())).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.waitForView(R.id.commentsListView);
-        findStrings(multipleCommentsData);
+        testHelper(Observable.fromArray(multipleComments), multipleCommentsData);
     }
 
     public void testEmptyJobListShowing() {
+        testHelper(Observable.fromArray(new ArrayList<>()), new String[0]);
+    }
+
+    private void testHelper(Observable<List<Comment>> output, String[] data) {
         solo.assertCurrentActivity(ACTIVITY_ERROR, JobCommentsActivity.class);
         solo.waitForActivity(JobCommentsActivity.class);
 
-        Observable<List<Comment>> output = Observable.fromArray(new ArrayList<Comment>());
         when(api.getJobComments(anyInt())).thenReturn(output);
         getActivity().setApi(api);
 
         solo.waitForView(R.id.commentsListView);
+        TestHelper.findStrings(data, solo);
     }
 
     private void populateFakeComments() {
@@ -99,11 +84,5 @@ public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<
         multipleComments = new ArrayList<>();
         for (int i = 0; i < multipleCommentsData.length; i += 2)
             multipleComments.add(new Comment(multipleCommentsData[i], multipleCommentsData[i + 1]));
-    }
-
-    private void findStrings(String[] expectedStrings) {
-        for (String s : expectedStrings) {
-            assertTrue(TEXT_NOT_FOUND, solo.waitForText(s));
-        }
     }
 }

@@ -22,9 +22,8 @@ import static org.mockito.Mockito.when;
 public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<ViewJobActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
-
-    private Solo solo;
     private final InternAPIProvider api;
+    private Solo solo;
     private String[] jobData;
     private ArrayList<Job> job;
 
@@ -57,7 +56,7 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
         getActivity().setApi(api);
 
         solo.waitForView(R.id.jobView);
-        findStrings(jobData);
+        TestHelper.findStrings(jobData, solo);
     }
 
     private void createFakeJob() {
@@ -70,11 +69,5 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
         };
 
         job.add(new JobBuilder().setOrganization(jobData[0]).setTitle(jobData[1]).setLocation(jobData[2]).setDescription(jobData[3]).createJob());
-    }
-
-    private void findStrings(String[] expectedStrings) {
-        for (String s : expectedStrings) {
-            assertTrue(TEXT_NOT_FOUND, solo.waitForText(s));
-        }
     }
 }

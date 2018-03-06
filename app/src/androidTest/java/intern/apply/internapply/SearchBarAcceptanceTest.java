@@ -51,12 +51,6 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
         solo.finishOpenedActivities();
     }
 
-    private void findStrings(String[] expectedStrings) {
-        for (String s : expectedStrings) {
-            assertTrue(TEXT_NOT_FOUND, solo.waitForText(s));
-        }
-    }
-
     public void testEmptySearch() {
         solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);
         solo.waitForActivity(MainActivity.class);
@@ -67,7 +61,7 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
         solo.waitForView(R.id.JobsListView);
 
         solo.enterText((EditText) solo.getView(R.id.searchBox), "");
-        findStrings(allJobsData);
+        TestHelper.findStrings(allJobsData, solo);
 
         verify(api, times(2)).getAllJobs();
     }
@@ -91,7 +85,7 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
         solo.waitForView(R.id.JobsListView);
 
         solo.enterText((EditText) solo.getView(R.id.searchBox), filterText);
-        findStrings(filteredJobsData);
+        TestHelper.findStrings(filteredJobsData, solo);
 
         verify(api, times(1)).getAllJobs();
         verify(api, times(1)).getAllJobs(filterText);
