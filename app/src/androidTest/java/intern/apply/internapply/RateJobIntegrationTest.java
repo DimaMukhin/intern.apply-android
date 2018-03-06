@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class RateJobAcceptanceTest extends ActivityInstrumentationTestCase2<ViewJobActivity> {
+public class RateJobIntegrationTest extends ActivityInstrumentationTestCase2<ViewJobActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String RATING_ERROR = "error with stars";
     private static final String VOTES_ERROR = "error with votes number";
@@ -31,7 +31,7 @@ public class RateJobAcceptanceTest extends ActivityInstrumentationTestCase2<View
     private JobRating jobRating;
     private RatingBar ratingBar;
 
-    public RateJobAcceptanceTest() {
+    public RateJobIntegrationTest() {
         super(ViewJobActivity.class);
         api = mock(InternAPIProvider.class);
     }

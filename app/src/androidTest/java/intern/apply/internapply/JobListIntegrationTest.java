@@ -17,7 +17,7 @@ import io.reactivex.Observable;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class JobListIntegrationTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private static final String ACTIVITY_ERROR = "wrong activity";
     private final InternAPIProvider api;
@@ -27,7 +27,7 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
     private List<Job> singleJob;
     private List<Job> multipleJobs;
 
-    public JobListAcceptanceTest() {
+    public JobListIntegrationTest() {
         super(MainActivity.class);
         api = mock(InternAPIProvider.class);
         setActivityIntent(new Intent().putExtra("TEST", true));
