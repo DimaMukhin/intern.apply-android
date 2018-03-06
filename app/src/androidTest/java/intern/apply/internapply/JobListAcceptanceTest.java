@@ -65,7 +65,7 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
         getActivity().SetAPI(api);
 
         solo.waitForView(R.id.JobsListView);
-        TestHelper.findStrings(data, this, solo);
+        TestHelper.findStrings(data, solo);
     }
 
     private void PopulateFakeJobs() {

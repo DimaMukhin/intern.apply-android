@@ -72,10 +72,10 @@ public class SurveyAcceptanceTest extends ActivityInstrumentationTestCase2<Surve
         getActivity().setApi(api);
 
         solo.waitForView(R.id.SurveyListView);
-        TestHelper.findStrings(questionsData, this, solo);
+        TestHelper.findStrings(questionsData, solo);
 
         for (String[] responses : responsesData)
-            TestHelper.findStrings(responses, this, solo);
+            TestHelper.findStrings(responses, solo);
     }
 
     public void testValidSurveySent() {

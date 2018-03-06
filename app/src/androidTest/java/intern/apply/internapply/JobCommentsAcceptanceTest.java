@@ -65,7 +65,7 @@ public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<
         getActivity().setApi(api);
 
         solo.waitForView(R.id.commentsListView);
-        TestHelper.findStrings(data, this, solo);
+        TestHelper.findStrings(data, solo);
     }
 
     private void populateFakeComments() {
