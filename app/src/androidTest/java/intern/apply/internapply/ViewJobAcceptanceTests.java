@@ -57,7 +57,7 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
         getActivity().setApi(api);
 
         solo.waitForView(R.id.jobView);
-        findStrings(jobData);
+        TestHelper.findStrings(jobData, this, solo);
     }
 
     private void createFakeJob() {
@@ -70,11 +70,5 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
         };
 
         job.add(new JobBuilder().setOrganization(jobData[0]).setTitle(jobData[1]).setLocation(jobData[2]).setDescription(jobData[3]).createJob());
-    }
-
-    private void findStrings(String[] expectedStrings) {
-        for (String s : expectedStrings) {
-            assertTrue(TEXT_NOT_FOUND, solo.waitForText(s));
-        }
     }
 }

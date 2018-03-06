@@ -20,11 +20,8 @@ import static org.mockito.Mockito.when;
 public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private static final String ACTIVITY_ERROR = "wrong activity";
-    private static final String TEXT_NOT_FOUND = "text not found";
-    private Solo solo;
-
     private final InternAPIProvider api;
-
+    private Solo solo;
     private String[] singleJobData;
     private String[] multipleJobsData;
     private List<Job> singleJob;
@@ -48,45 +45,27 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
         super.tearDown();
     }
 
-    private void findStrings(String[] expectedStrings) {
-        for (String s : expectedStrings) {
-            assertTrue(TEXT_NOT_FOUND, solo.waitForText(s));
-        }
-    }
-
     public void testOneJobShowing() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);
-        solo.waitForActivity(MainActivity.class);
-
-        Observable<List<Job>> output = Observable.fromArray(singleJob);
-        when(api.getAllJobs()).thenReturn(output);
-        getActivity().SetAPI(api);
-
-        solo.waitForView(R.id.JobsListView);
-        findStrings(singleJobData);
+        testHelper(Observable.fromArray(singleJob), singleJobData);
     }
 
     public void testMultipleJobsShowing() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);
-        solo.waitForActivity(MainActivity.class);
-
-        Observable<List<Job>> output = Observable.fromArray(multipleJobs);
-        when(api.getAllJobs()).thenReturn(output);
-        getActivity().SetAPI(api);
-
-        solo.waitForView(R.id.JobsListView);
-        findStrings(multipleJobsData);
+        testHelper(Observable.fromArray(multipleJobs), multipleJobsData);
     }
 
     public void testEmptyJobListShowing() {
+        testHelper(Observable.fromArray(new ArrayList<Job>()), new String[0]);
+    }
+
+    private void testHelper(Observable<List<Job>> output, String[] data) {
         solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);
         solo.waitForActivity(MainActivity.class);
 
-        Observable<List<Job>> output = Observable.fromArray(new ArrayList<Job>());
         when(api.getAllJobs()).thenReturn(output);
         getActivity().SetAPI(api);
 
         solo.waitForView(R.id.JobsListView);
+        TestHelper.findStrings(data, this, solo);
     }
 
     private void PopulateFakeJobs() {
