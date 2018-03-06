@@ -19,10 +19,8 @@ import static org.mockito.Mockito.when;
 
 public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<JobCommentsActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
-
-    private Solo solo;
     private final InternAPIProvider api;
-
+    private Solo solo;
     private String[] singleCommentData;
     private String[] multipleCommentsData;
     private List<Comment> singleComment;
