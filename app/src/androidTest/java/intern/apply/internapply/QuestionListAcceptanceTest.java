@@ -48,38 +48,15 @@ public class QuestionListAcceptanceTest extends ActivityInstrumentationTestCase2
     }
 
     public void testOneQuestionShowing() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, QNAActivity.class);
-        solo.waitForActivity(QNAActivity.class);
-
-        Observable<List<Question>> output = Observable.fromArray(singleQuestion);
-        when(api.getAllQuestions()).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.waitForView(R.id.questionsListView);
-        findStrings(singleQuestionData);
+        testHelper(Observable.fromArray(singleQuestion), singleQuestionData);
     }
 
     public void testMultipleQuestionsShowing() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, QNAActivity.class);
-        solo.waitForActivity(QNAActivity.class);
-
-        Observable<List<Question>> output = Observable.fromArray(multipleQuestions);
-        when(api.getAllQuestions()).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.waitForView(R.id.questionsListView);
-        findStrings(multipleQuestionsData);
+        testHelper(Observable.fromArray(multipleQuestions), multipleQuestionsData);
     }
 
     public void testEmptyQuestionListShowing() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, QNAActivity.class);
-        solo.waitForActivity(QNAActivity.class);
-
-        Observable<List<Question>> output = Observable.fromArray(new ArrayList<Question>());
-        when(api.getAllQuestions()).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.waitForView(R.id.questionsListView);
+        testHelper(Observable.fromArray(new ArrayList<Question>()), new String[0]);
     }
 
     private void populateFakeQuestions() {
@@ -100,9 +77,14 @@ public class QuestionListAcceptanceTest extends ActivityInstrumentationTestCase2
             multipleQuestions.add(new Question(multipleQuestionsData[i], multipleQuestionsData[i+1]));
     }
 
-    private void findStrings(String[] expectedStrings) {
-        for (String s : expectedStrings) {
-            assertTrue(TEXT_NOT_FOUND, solo.waitForText(s));
-        }
+    private void testHelper(Observable<List<Question>> output, String[] data) {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, QNAActivity.class);
+        solo.waitForActivity(QNAActivity.class);
+
+        when(api.getAllQuestions()).thenReturn(output);
+        getActivity().setApi(api);
+
+        solo.waitForView(R.id.questionsListView);
+        TestHelper.findStrings(data, solo);
     }
 }

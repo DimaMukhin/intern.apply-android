@@ -9,7 +9,7 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
-import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
@@ -22,15 +22,14 @@ import static org.mockito.Mockito.when;
 public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<ViewJobActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
-
+    private final InternAPIProvider api;
     private Solo solo;
-    private final InternAPI api;
     private String[] jobData;
     private ArrayList<Job> job;
 
     public ViewJobAcceptanceTests() {
         super(ViewJobActivity.class);
-        api = mock(InternAPI.class);
+        api = mock(InternAPIProvider.class);
         createFakeJob();
     }
 
@@ -39,6 +38,7 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
         super.setUp();
         setActivityIntent(new Intent().putExtra("TEST", true));
         solo = new Solo(getInstrumentation(), getActivity());
+        when(api.getJobRating(anyInt())).thenReturn(Observable.fromArray());
     }
 
     @Override
@@ -56,7 +56,7 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
         getActivity().setApi(api);
 
         solo.waitForView(R.id.jobView);
-        findStrings(jobData);
+        TestHelper.findStrings(jobData, solo);
     }
 
     private void createFakeJob() {
@@ -69,11 +69,5 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
         };
 
         job.add(new JobBuilder().setOrganization(jobData[0]).setTitle(jobData[1]).setLocation(jobData[2]).setDescription(jobData[3]).createJob());
-    }
-
-    private void findStrings(String[] expectedStrings) {
-        for (String s : expectedStrings) {
-            assertTrue(TEXT_NOT_FOUND, solo.waitForText(s));
-        }
     }
 }

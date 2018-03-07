@@ -8,13 +8,14 @@ import android.widget.Toast;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class JobCommentsActivity extends AppCompatActivity {
 
     private int jobId;
-    private InternAPI api;
+    private InternAPIProvider api;
     private ListView commentsListView;
 
     @Override
@@ -35,7 +36,7 @@ public class JobCommentsActivity extends AppCompatActivity {
         }
     }
 
-    public void setApi(InternAPI api) {
+    public void setApi(InternAPIProvider api) {
         this.api = api;
         getAllComments();
     }

@@ -3,9 +3,6 @@ package intern.apply.internapply;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
@@ -15,11 +12,8 @@ import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Question;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.addquestionactivity.AddQuestionActivity;
-import io.reactivex.Observable;
-import okhttp3.MediaType;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
 
+import io.reactivex.Observable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -50,85 +44,39 @@ public class AddQuestionAcceptanceTest extends ActivityInstrumentationTestCase2<
     }
 
     public void testValidQuestionAdded() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, AddQuestionActivity.class);
-        solo.waitForActivity(AddQuestionActivity.class);
-
-        Observable<Question> output = Observable.just(new Question());
-        when(api.addNewQuestion(any())).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.clickOnButton("Ask");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Question was added successfully"));
+        testHelper(Observable.just(new Question()), "Question was added successfully");
     }
 
     public void testAddQuestionInternalServerError() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, AddQuestionActivity.class);
-        solo.waitForActivity(AddQuestionActivity.class);
-
-        Observable<Question> output = Observable.error(new Error());
-        when(api.addNewQuestion(any())).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.clickOnButton("Ask");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Internal server error, please try again later"));
+        testHelper(Observable.error(new Error()), "Internal server error, please try again later");
     }
 
     public void testAddQuestionWithInvalidTitle() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, AddQuestionActivity.class);
-        solo.waitForActivity(AddQuestionActivity.class);
-
         List<ServerError> errors = new ArrayList<>();
         errors.add(new ServerError(7, ""));
-        Observable<Question> output = Observable.error(CreateHttpException(errors));
-        when(api.addNewQuestion(any())).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.clickOnButton("Ask");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid question title"));
+        testHelper(Observable.error(TestHelper.CreateHttpException(errors)), "Invalid question title");
     }
 
     public void testAddQuestionWithInvalidBody() {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, AddQuestionActivity.class);
-        solo.waitForActivity(AddQuestionActivity.class);
-
         List<ServerError> errors = new ArrayList<>();
         errors.add(new ServerError(8, ""));
-        Observable<Question> output = Observable.error(CreateHttpException(errors));
-        when(api.addNewQuestion(any())).thenReturn(output);
-        getActivity().setApi(api);
-
-        solo.clickOnButton("Ask");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid question body"));
+        testHelper(Observable.error(TestHelper.CreateHttpException(errors)), "Invalid question body");
     }
 
     public void testAddQuestionWithInvalidName() {
+        List<ServerError> errors = new ArrayList<>();
+        errors.add(new ServerError(9, ""));
+        testHelper(Observable.error(TestHelper.CreateHttpException(errors)), "Invalid name");
+    }
+
+    private void testHelper(Observable<Question> output, String textToSearch) {
         solo.assertCurrentActivity(ACTIVITY_ERROR, AddQuestionActivity.class);
         solo.waitForActivity(AddQuestionActivity.class);
 
-        List<ServerError> errors = new ArrayList<>();
-        errors.add(new ServerError(9, ""));
-        Observable<Question> output = Observable.error(CreateHttpException(errors));
         when(api.addNewQuestion(any())).thenReturn(output);
         getActivity().setApi(api);
 
         solo.clickOnButton("Ask");
-        assertTrue(TEXT_NOT_FOUND, solo.searchText("Invalid name"));
-    }
-
-    private HttpException CreateHttpException(List<ServerError> errors) {
-        JsonArray errorBody = new JsonArray();
-
-        for (ServerError error : errors) {
-            JsonObject jsonError = new JsonObject();
-            jsonError.addProperty("code", error.getCode());
-            jsonError.addProperty("message", error.getMessage());
-            errorBody.add(jsonError);
-        }
-
-        return new HttpException(
-                Response.error(400,
-                        ResponseBody.create(
-                                MediaType.parse("application/json; charset=utf-8"),
-                                errorBody.toString())));
+        assertTrue(TEXT_NOT_FOUND, solo.searchText(textToSearch));
     }
 }

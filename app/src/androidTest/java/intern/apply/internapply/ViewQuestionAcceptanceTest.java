@@ -58,7 +58,7 @@ public class ViewQuestionAcceptanceTest extends ActivityInstrumentationTestCase2
         getActivity().setApi(api);
 
         solo.waitForView(R.id.questionView);
-        findStrings(questionData);
+        TestHelper.findStrings(questionData, solo);
     }
 
     private void createFakeQuestion() {
@@ -69,11 +69,5 @@ public class ViewQuestionAcceptanceTest extends ActivityInstrumentationTestCase2
         };
 
         question = new Question(questionData[0], questionData[1], questionData[2]);
-    }
-
-    private void findStrings(String[] expectedStrings) {
-        for (String s : expectedStrings) {
-            assertTrue(TEXT_NOT_FOUND, solo.waitForText(s));
-        }
     }
 }

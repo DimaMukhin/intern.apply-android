@@ -1,11 +1,6 @@
 package intern.apply.internapply.api;
 
-import android.util.Log;
-
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -14,13 +9,14 @@ import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.Question;
+import intern.apply.internapply.model.JobRating;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.SurveyQuestion;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class InternAPI {
+public class InternAPI implements InternAPIProvider {
     private static InternAPI instance = null;
 
 
@@ -90,7 +86,6 @@ public class InternAPI {
         return internAPIClient.sendContactMessage(cm);
     }
 
-
     /**
      * Sends a job the server
      *
@@ -155,5 +150,20 @@ public class InternAPI {
      * @return  the question
      */
     public Observable<Question> getQuestion(int questionId) { return internAPIClient.getQuestion(questionId); }
+
+    /**
+     * get a job rating
+     * @param jobId
+     * @return
+     */
+    public Observable<List<JobRating>> getJobRating(int jobId){ return internAPIClient.getJobRating(jobId); }
+
+    /**
+     * rate a job
+     * @param jobId
+     * @param jobRating
+     * @return
+     */
+    public Observable<JobRating> rateJob(int jobId, JobRating jobRating){ return internAPIClient.rateJob(jobId, jobRating); }
     //endregion
 }

@@ -8,16 +8,16 @@ import java.util.Collections;
 import java.util.List;
 
 import intern.apply.internapply.R;
-import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 
 public class SurveyList {
-    private InternAPI api;
+    private InternAPIProvider api;
     private List<String> userAnswers;
 
-    public SurveyList(InternAPI api) {
+    public SurveyList(InternAPIProvider api) {
         this.api = api;
     }
 

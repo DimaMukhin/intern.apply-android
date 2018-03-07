@@ -4,7 +4,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import intern.apply.internapply.R;
-import intern.apply.internapply.api.InternAPI;
+import intern.apply.internapply.api.InternAPIProvider;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -14,10 +14,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 class JobsList {
-    private final InternAPI api;
+    private final InternAPIProvider api;
     private ListView listView;
 
-    public JobsList(InternAPI api) {
+    public JobsList(InternAPIProvider api) {
         this.api = api;
     }
 
@@ -32,7 +32,7 @@ class JobsList {
                 }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
     }
 
-    public void ShowFilteredList(MainActivity activity,String filter) {
+    public void ShowFilteredList(MainActivity activity, String filter) {
         api.getAllJobs(filter).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
