@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.List;
 
+import intern.apply.internapply.model.Answer;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
@@ -165,5 +166,12 @@ public class InternAPI implements InternAPIProvider {
      * @return
      */
     public Observable<JobRating> rateJob(int jobId, JobRating jobRating){ return internAPIClient.rateJob(jobId, jobRating); }
+
+    /**
+     * get answers for a question
+     * @param questionId
+     * @return
+     */
+    public Observable<List<Answer>> getAnswers(int questionId) { return internAPIClient.getAnswers(questionId); }
     //endregion
 }

@@ -3,12 +3,15 @@ package intern.apply.internapply.view.viewquestionactivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Question;
+import intern.apply.internapply.view.qnaactivity.QuestionsCustomListAdapter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -19,6 +22,8 @@ public class ViewQuestionActivity extends AppCompatActivity {
     private TextView questionTitle;
     private TextView questionName;
     private TextView questionBody;
+    private ListView answersListView;
+    private TextView answersTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +37,21 @@ public class ViewQuestionActivity extends AppCompatActivity {
         questionTitle = findViewById(R.id.tvQuestionViewTitle);
         questionName = findViewById(R.id.tvQuestionViewName);
         questionBody = findViewById(R.id.tvQuestionViewBody);
+        answersTitle = findViewById(R.id.tvAnswersTitle);
+        answersListView = findViewById(R.id.answerList);
 
         boolean test = getIntent().getBooleanExtra("TEST", false);
         if (!test) {
             api = InternAPI.getAPI();
             displayQuestion();
+            displayAnswers();
         }
     }
 
     public void setApi(InternAPI api) {
         this.api = api;
         displayQuestion();
+        displayAnswers();
     }
 
     /**
@@ -64,6 +73,24 @@ public class ViewQuestionActivity extends AppCompatActivity {
                 }, error -> {
                     Toast.makeText(this, R.string.couldNotGetQuestion, Toast.LENGTH_LONG).show();
                     finish();
+                });
+    }
+
+    /**
+     * get the answers from the intent api and display them
+     */
+    private void displayAnswers(){
+        api.getAnswers(questionId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    if(response.size() > 0)
+                        answersTitle.setVisibility(View.VISIBLE);
+
+                    AnswersCustomListAdapter listAdapter = new AnswersCustomListAdapter(this, response);
+                    answersListView.setAdapter(listAdapter);
+                }, error -> {
+                    Toast.makeText(this, R.string.InternalServerError, Toast.LENGTH_LONG).show();
                 });
     }
 

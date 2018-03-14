@@ -13,7 +13,7 @@ import intern.apply.internapply.R;
 import intern.apply.internapply.model.Question;
 
 /**
- * Created by Unknown on 2018-02-26.
+ * List adapter for a list of questions
  */
 
 public class QuestionsCustomListAdapter extends ArrayAdapter {

@@ -2,6 +2,7 @@ package intern.apply.internapply.api;
 
 import java.util.List;
 
+import intern.apply.internapply.model.Answer;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
@@ -109,4 +110,11 @@ public interface InternAPIProvider {
      * @return
      */
     public Observable<JobRating> rateJob(int jobId, JobRating jobRating);
+
+    /**
+     * get answer for a question
+     * @param questionId
+     * @return
+     */
+    public Observable<List<Answer>> getAnswers(int questionId);
 }

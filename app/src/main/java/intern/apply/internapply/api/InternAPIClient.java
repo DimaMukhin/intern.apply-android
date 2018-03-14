@@ -3,6 +3,7 @@ package intern.apply.internapply.api;
 
 import java.util.List;
 
+import intern.apply.internapply.model.Answer;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
@@ -63,4 +64,7 @@ interface InternAPIClient {
 
     @POST("/api/job/{id}/rating")
     Observable<JobRating> rateJob(@Path("id") int jobId, @Body JobRating jobRating);
+
+    @GET("/api/question/{id}/answers")
+    Observable<List<Answer>> getAnswers(@Path("id") int questionId);
 }

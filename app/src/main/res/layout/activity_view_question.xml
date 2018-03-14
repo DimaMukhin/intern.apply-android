@@ -7,42 +7,52 @@
     android:padding="10dp"
     tools:context="intern.apply.internapply.view.viewquestionactivity.ViewQuestionActivity">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/questionView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/questionView"
+        <TextView
+            android:id="@+id/tvQuestionViewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:focusableInTouchMode="true" >
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/tvQuestionViewTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="24sp" />
+        <TextView
+            android:id="@+id/tvQuestionViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
 
-            <TextView
-                android:id="@+id/tvQuestionViewName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="" />
+        <TextView
+            android:id="@+id/tvQuestionViewBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tvQuestionViewBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text=""
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvAnswersTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="30dp"
+            android:text="@string/answersTitle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp"
+            android:visibility="gone" />
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </ScrollView>
+    <ListView
+        android:id="@+id/answerList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
