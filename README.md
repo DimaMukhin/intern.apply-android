@@ -1,5 +1,7 @@
 # intern.apply-android
 
+Please see the [main repository](https://github.com/DimaMukhin/intern.apply) of the project for more information.
+
 ## running the application on production mode
 
 1. clone the project
