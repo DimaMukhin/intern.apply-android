@@ -173,5 +173,13 @@ public class InternAPI implements InternAPIProvider {
      * @return
      */
     public Observable<List<Answer>> getAnswers(int questionId) { return internAPIClient.getAnswers(questionId); }
+
+    /**
+     * add answer to a question
+     * @param questionId
+     * @param answer
+     * @return
+     */
+    public Observable<Answer> addAnswer(int questionId, Answer answer) { return internAPIClient.addAnswer(questionId, answer); }
     //endregion
 }

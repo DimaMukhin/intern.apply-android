@@ -67,4 +67,7 @@ interface InternAPIClient {
 
     @GET("/api/question/{id}/answers")
     Observable<List<Answer>> getAnswers(@Path("id") int questionId);
+
+    @POST("/api/question/{id}/answers")
+    Observable<Answer> addAnswer(@Path("id") int questionId, @Body Answer answer);
 }

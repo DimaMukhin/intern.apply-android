@@ -117,4 +117,12 @@ public interface InternAPIProvider {
      * @return
      */
     public Observable<List<Answer>> getAnswers(int questionId);
+
+    /**
+     * add an answer to a question
+     * @param questionId
+     * @param answer
+     * @return
+     */
+    public Observable<Answer> addAnswer(int questionId, Answer answer);
 }

@@ -25,6 +25,7 @@ public class AcceptanceTests {
         suite.addTestSuite(QuestionListAcceptanceTest.class);
         suite.addTestSuite(AddQuestionAcceptanceTest.class);
         suite.addTestSuite(ViewQuestionAcceptanceTest.class);
+        suite.addTestSuite(AddAnswerAcceptanceTest.class);
         return suite;
     }
 }

@@ -11,6 +11,8 @@ import android.widget.Toast;
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Question;
+import intern.apply.internapply.view.addansweractivity.AddAnswerActivity;
+import intern.apply.internapply.view.addquestionactivity.AddQuestionActivity;
 import intern.apply.internapply.view.qnaactivity.QuestionsCustomListAdapter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -107,5 +109,14 @@ public class ViewQuestionActivity extends AppCompatActivity {
             else
                 questionId = 0;
         }
+    }
+
+    /**
+     * on add button click, navigate to new question creation intent
+     */
+    public void addNewAnswer(View view) {
+        Intent addJobIntent = new Intent(ViewQuestionActivity.this, AddAnswerActivity.class);
+        addJobIntent.putExtra("questionId", questionId);
+        startActivity(addJobIntent);
     }
 }
