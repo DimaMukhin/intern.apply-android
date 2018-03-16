@@ -22,6 +22,9 @@ public class AcceptanceTests {
         suite.addTestSuite(SearchBarAcceptanceTest.class);
         suite.addTestSuite(SurveyAcceptanceTest.class);
         suite.addTestSuite(ViewJobAcceptanceTests.class);
+        suite.addTestSuite(QuestionListAcceptanceTest.class);
+        suite.addTestSuite(AddQuestionAcceptanceTest.class);
+        suite.addTestSuite(ViewQuestionAcceptanceTest.class);
         return suite;
     }
 }

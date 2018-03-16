@@ -7,6 +7,7 @@ import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.Question;
 import intern.apply.internapply.model.JobRating;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.SurveyQuestion;
@@ -47,6 +48,15 @@ interface InternAPIClient {
 
     @POST("/api/salary")
     Observable<Salary> addJobSalary(@Body Salary salary);
+
+    @GET("/api/question")
+    Observable<List<Question>> getAllQuestions();
+
+    @POST("/api/question")
+    Observable<Question> addNewQuestion(@Body Question question);
+
+    @GET("/api/question/{id}")
+    Observable<Question> getQuestion(@Path("id") int questionId);
 
     @GET("/api/job/{id}/rating")
     Observable<List<JobRating>> getJobRating(@Path("id") int jobId);

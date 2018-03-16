@@ -22,13 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.surveyactivity.SurveyActivity"></activity>
+        <activity android:name=".view.surveyactivity.SurveyActivity" />
         <activity android:name=".view.contactusactivity.ContactUsActivity" />
         <activity
             android:name=".view.addjobactivity.AddJobActivity"
             android:parentActivityName=".view.mainactivity.MainActivity" />
         <activity android:name=".view.viewjobactivity.ViewJobActivity" />
-        <activity android:name=".view.jobcommentsactivity.JobCommentsActivity"></activity>
+        <activity android:name=".view.jobcommentsactivity.JobCommentsActivity" />
+        <activity android:name=".view.qnaactivity.QNAActivity" />
+        <activity android:name=".view.addquestionactivity.AddQuestionActivity" />
+        <activity android:name=".view.viewquestionactivity.ViewQuestionActivity"></activity>
     </application>
 
 </manifest>

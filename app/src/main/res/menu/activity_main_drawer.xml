@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -8,6 +9,9 @@
             android:id="@+id/action_add_job"
             android:icon="@drawable/ic_add"
             android:title="@string/add_job_title" />
+        <item
+            android:id="@+id/action_qna"
+            android:title="@string/qna_title" />
     </group>
 
 </menu>
