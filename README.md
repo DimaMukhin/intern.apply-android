@@ -18,7 +18,9 @@ Please see the [main repository](https://github.com/DimaMukhin/intern.apply) of 
 
 1. open `InternAPI.java`
 2. change `private final String BASE_URL = "https://intern-apply.herokuapp.com/";` to point at `http://<localhost-ip>:3000`
-3. example: `private final String BASE_URL = "http://192.168.1.2:3000";`
+3. example: `private final String BASE_URL = "http://192.168.1.2:3000";`  
+
+Why manualy changing the BASE URL of the api? because Retrofit does not support "localhost" yet. We decided to keep using Retrofit anyways since this is not a big deal.
 
 ## running tests
 
