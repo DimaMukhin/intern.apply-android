@@ -112,7 +112,7 @@ public class ViewQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * on add button click, navigate to new question creation intent
+     * on add button click, navigate to new answer creation intent
      */
     public void addNewAnswer(View view) {
         Intent addJobIntent = new Intent(ViewQuestionActivity.this, AddAnswerActivity.class);
