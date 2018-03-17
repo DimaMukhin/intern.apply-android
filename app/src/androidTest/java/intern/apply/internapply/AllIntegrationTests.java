@@ -12,20 +12,21 @@ import junit.framework.TestSuite;
 public class AllIntegrationTests {
     public static Test suite() {
         TestSuite suite = new TestSuite("Integration tests");
-        suite.addTestSuite(AddJobIntegrationTest.class);
+        suite.addTestSuite(AddAnswerIntegrationTest.class);
         suite.addTestSuite(AddJobCommentIntegrationTest.class);
+        suite.addTestSuite(AddJobIntegrationTest.class);
+        suite.addTestSuite(AddQuestionIntegrationTest.class);
         suite.addTestSuite(AddSalaryIntegrationTest.class);
+        suite.addTestSuite(AnswerListIntegrationTest.class);
         suite.addTestSuite(ContactUsIntegrationTest.class);
         suite.addTestSuite(JobCommentsIntegrationTest.class);
         suite.addTestSuite(JobListIntegrationTest.class);
+        suite.addTestSuite(QuestionListIntegrationTest.class);
         suite.addTestSuite(RateJobIntegrationTest.class);
         suite.addTestSuite(SearchBarIntegrationTest.class);
         suite.addTestSuite(SurveyIntegrationTest.class);
         suite.addTestSuite(ViewJobIntegrationTests.class);
-        suite.addTestSuite(QuestionListIntegrationTest.class);
-        suite.addTestSuite(AddQuestionIntegrationTest.class);
         suite.addTestSuite(ViewQuestionIntegrationTest.class);
-        suite.addTestSuite(AddAnswerIntegrationTest.class);
         return suite;
     }
 }
