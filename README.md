@@ -7,6 +7,9 @@ Please see the [main repository](https://github.com/DimaMukhin/intern.apply) of 
 1. clone the project
 2. use android studio to compile and run the application
 
+If the application does not work, please try to rebuild the whole project (clean + recompile)  
+Try to restart the application once if at first nothing shows up (this is an issue with Android Studio). 
+
 ## running the application on development mode
 
 1. clone the project
