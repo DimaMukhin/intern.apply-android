@@ -7,6 +7,9 @@ import com.robotium.solo.Solo;
 
 import junit.framework.Assert;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import intern.apply.internapply.model.ServerError;
@@ -40,4 +43,17 @@ public class TestHelper {
             Assert.assertTrue("text not found", solo.waitForText(s));
     }
 
+    public static void ExecuteSQL(String sql) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://fugfonv8odxxolj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com/x9ptoxf7hkxdbkme";
+            Connection c = DriverManager.getConnection(url, "rziicv90jjsju3xj", "eso1lssuop8145gk");
+            PreparedStatement st = c.prepareStatement(sql);
+            st.execute();
+            st.close();
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
