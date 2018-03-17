@@ -5,15 +5,15 @@ import junit.framework.TestSuite;
 
 /**
  * SystemTests
- * Contains all acceptance tests.
- * Handles automatic running of all acceptance tests.
+ * Contains all System tests.
+ * Handles automatic running of all system tests.
  */
 
 public class SystemTests {
     public static Test suite() {
         TestSuite suite = new TestSuite("Acceptance tests");
         suite.addTestSuite(AddSalarySystemTest.class);
-        //suite.addTestSuite(JobListAcceptanceTest.class);
+        suite.addTestSuite(JobListSystemTest.class);
         return suite;
     }
 }

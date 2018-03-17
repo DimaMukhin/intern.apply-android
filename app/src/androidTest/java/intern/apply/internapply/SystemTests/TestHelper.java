@@ -1,44 +1,18 @@
 package intern.apply.internapply.SystemTests;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.robotium.solo.Solo;
 
 import junit.framework.Assert;
+import junit.framework.AssertionFailedError;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.util.List;
-
-import intern.apply.internapply.model.ServerError;
-import okhttp3.MediaType;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
 
 
 public class TestHelper {
 
     static String LOCAL_HOST_URL = "http://192.168.0.20:3000/";
-
-    public static HttpException CreateHttpException(List<ServerError> errors) {
-        JsonArray errorBody = new JsonArray();
-
-        for (ServerError error : errors) {
-            JsonObject jsonError = new JsonObject();
-            jsonError.addProperty("code", error.getCode());
-            jsonError.addProperty("message", error.getMessage());
-            errorBody.add(jsonError);
-        }
-
-        return new HttpException(
-                Response.error(400,
-                        ResponseBody.create(
-                                MediaType.parse("application/json; charset=utf-8"),
-                                errorBody.toString())));
-    }
-
 
     public static void findStrings(String[] expectedStrings, Solo solo) {
         for (String s : expectedStrings)
@@ -46,6 +20,9 @@ public class TestHelper {
     }
 
     public static void ExecuteSQL(String sql) {
+        if (sql.isEmpty())
+            return;
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://fugfonv8odxxolj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com/x9ptoxf7hkxdbkme";
@@ -55,7 +32,60 @@ public class TestHelper {
             st.close();
             c.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new AssertionFailedError("SQL QUERY FAILED:" + e.toString());
         }
+    }
+
+    public static void CreateJobTables() {
+        String sql = "DROP TABLE IF EXISTS jobRating";
+        TestHelper.ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS job";
+        TestHelper.ExecuteSQL(sql);
+
+        sql = " CREATE TABLE job (" +
+                "id INT NOT NULL AUTO_INCREMENT," +
+                "organization VARCHAR(45) NOT NULL," +
+                "title VARCHAR(100) NOT NULL," +
+                "location VARCHAR(45)," +
+                "description VARCHAR(2000)," +
+                "salary DECIMAL(4,1)," +
+                "numSalaries INT(10)," +
+                "PRIMARY KEY (id))";
+        TestHelper.ExecuteSQL(sql);
+
+        sql = "CREATE TABLE jobRating (" +
+                "jobId INT(11) NOT NULL," +
+                "score DECIMAL(3,2) DEFAULT '0.00' NOT NULL," +
+                "votes INT(11) DEFAULT '0' NOT NULL," +
+                "PRIMARY KEY(jobId)," +
+                "CONSTRAINT jobId___fk FOREIGN KEY (jobId) REFERENCES job (id) ON DELETE CASCADE )";
+        TestHelper.ExecuteSQL(sql);
+    }
+
+    public static void InitializeJobTables() {
+
+        String sql;
+
+        sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
+                "(1, 'fake org', 'fake title', 'fake location', 0, 0)," +
+                "(2, 'google', 'second title', 'vancouver', 0, 0)," +
+                "(3, 'CityOFWinnipeg', 'third title', 'location', 0, 0)";
+        TestHelper.ExecuteSQL(sql);
+
+        sql = "INSERT INTO jobRating(jobId, score, votes) VALUES" +
+                "(1, 1.0, 1)," +
+                "(2, 2.0, 2)";
+        TestHelper.ExecuteSQL(sql);
+    }
+
+    public static void CleanTables() {
+        String sql;
+
+        sql = "Delete from jobRating";
+        TestHelper.ExecuteSQL(sql);
+
+        sql = "Delete from job";
+        TestHelper.ExecuteSQL(sql);
     }
 }
