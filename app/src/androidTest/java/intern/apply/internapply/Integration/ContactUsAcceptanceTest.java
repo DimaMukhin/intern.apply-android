@@ -1,4 +1,4 @@
-package intern.apply.internapply;
+package intern.apply.internapply.Integration;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;

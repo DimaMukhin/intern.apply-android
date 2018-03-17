@@ -17,12 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class InternAPI implements InternAPIProvider {
     private static InternAPI instance = null;
-
+    private static String BASE_URL = "https://intern-apply.herokuapp.com/";
 
     private InternAPIClient internAPIClient;
 
     private InternAPI() {
-        String BASE_URL = "https://intern-apply.herokuapp.com/";
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -41,6 +40,15 @@ public class InternAPI implements InternAPIProvider {
         if (instance == null)
             instance = new InternAPI();
         return instance;
+    }
+
+    /**
+     * intern api base url of server setter
+     *
+     * @param baseUrl baseUrl of server
+     */
+    public static void setBaseUrl(String baseUrl) {
+        BASE_URL = baseUrl;
     }
 
     //region Transit API public calls

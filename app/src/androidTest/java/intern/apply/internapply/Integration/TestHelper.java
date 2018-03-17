@@ -1,4 +1,4 @@
-package intern.apply.internapply;
+package intern.apply.internapply.Integration;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

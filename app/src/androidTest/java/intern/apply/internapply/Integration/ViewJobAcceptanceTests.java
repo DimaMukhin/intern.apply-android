@@ -1,4 +1,4 @@
-package intern.apply.internapply;
+package intern.apply.internapply.Integration;
 
 
 import android.content.Intent;
@@ -9,6 +9,7 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
+import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;

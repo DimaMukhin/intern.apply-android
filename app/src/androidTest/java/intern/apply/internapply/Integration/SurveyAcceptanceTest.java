@@ -1,4 +1,4 @@
-package intern.apply.internapply;
+package intern.apply.internapply.Integration;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ServerError;
