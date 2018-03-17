@@ -26,13 +26,11 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-
-
-//task runServer{
-//    afterEvaluate {
-//        ant.exec(
-//                executable: 'serverScript.bat',
-//                spawn: true
-//        )
-//    }
-//}
+task runServer{
+    afterEvaluate {
+        ant.exec(
+                executable: 'ServerScript.bat',
+                spawn: true
+        )
+    }
+}
