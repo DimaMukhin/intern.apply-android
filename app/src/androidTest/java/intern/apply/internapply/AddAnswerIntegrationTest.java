@@ -10,25 +10,22 @@ import java.util.List;
 
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Answer;
-import intern.apply.internapply.model.Question;
 import intern.apply.internapply.model.ServerError;
 import intern.apply.internapply.view.addansweractivity.AddAnswerActivity;
-import intern.apply.internapply.view.addquestionactivity.AddQuestionActivity;
-
 import io.reactivex.Observable;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AddAnswerAcceptanceTest extends ActivityInstrumentationTestCase2<AddAnswerActivity> {
+public class AddAnswerIntegrationTest extends ActivityInstrumentationTestCase2<AddAnswerActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
-
-    private Solo solo;
     private final InternAPI api;
+    private Solo solo;
 
-    public AddAnswerAcceptanceTest() {
+    public AddAnswerIntegrationTest() {
         super(AddAnswerActivity.class);
         api = mock(InternAPI.class);
     }
@@ -41,7 +38,7 @@ public class AddAnswerAcceptanceTest extends ActivityInstrumentationTestCase2<Ad
     }
 
     @Override
-    public void tearDown() throws  Exception {
+    public void tearDown() throws Exception {
         solo.finishOpenedActivities();
         super.tearDown();
     }

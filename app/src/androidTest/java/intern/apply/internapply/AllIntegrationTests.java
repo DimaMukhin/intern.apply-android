@@ -22,6 +22,10 @@ public class AllIntegrationTests {
         suite.addTestSuite(SearchBarIntegrationTest.class);
         suite.addTestSuite(SurveyIntegrationTest.class);
         suite.addTestSuite(ViewJobIntegrationTests.class);
+        suite.addTestSuite(QuestionListIntegrationTest.class);
+        suite.addTestSuite(AddQuestionIntegrationTest.class);
+        suite.addTestSuite(ViewQuestionIntegrationTest.class);
+        suite.addTestSuite(AddAnswerIntegrationTest.class);
         return suite;
     }
 }

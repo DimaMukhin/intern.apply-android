@@ -1,8 +1,8 @@
 package intern.apply.internapply.view.addansweractivity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,7 +12,6 @@ import java.util.List;
 import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Answer;
-import intern.apply.internapply.model.Question;
 import intern.apply.internapply.model.ServerError;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -31,7 +30,7 @@ public class AddAnswerActivity extends AppCompatActivity {
         onInit();
     }
 
-    private void onInit(){
+    private void onInit() {
         getQuestionId();
         etAnswerAuthor = findViewById(R.id.etAnswerAuthor);
         etAnswerBody = findViewById(R.id.etAnswerBody);

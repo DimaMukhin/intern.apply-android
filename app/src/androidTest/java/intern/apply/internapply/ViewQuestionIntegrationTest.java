@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
  * Created by Unknown on 2018-03-03.
  */
 
-public class ViewQuestionAcceptanceTest extends ActivityInstrumentationTestCase2<ViewQuestionActivity> {
+public class ViewQuestionIntegrationTest extends ActivityInstrumentationTestCase2<ViewQuestionActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
     private final InternAPI api;
@@ -26,7 +26,7 @@ public class ViewQuestionAcceptanceTest extends ActivityInstrumentationTestCase2
     private String[] questionData;
     private Question question;
 
-    public ViewQuestionAcceptanceTest() {
+    public ViewQuestionIntegrationTest() {
         super(ViewQuestionActivity.class);
         api = mock(InternAPI.class);
         createFakeQuestion();
@@ -59,7 +59,7 @@ public class ViewQuestionAcceptanceTest extends ActivityInstrumentationTestCase2
     }
 
     private void createFakeQuestion() {
-        questionData = new String[] {
+        questionData = new String[]{
                 "fake question title",
                 "fake question body",
                 "fake author"

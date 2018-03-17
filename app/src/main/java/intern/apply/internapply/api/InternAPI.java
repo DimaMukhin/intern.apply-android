@@ -9,8 +9,8 @@ import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
-import intern.apply.internapply.model.Question;
 import intern.apply.internapply.model.JobRating;
+import intern.apply.internapply.model.Question;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.SurveyQuestion;
 import io.reactivex.Observable;
@@ -56,7 +56,9 @@ public class InternAPI implements InternAPIProvider {
         return internAPIClient.getAllJobs();
     }
 
-    public Observable<List<Job>> getAllJobs(String filter) { return internAPIClient.getAllJobs(filter); }
+    public Observable<List<Job>> getAllJobs(String filter) {
+        return internAPIClient.getAllJobs(filter);
+    }
 
     /**
      * get the survey questions with allowed responses from the server
@@ -134,23 +136,32 @@ public class InternAPI implements InternAPIProvider {
 
     /**
      * Get all the questions from the server
+     *
      * @return list of questions
      */
-    public Observable<List<Question>> getAllQuestions() { return internAPIClient.getAllQuestions(); }
+    public Observable<List<Question>> getAllQuestions() {
+        return internAPIClient.getAllQuestions();
+    }
 
     /**
      * Add a new question to the Q&A board
-     * @param question  the question to add
-     * @return  the added question on success
+     *
+     * @param question the question to add
+     * @return the added question on success
      */
-    public Observable<Question> addNewQuestion(Question question) { return internAPIClient.addNewQuestion(question); }
+    public Observable<Question> addNewQuestion(Question question) {
+        return internAPIClient.addNewQuestion(question);
+    }
 
     /**
      * Get a question by its id from the server
+     *
      * @param questionId the id of the question to get
-     * @return  the question
+     * @return the question
      */
-    public Observable<Question> getQuestion(int questionId) { return internAPIClient.getQuestion(questionId); }
+    public Observable<Question> getQuestion(int questionId) {
+        return internAPIClient.getQuestion(questionId);
+    }
 
     /**
      * get a job rating
@@ -165,21 +176,29 @@ public class InternAPI implements InternAPIProvider {
      * @param jobRating
      * @return
      */
-    public Observable<JobRating> rateJob(int jobId, JobRating jobRating){ return internAPIClient.rateJob(jobId, jobRating); }
+    public Observable<JobRating> rateJob(int jobId, JobRating jobRating) {
+        return internAPIClient.rateJob(jobId, jobRating);
+    }
 
     /**
      * get answers for a question
+     *
      * @param questionId
      * @return
      */
-    public Observable<List<Answer>> getAnswers(int questionId) { return internAPIClient.getAnswers(questionId); }
+    public Observable<List<Answer>> getAnswers(int questionId) {
+        return internAPIClient.getAnswers(questionId);
+    }
 
     /**
      * add answer to a question
+     *
      * @param questionId
      * @param answer
      * @return
      */
-    public Observable<Answer> addAnswer(int questionId, Answer answer) { return internAPIClient.addAnswer(questionId, answer); }
+    public Observable<Answer> addAnswer(int questionId, Answer answer) {
+        return internAPIClient.addAnswer(questionId, answer);
+    }
     //endregion
 }

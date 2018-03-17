@@ -1,8 +1,8 @@
 package intern.apply.internapply.view.viewquestionactivity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -79,12 +79,12 @@ public class ViewQuestionActivity extends AppCompatActivity {
     /**
      * get the answers from the intent api and display them
      */
-    private void displayAnswers(){
+    private void displayAnswers() {
         api.getAnswers(questionId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    if(response.size() > 0)
+                    if (response.size() > 0)
                         answersTitle.setVisibility(View.VISIBLE);
 
                     AnswersCustomListAdapter listAdapter = new AnswersCustomListAdapter(this, response);

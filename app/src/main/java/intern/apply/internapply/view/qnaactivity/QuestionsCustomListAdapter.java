@@ -29,11 +29,11 @@ public class QuestionsCustomListAdapter extends ArrayAdapter {
     }
 
     public View getView(int position, View view, ViewGroup parent) {
-        LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.questions_listview_row, null,true);
+        LayoutInflater inflater = context.getLayoutInflater();
+        View rowView = inflater.inflate(R.layout.questions_listview_row, null, true);
 
-        TextView nameTextField = (TextView) rowView.findViewById(R.id.tvQuestionName);
-        TextView titleTextField = (TextView) rowView.findViewById(R.id.tvQuestionTitle);
+        TextView nameTextField = rowView.findViewById(R.id.tvQuestionName);
+        TextView titleTextField = rowView.findViewById(R.id.tvQuestionTitle);
 
         nameTextField.setText(questions.get(position).getAuthor());
         titleTextField.setText(questions.get(position).getTitle());
