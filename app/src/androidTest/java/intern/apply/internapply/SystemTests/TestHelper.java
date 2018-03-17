@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 
 public class TestHelper {
 
-    static String LOCAL_HOST_URL = "http://192.168.0.20:3000/";
+    static String LOCAL_HOST_URL = "http://10.0.2.2:3000/";
 
     public static void findStrings(String[] expectedStrings, Solo solo) {
         for (String s : expectedStrings)
