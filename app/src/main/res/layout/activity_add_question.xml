@@ -8,13 +8,13 @@
     tools:context="intern.apply.internapply.view.addquestionactivity.AddQuestionActivity">
 
     <TextView
+        style="@style/Base.TextAppearance.AppCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_question"
         android:textAlignment="center"
         android:textSize="40sp"
-        android:textStyle="bold"
-        style="@style/Base.TextAppearance.AppCompat" />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etQuestionName"
@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/your_name"
-        android:paddingBottom="5dp"
-        android:inputType="textEmailSubject" />
+        android:inputType="textEmailSubject"
+        android:paddingBottom="5dp" />
 
     <EditText
         android:id="@+id/etQuestionTitle"
@@ -31,8 +31,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/title"
-        android:paddingBottom="5dp"
-        android:inputType="textEmailSubject" />
+        android:inputType="textEmailSubject"
+        android:paddingBottom="5dp" />
 
     <EditText
         android:id="@+id/etQuestionBody"
@@ -40,8 +40,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/question"
-        android:paddingBottom="5dp"
-        android:inputType="textMultiLine|textShortMessage" />
+        android:inputType="textMultiLine|textShortMessage"
+        android:paddingBottom="5dp" />
 
     <Button
         android:layout_width="match_parent"

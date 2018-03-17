@@ -19,7 +19,7 @@ public interface InternAPIProvider {
      *
      * @return list of jobs
      */
-    public Observable<List<Job>> getAllJobs();
+    Observable<List<Job>> getAllJobs();
 
     /**
      * get all filtered jobs
@@ -27,14 +27,14 @@ public interface InternAPIProvider {
      * @param filter the string filter
      * @return a list of jobs
      */
-    public Observable<List<Job>> getAllJobs(String filter);
+    Observable<List<Job>> getAllJobs(String filter);
 
     /**
      * get the survey questions with allowed responses
      *
      * @return the survey questions with their allowed responses
      */
-    public Observable<List<SurveyQuestion>> getSurvey();
+    Observable<List<SurveyQuestion>> getSurvey();
 
     /**
      * send a completed survey
@@ -42,7 +42,7 @@ public interface InternAPIProvider {
      * @param survey the completed survey
      * @return the survey sent
      */
-    public Observable<CompletedSurvey> sendCompletedSurvey(CompletedSurvey survey);
+    Observable<CompletedSurvey> sendCompletedSurvey(CompletedSurvey survey);
 
     /**
      * send a "contact-us" message
@@ -50,7 +50,7 @@ public interface InternAPIProvider {
      * @param cm the contact-us message
      * @return the message sent
      */
-    public Observable<ContactMessage> sendContactMessage(ContactMessage cm);
+    Observable<ContactMessage> sendContactMessage(ContactMessage cm);
 
 
     /**
@@ -59,7 +59,7 @@ public interface InternAPIProvider {
      * @param job the new job
      * @return servers response
      */
-    public Observable<Job> addJob(Job job);
+    Observable<Job> addJob(Job job);
 
     /**
      * get a specific job by id
@@ -67,7 +67,7 @@ public interface InternAPIProvider {
      * @param jobId the id of the job
      * @return the job with the given id
      */
-    public Observable<List<Job>> getJob(int jobId);
+    Observable<List<Job>> getJob(int jobId);
 
     /**
      * get all the comments of a specific job
@@ -75,7 +75,7 @@ public interface InternAPIProvider {
      * @param jobId the id of the job
      * @return  a list of comments of the specified job
      */
-    public Observable<List<Comment>> getJobComments(int jobId);
+    Observable<List<Comment>> getJobComments(int jobId);
 
 
     /**
@@ -84,7 +84,7 @@ public interface InternAPIProvider {
      * @param comment   the comment to add
      * @return  the added comment
      */
-    public Observable<Comment> addJobComment(Comment comment);
+    Observable<Comment> addJobComment(Comment comment);
 
     /**
      * Add a salary to a job
@@ -93,14 +93,14 @@ public interface InternAPIProvider {
      * @return the added comment
 
      */
-    public Observable<Salary> addJobSalary(Salary salary);
+    Observable<Salary> addJobSalary(Salary salary);
 
     /**
      * getting the rating of a specific job
      * @param jobId
      * @return
      */
-    public Observable<List<JobRating>> getJobRating(int jobId);
+    Observable<List<JobRating>> getJobRating(int jobId);
 
 
     /**
@@ -109,20 +109,22 @@ public interface InternAPIProvider {
      * @param jobRating
      * @return
      */
-    public Observable<JobRating> rateJob(int jobId, JobRating jobRating);
+    Observable<JobRating> rateJob(int jobId, JobRating jobRating);
 
     /**
      * get answer for a question
+     *
      * @param questionId
      * @return
      */
-    public Observable<List<Answer>> getAnswers(int questionId);
+    Observable<List<Answer>> getAnswers(int questionId);
 
     /**
      * add an answer to a question
+     *
      * @param questionId
      * @param answer
      * @return
      */
-    public Observable<Answer> addAnswer(int questionId, Answer answer);
+    Observable<Answer> addAnswer(int questionId, Answer answer);
 }

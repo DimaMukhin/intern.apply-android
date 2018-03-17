@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<JobCommentsActivity> {
+public class JobCommentsIntegrationTest extends ActivityInstrumentationTestCase2<JobCommentsActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private final InternAPIProvider api;
     private Solo solo;
@@ -26,7 +26,7 @@ public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<
     private List<Comment> singleComment;
     private List<Comment> multipleComments;
 
-    public JobCommentsAcceptanceTest() {
+    public JobCommentsIntegrationTest() {
         super(JobCommentsActivity.class);
         api = mock(InternAPIProvider.class);
         populateFakeComments();

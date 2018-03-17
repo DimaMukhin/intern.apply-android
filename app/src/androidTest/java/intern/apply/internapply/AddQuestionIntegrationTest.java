@@ -9,27 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import intern.apply.internapply.api.InternAPI;
-import intern.apply.internapply.model.Answer;
 import intern.apply.internapply.model.Question;
 import intern.apply.internapply.model.ServerError;
-import intern.apply.internapply.view.addansweractivity.AddAnswerActivity;
 import intern.apply.internapply.view.addquestionactivity.AddQuestionActivity;
-
 import io.reactivex.Observable;
+
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AddAnswerAcceptanceTest extends ActivityInstrumentationTestCase2<AddAnswerActivity> {
+public class AddQuestionIntegrationTest extends ActivityInstrumentationTestCase2<AddQuestionActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
-
-    private Solo solo;
     private final InternAPI api;
+    private Solo solo;
 
-    public AddAnswerAcceptanceTest() {
-        super(AddAnswerActivity.class);
+    public AddQuestionIntegrationTest() {
+        super(AddQuestionActivity.class);
         api = mock(InternAPI.class);
     }
 
@@ -41,39 +37,45 @@ public class AddAnswerAcceptanceTest extends ActivityInstrumentationTestCase2<Ad
     }
 
     @Override
-    public void tearDown() throws  Exception {
+    public void tearDown() throws Exception {
         solo.finishOpenedActivities();
         super.tearDown();
     }
 
-    public void testValidAnswerAdded() {
-        testHelper(Observable.just(new Answer("shai", "test answer")), "Your answer was successfully added");
+    public void testValidQuestionAdded() {
+        testHelper(Observable.just(new Question()), "Question was added successfully");
     }
 
-    public void testAddAnswerInternalServerError() {
+    public void testAddQuestionInternalServerError() {
         testHelper(Observable.error(new Error()), "Internal server error, please try again later");
     }
 
-    public void testAddAnswerWithInvalidBody() {
+    public void testAddQuestionWithInvalidTitle() {
         List<ServerError> errors = new ArrayList<>();
-        errors.add(new ServerError(34, ""));
-        testHelper(Observable.error(TestHelper.CreateHttpException(errors)), "Invalid answer");
+        errors.add(new ServerError(7, ""));
+        testHelper(Observable.error(TestHelper.CreateHttpException(errors)), "Invalid question title");
     }
 
-    public void testAddAnswerWithInvalidName() {
+    public void testAddQuestionWithInvalidBody() {
         List<ServerError> errors = new ArrayList<>();
-        errors.add(new ServerError(33, ""));
+        errors.add(new ServerError(8, ""));
+        testHelper(Observable.error(TestHelper.CreateHttpException(errors)), "Invalid question body");
+    }
+
+    public void testAddQuestionWithInvalidName() {
+        List<ServerError> errors = new ArrayList<>();
+        errors.add(new ServerError(9, ""));
         testHelper(Observable.error(TestHelper.CreateHttpException(errors)), "Invalid name");
     }
 
-    private void testHelper(Observable<Answer> output, String textToSearch) {
-        solo.assertCurrentActivity(ACTIVITY_ERROR, AddAnswerActivity.class);
-        solo.waitForActivity(AddAnswerActivity.class);
+    private void testHelper(Observable<Question> output, String textToSearch) {
+        solo.assertCurrentActivity(ACTIVITY_ERROR, AddQuestionActivity.class);
+        solo.waitForActivity(AddQuestionActivity.class);
 
-        when(api.addAnswer(anyInt(), any())).thenReturn(output);
+        when(api.addNewQuestion(any())).thenReturn(output);
         getActivity().setApi(api);
 
-        solo.clickOnButton("answer");
+        solo.clickOnButton("Ask");
         assertTrue(TEXT_NOT_FOUND, solo.searchText(textToSearch));
     }
 }

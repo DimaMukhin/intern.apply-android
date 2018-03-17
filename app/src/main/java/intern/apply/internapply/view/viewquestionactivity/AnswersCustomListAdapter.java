@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
 
 import intern.apply.internapply.R;
 import intern.apply.internapply.model.Answer;
-import intern.apply.internapply.model.Question;
 
 /**
  * List adapter for a list of answers
@@ -33,10 +31,10 @@ public class AnswersCustomListAdapter extends ArrayAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         String by = context.getString(R.string.byAuthor) + " ";
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.answers_listview_row, null,true);
+        View rowView = inflater.inflate(R.layout.answers_listview_row, null, true);
 
-        TextView authorTextField = (TextView) rowView.findViewById(R.id.tvAnswerAuthor);
-        TextView bodyTextField = (TextView) rowView.findViewById(R.id.answerBody);
+        TextView authorTextField = rowView.findViewById(R.id.tvAnswerAuthor);
+        TextView bodyTextField = rowView.findViewById(R.id.answerBody);
 
         authorTextField.setText(by + answers.get(position).getAuthor());
         bodyTextField.setText(answers.get(position).getBody());

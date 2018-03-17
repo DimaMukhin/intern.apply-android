@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SurveyAcceptanceTest extends ActivityInstrumentationTestCase2<SurveyActivity> {
+public class SurveyIntegrationTest extends ActivityInstrumentationTestCase2<SurveyActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
     private final InternAPIProvider api;
@@ -29,7 +29,7 @@ public class SurveyAcceptanceTest extends ActivityInstrumentationTestCase2<Surve
     private List<String[]> responsesData;
     private List<SurveyQuestion> questionsList;
 
-    public SurveyAcceptanceTest() {
+    public SurveyIntegrationTest() {
         super(SurveyActivity.class);
         api = mock(InternAPIProvider.class);
         populateFakeQuestions();

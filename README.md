@@ -27,4 +27,4 @@ Why manualy changing the BASE URL of the api? because Retrofit does not support 
 
 ## running tests
 
-right click on "AcceptanceTests" and click on "run 'AcceptanceTests'"
+right click on "AllIntegrationTests" and click on "run 'AllIntegrationTests'"

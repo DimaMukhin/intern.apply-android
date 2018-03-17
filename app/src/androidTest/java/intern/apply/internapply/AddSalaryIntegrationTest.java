@@ -23,13 +23,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-public class AddSalaryAcceptanceTest extends ActivityInstrumentationTestCase2<ViewJobActivity> {
+public class AddSalaryIntegrationTest extends ActivityInstrumentationTestCase2<ViewJobActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
     private final InternAPIProvider api;
     private Solo solo;
 
-    public AddSalaryAcceptanceTest() {
+    public AddSalaryIntegrationTest() {
         super(ViewJobActivity.class);
         api = mock(InternAPIProvider.class);
     }

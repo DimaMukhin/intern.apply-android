@@ -18,13 +18,11 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AnswerListAcceptanceTest extends ActivityInstrumentationTestCase2<ViewQuestionActivity> {
+public class AnswerListIntegrationTest extends ActivityInstrumentationTestCase2<ViewQuestionActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
-
-    private Solo solo;
     private final InternAPI api;
-
+    private Solo solo;
     private String[] singleAnswerData;
     private String[] multipleAnswersData;
     private List<Answer> singleAnswer;
@@ -32,7 +30,7 @@ public class AnswerListAcceptanceTest extends ActivityInstrumentationTestCase2<V
     private String[] questionData;
     private Question question;
 
-    public AnswerListAcceptanceTest() {
+    public AnswerListIntegrationTest() {
         super(ViewQuestionActivity.class);
         api = mock(InternAPI.class);
         populateFakeQuestions();
@@ -64,12 +62,12 @@ public class AnswerListAcceptanceTest extends ActivityInstrumentationTestCase2<V
     }
 
     private void populateFakeQuestions() {
-        singleAnswerData = new String[] {
+        singleAnswerData = new String[]{
                 "dima", "test answer"
         };
         singleAnswer = new ArrayList<>();
         for (int i = 0; i < singleAnswerData.length; i += 2)
-            singleAnswer.add(new Answer(singleAnswerData[i], singleAnswerData[i+1]));
+            singleAnswer.add(new Answer(singleAnswerData[i], singleAnswerData[i + 1]));
 
         multipleAnswersData = new String[]{
                 "multi author", "multi dima",
@@ -78,9 +76,9 @@ public class AnswerListAcceptanceTest extends ActivityInstrumentationTestCase2<V
         };
         multipleAnswers = new ArrayList<>();
         for (int i = 0; i < multipleAnswersData.length; i += 2)
-            multipleAnswers.add(new Answer(multipleAnswersData[i], multipleAnswersData[i+1]));
+            multipleAnswers.add(new Answer(multipleAnswersData[i], multipleAnswersData[i + 1]));
 
-        questionData = new String[] {
+        questionData = new String[]{
                 "fake question title",
                 "fake question body",
                 "fake author"

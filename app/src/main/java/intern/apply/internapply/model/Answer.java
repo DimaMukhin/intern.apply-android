@@ -8,16 +8,16 @@ public class Answer {
     private String author;
     private String body;
 
-    public Answer(String author, String body){
+    public Answer(String author, String body) {
         this.body = body;
         this.author = author;
     }
 
-    public String getBody(){
+    public String getBody() {
         return body;
     }
 
-    public String getAuthor(){
+    public String getAuthor() {
         return author;
     }
 }

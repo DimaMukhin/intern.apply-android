@@ -16,19 +16,17 @@ import io.reactivex.Observable;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class QuestionListAcceptanceTest extends ActivityInstrumentationTestCase2<QNAActivity> {
+public class QuestionListIntegrationTest extends ActivityInstrumentationTestCase2<QNAActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
-
-    private Solo solo;
     private final InternAPI api;
-
+    private Solo solo;
     private String[] singleQuestionData;
     private String[] multipleQuestionsData;
     private List<Question> singleQuestion;
     private List<Question> multipleQuestions;
 
-    public QuestionListAcceptanceTest() {
+    public QuestionListIntegrationTest() {
         super(QNAActivity.class);
         api = mock(InternAPI.class);
         populateFakeQuestions();
@@ -60,12 +58,12 @@ public class QuestionListAcceptanceTest extends ActivityInstrumentationTestCase2
     }
 
     private void populateFakeQuestions() {
-        singleQuestionData = new String[] {
+        singleQuestionData = new String[]{
                 "test title", "dima"
         };
         singleQuestion = new ArrayList<>();
         for (int i = 0; i < singleQuestionData.length; i += 2)
-            singleQuestion.add(new Question(singleQuestionData[i], singleQuestionData[i+1]));
+            singleQuestion.add(new Question(singleQuestionData[i], singleQuestionData[i + 1]));
 
         multipleQuestionsData = new String[]{
                 "multi title", "multi dima",
@@ -74,7 +72,7 @@ public class QuestionListAcceptanceTest extends ActivityInstrumentationTestCase2
         };
         multipleQuestions = new ArrayList<>();
         for (int i = 0; i < multipleQuestionsData.length; i += 2)
-            multipleQuestions.add(new Question(multipleQuestionsData[i], multipleQuestionsData[i+1]));
+            multipleQuestions.add(new Question(multipleQuestionsData[i], multipleQuestionsData[i + 1]));
     }
 
     private void testHelper(Observable<List<Question>> output, String[] data) {

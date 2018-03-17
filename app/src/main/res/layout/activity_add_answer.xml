@@ -23,22 +23,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/your_name" />
+        android:hint="@string/your_name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etAnswerBody"
         android:layout_width="match_parent"
         android:layout_height="184dp"
         android:ems="10"
-        android:inputType="textMultiLine"
         android:gravity="top"
-        android:hint="@string/your_answer" />
+        android:hint="@string/your_answer"
+        android:inputType="textMultiLine" />
 
     <Button
         android:id="@+id/answerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/answer_button"
-        android:onClick="addNewAnswer" />
+        android:onClick="addNewAnswer"
+        android:text="@string/answer_button" />
 </LinearLayout>
