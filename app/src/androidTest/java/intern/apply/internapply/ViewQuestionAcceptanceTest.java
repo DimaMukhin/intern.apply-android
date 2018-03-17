@@ -5,9 +5,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Question;
 import intern.apply.internapply.view.viewquestionactivity.ViewQuestionActivity;
@@ -24,9 +21,8 @@ import static org.mockito.Mockito.when;
 public class ViewQuestionAcceptanceTest extends ActivityInstrumentationTestCase2<ViewQuestionActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
-
-    private Solo solo;
     private final InternAPI api;
+    private Solo solo;
     private String[] questionData;
     private Question question;
 
@@ -55,6 +51,7 @@ public class ViewQuestionAcceptanceTest extends ActivityInstrumentationTestCase2
 
         Observable<Question> output = Observable.fromArray(question);
         when(api.getQuestion(anyInt())).thenReturn(output);
+        when(api.getAnswers(anyInt())).thenReturn(Observable.fromArray());
         getActivity().setApi(api);
 
         solo.waitForView(R.id.questionView);

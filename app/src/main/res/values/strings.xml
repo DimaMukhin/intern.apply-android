@@ -68,5 +68,13 @@
     <string name="comments">Comments</string>
     <string name="add_a_comment">Add a comment</string>
     <string name="your_name">Your Name</string>
+    <string name="answersTitle">Answers</string>
+    <string name="byAuthor">By</string>
+    <string name="add_answer_title">Add Answer</string>
+    <string name="your_answer">Your Answer</string>
+    <string name="answer_button">answer</string>
+    <string name="answerSuccess">Your answer was successfully added</string>
+    <string name="invalidAnswerAuthor">Invalid name (max 45 characters)</string>
+    <string name="invalidAnswerBody">Invalid answer (max 1000 characters)</string>
 
 </resources>

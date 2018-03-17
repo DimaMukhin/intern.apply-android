@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="intern.apply.internapply.view.addansweractivity.AddAnswerActivity">
+
+
+    <TextView
+        android:id="@+id/addAnswerTitle"
+        style="@style/Base.TextAppearance.AppCompat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_answer_title"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etAnswerAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/your_name" />
+
+    <EditText
+        android:id="@+id/etAnswerBody"
+        android:layout_width="match_parent"
+        android:layout_height="184dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:hint="@string/your_answer" />
+
+    <Button
+        android:id="@+id/answerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/answer_button"
+        android:onClick="addNewAnswer" />
+</LinearLayout>
