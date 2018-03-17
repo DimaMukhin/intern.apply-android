@@ -3,10 +3,12 @@ package intern.apply.internapply.api;
 
 import java.util.List;
 
+import intern.apply.internapply.model.Answer;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ContactMessage;
 import intern.apply.internapply.model.Job;
+import intern.apply.internapply.model.Question;
 import intern.apply.internapply.model.JobRating;
 import intern.apply.internapply.model.Salary;
 import intern.apply.internapply.model.SurveyQuestion;
@@ -48,9 +50,24 @@ interface InternAPIClient {
     @POST("/api/salary")
     Observable<Salary> addJobSalary(@Body Salary salary);
 
+    @GET("/api/question")
+    Observable<List<Question>> getAllQuestions();
+
+    @POST("/api/question")
+    Observable<Question> addNewQuestion(@Body Question question);
+
+    @GET("/api/question/{id}")
+    Observable<Question> getQuestion(@Path("id") int questionId);
+
     @GET("/api/job/{id}/rating")
     Observable<List<JobRating>> getJobRating(@Path("id") int jobId);
 
     @POST("/api/job/{id}/rating")
     Observable<JobRating> rateJob(@Path("id") int jobId, @Body JobRating jobRating);
+
+    @GET("/api/question/{id}/answers")
+    Observable<List<Answer>> getAnswers(@Path("id") int questionId);
+
+    @POST("/api/question/{id}/answers")
+    Observable<Answer> addAnswer(@Path("id") int questionId, @Body Answer answer);
 }

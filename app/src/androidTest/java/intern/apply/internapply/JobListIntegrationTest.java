@@ -65,7 +65,7 @@ public class JobListIntegrationTest extends ActivityInstrumentationTestCase2<Mai
         getActivity().SetAPI(api);
 
         solo.waitForView(R.id.JobsListView);
-        TestHelper.findStrings(data, this, solo);
+        TestHelper.findStrings(data, solo);
     }
 
     private void PopulateFakeJobs() {

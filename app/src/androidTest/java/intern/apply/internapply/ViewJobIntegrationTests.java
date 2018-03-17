@@ -56,7 +56,7 @@ public class ViewJobIntegrationTests extends ActivityInstrumentationTestCase2<Vi
         getActivity().setApi(api);
 
         solo.waitForView(R.id.jobView);
-        TestHelper.findStrings(jobData, this, solo);
+        TestHelper.findStrings(jobData, solo);
     }
 
     private void createFakeJob() {

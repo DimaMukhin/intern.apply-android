@@ -61,7 +61,7 @@ public class SearchBarIntegrationTest extends ActivityInstrumentationTestCase2<M
         solo.waitForView(R.id.JobsListView);
 
         solo.enterText((EditText) solo.getView(R.id.searchBox), "");
-        TestHelper.findStrings(allJobsData, this, solo);
+        TestHelper.findStrings(allJobsData, solo);
 
         verify(api, times(2)).getAllJobs();
     }
@@ -85,7 +85,7 @@ public class SearchBarIntegrationTest extends ActivityInstrumentationTestCase2<M
         solo.waitForView(R.id.JobsListView);
 
         solo.enterText((EditText) solo.getView(R.id.searchBox), filterText);
-        TestHelper.findStrings(filteredJobsData, this, solo);
+        TestHelper.findStrings(filteredJobsData, solo);
 
         verify(api, times(1)).getAllJobs();
         verify(api, times(1)).getAllJobs(filterText);

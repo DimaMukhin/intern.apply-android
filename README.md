@@ -1,9 +1,14 @@
 # intern.apply-android
 
+Please see the [main repository](https://github.com/DimaMukhin/intern.apply) of the project for more information.
+
 ## running the application on production mode
 
 1. clone the project
 2. use android studio to compile and run the application
+
+If the application does not work, please try to rebuild the whole project (clean + recompile)  
+Try to restart the application once if at first nothing shows up (this is an issue with Android Studio). 
 
 ## running the application on development mode
 
@@ -16,7 +21,9 @@
 
 1. open `InternAPI.java`
 2. change `private final String BASE_URL = "https://intern-apply.herokuapp.com/";` to point at `http://<localhost-ip>:3000`
-3. example: `private final String BASE_URL = "http://192.168.1.2:3000";`
+3. example: `private final String BASE_URL = "http://192.168.1.2:3000";`  
+
+Why manualy changing the BASE URL of the api? because Retrofit does not support "localhost" yet. We decided to keep using Retrofit anyways since this is not a big deal.
 
 ## running tests
 

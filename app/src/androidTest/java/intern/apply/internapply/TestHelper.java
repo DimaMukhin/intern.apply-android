@@ -1,7 +1,5 @@
 package intern.apply.internapply;
 
-import android.test.ActivityInstrumentationTestCase2;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
@@ -37,7 +35,7 @@ public class TestHelper {
     }
 
 
-    public static void findStrings(String[] expectedStrings, ActivityInstrumentationTestCase2 activity, Solo solo) {
+    public static void findStrings(String[] expectedStrings, Solo solo) {
         for (String s : expectedStrings)
             Assert.assertTrue("text not found", solo.waitForText(s));
     }

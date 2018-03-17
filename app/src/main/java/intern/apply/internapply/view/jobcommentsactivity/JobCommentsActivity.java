@@ -52,7 +52,7 @@ public class JobCommentsActivity extends AppCompatActivity {
                     CommentsCustomListAdapter listAdapter = new CommentsCustomListAdapter(this, response);
                     commentsListView.setAdapter(listAdapter);
                 }, error -> {
-                    Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.InternalServerError, Toast.LENGTH_LONG).show();
                 });
     }
 
