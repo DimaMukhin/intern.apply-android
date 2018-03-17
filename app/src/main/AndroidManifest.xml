@@ -33,6 +33,7 @@
         <activity android:name=".view.addquestionactivity.AddQuestionActivity" />
         <activity android:name=".view.viewquestionactivity.ViewQuestionActivity" />
         <activity android:name=".view.addansweractivity.AddAnswerActivity"></activity>
+        <activity android:name=".view.viewquestionactivity.ViewQuestionActivity"></activity>
     </application>
 
 </manifest>

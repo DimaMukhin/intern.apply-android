@@ -12,8 +12,6 @@ import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Question;
 import intern.apply.internapply.view.addansweractivity.AddAnswerActivity;
-import intern.apply.internapply.view.addquestionactivity.AddQuestionActivity;
-import intern.apply.internapply.view.qnaactivity.QuestionsCustomListAdapter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
