@@ -10,36 +10,27 @@ public class Job {
     private double salary;
     private int numSalaries;
 
-    public Job(String organization, String title, String location, String description, double salary, int numSalaries) {
+    public Job(String organization, String title, String location, String url, String description, double salary, int numSalaries) {
         this.organization = organization;
         this.title = title;
         this.location = location;
+        this.url = url;
         this.description = description;
         this.salary = salary;
         this.numSalaries = numSalaries;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public String getOrganization() {
-        return organization;
-    }
+    public String getOrganization() { return organization; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
-    public String getLocation() {
-        return location;
-    }
+    public String getLocation() { return location; }
 
     public String getUrl() { return url; }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
 
     public double getSalary() { return salary; }
 
