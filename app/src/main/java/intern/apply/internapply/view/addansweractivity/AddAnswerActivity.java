@@ -13,6 +13,7 @@ import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Answer;
 import intern.apply.internapply.model.ServerError;
+import intern.apply.internapply.view.viewquestionactivity.ViewQuestionActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -55,6 +56,13 @@ public class AddAnswerActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     Toast.makeText(this, R.string.answerSuccess, Toast.LENGTH_LONG).show();
+
+                    finish();
+
+                    Intent backToAnswers = new Intent(AddAnswerActivity.this, ViewQuestionActivity.class);
+                    backToAnswers.putExtra("questionId", questionId);
+                    startActivity(backToAnswers);
+
                     finish();
                 }, error -> {
                     List<ServerError> errors = ServerError.getErrorsFromServerException(error);
