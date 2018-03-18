@@ -30,6 +30,9 @@ public class TestDBHelper {
         String sql = "DROP TABLE IF EXISTS jobRating";
         ExecuteSQL(sql);
 
+        sql = "DROP TABLE IF EXISTS comment";
+        ExecuteSQL(sql);
+
         sql = "DROP TABLE IF EXISTS job";
         ExecuteSQL(sql);
 
@@ -42,6 +45,16 @@ public class TestDBHelper {
                 "salary DECIMAL(4,1)," +
                 "numSalaries INT(10)," +
                 "PRIMARY KEY (id))";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE comment (" +
+                "id INT NOT NULL AUTO_INCREMENT," +
+                "jobID INT NOT NULL," +
+                "message VARCHAR(300) NOT NULL," +
+                "author VARCHAR(45) NOT NULL," +
+                "ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                "PRIMARY KEY (id)," +
+                "FOREIGN KEY (jobID) REFERENCES job (id))";
         ExecuteSQL(sql);
 
         sql = "CREATE TABLE jobRating (" +
@@ -82,12 +95,21 @@ public class TestDBHelper {
                 "(1, 1.0, 1)," +
                 "(2, 2.0, 2)";
         ExecuteSQL(sql);
+
+        sql = "INSERT INTO comment (id, jobID, message, author) VALUES" +
+                "(1, 1, 'this is a nice comment body', 'dima')," +
+                "(2, 1, 'another comment for the same job', 'ben')," +
+                "(3, 2, 'this last comment is for job 2', 'rick')";
+        ExecuteSQL(sql);
     }
 
     public static void CleanTables() {
         String sql;
 
         sql = "Delete from jobRating";
+        ExecuteSQL(sql);
+
+        sql = "Delete from comment";
         ExecuteSQL(sql);
 
         sql = "Delete from job";

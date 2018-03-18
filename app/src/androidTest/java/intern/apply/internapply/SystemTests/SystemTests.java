@@ -15,6 +15,8 @@ public class SystemTests {
         suite.addTestSuite(AddSalarySystemTest.class);
         suite.addTestSuite(JobListSystemTest.class);
         suite.addTestSuite(ContactUsSystemTest.class);
+        suite.addTestSuite(JobCommentsSystemTest.class);
+        suite.addTestSuite(AddCommentSystemTest.class);
         return suite;
     }
 }
