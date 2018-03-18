@@ -36,5 +36,5 @@ right click on "AllIntegrationTests" and click on "run 'AllIntegrationTests'"
 
 ## running system tests
 
-#Set the path of web server (intern.apply) to your local server repo in intern.apply.android/ServerScript.bat
-right click on "SystemTests" and click on "run 'SystemTests'"
+1. Set the path of web server (intern.apply) to your local server repo in intern.apply.android/ServerScript.bat
+2. Right click on "SystemTests" and click on "run 'SystemTests'"
