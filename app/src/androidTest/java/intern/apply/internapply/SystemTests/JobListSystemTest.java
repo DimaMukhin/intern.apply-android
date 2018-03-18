@@ -5,6 +5,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.robotium.solo.Solo;
 
 import intern.apply.internapply.R;
+import intern.apply.internapply.TestHelper;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.view.mainactivity.MainActivity;
 
@@ -17,7 +18,7 @@ public class JobListSystemTest extends ActivityInstrumentationTestCase2<MainActi
     public JobListSystemTest() {
         super(MainActivity.class);
         InternAPI.setBaseUrl(TestHelper.LOCAL_HOST_URL);
-        TestHelper.CreateJobTables();
+        TestDBHelper.CreateJobTables();
     }
 
     public void setUp() throws Exception {
@@ -28,7 +29,7 @@ public class JobListSystemTest extends ActivityInstrumentationTestCase2<MainActi
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
         super.tearDown();
-        TestHelper.CleanTables();
+        TestDBHelper.CleanTables();
     }
 
     public void testOneJobShowing() {
@@ -58,7 +59,7 @@ public class JobListSystemTest extends ActivityInstrumentationTestCase2<MainActi
     }
 
     private void testHelper(String insertSqlStatements, String[] data) {
-        TestHelper.ExecuteSQL(insertSqlStatements);
+        TestDBHelper.ExecuteSQL(insertSqlStatements);
         solo = new Solo(getInstrumentation(), getActivity());
 
         solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);

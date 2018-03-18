@@ -1,4 +1,4 @@
-package intern.apply.internapply.Integration;
+package intern.apply.internapply.IntegrationTests;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -6,6 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.robotium.solo.Solo;
 
 import intern.apply.internapply.R;
+import intern.apply.internapply.TestHelper;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.model.Question;
 import intern.apply.internapply.view.viewquestionactivity.ViewQuestionActivity;

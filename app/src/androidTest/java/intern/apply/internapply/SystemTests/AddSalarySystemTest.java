@@ -7,6 +7,7 @@ import android.widget.EditText;
 import com.robotium.solo.Solo;
 
 import intern.apply.internapply.R;
+import intern.apply.internapply.TestHelper;
 import intern.apply.internapply.api.InternAPI;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 
@@ -19,14 +20,14 @@ public class AddSalarySystemTest extends ActivityInstrumentationTestCase2<ViewJo
     public AddSalarySystemTest() {
         super(ViewJobActivity.class);
         InternAPI.setBaseUrl(TestHelper.LOCAL_HOST_URL);
-        TestHelper.CreateJobTables();
+        TestDBHelper.CreateJobTables();
     }
 
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        TestHelper.InitializeJobTables();
+        TestDBHelper.InitializeJobTables();
         setActivityIntent(new Intent().putExtra("jobId", 2));
         solo = new Solo(getInstrumentation(), getActivity());
     }
@@ -35,7 +36,7 @@ public class AddSalarySystemTest extends ActivityInstrumentationTestCase2<ViewJo
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
         super.tearDown();
-        TestHelper.CleanTables();
+        TestDBHelper.CleanTables();
     }
 
     public void testValidSalaryAdded() {

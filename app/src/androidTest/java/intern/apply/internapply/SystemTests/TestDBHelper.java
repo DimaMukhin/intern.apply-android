@@ -1,8 +1,5 @@
 package intern.apply.internapply.SystemTests;
 
-import com.robotium.solo.Solo;
-
-import junit.framework.Assert;
 import junit.framework.AssertionFailedError;
 
 import java.sql.Connection;
@@ -10,14 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 
-public class TestHelper {
-
-    static String LOCAL_HOST_URL = "http://10.0.2.2:3000/";
-
-    public static void findStrings(String[] expectedStrings, Solo solo) {
-        for (String s : expectedStrings)
-            Assert.assertTrue("text not found", solo.waitForText(s));
-    }
+public class TestDBHelper {
 
     public static void ExecuteSQL(String sql) {
         if (sql.isEmpty())
@@ -38,10 +28,10 @@ public class TestHelper {
 
     public static void CreateJobTables() {
         String sql = "DROP TABLE IF EXISTS jobRating";
-        TestHelper.ExecuteSQL(sql);
+        ExecuteSQL(sql);
 
         sql = "DROP TABLE IF EXISTS job";
-        TestHelper.ExecuteSQL(sql);
+        ExecuteSQL(sql);
 
         sql = " CREATE TABLE job (" +
                 "id INT NOT NULL AUTO_INCREMENT," +
@@ -52,7 +42,7 @@ public class TestHelper {
                 "salary DECIMAL(4,1)," +
                 "numSalaries INT(10)," +
                 "PRIMARY KEY (id))";
-        TestHelper.ExecuteSQL(sql);
+        ExecuteSQL(sql);
 
         sql = "CREATE TABLE jobRating (" +
                 "jobId INT(11) NOT NULL," +
@@ -60,7 +50,7 @@ public class TestHelper {
                 "votes INT(11) DEFAULT '0' NOT NULL," +
                 "PRIMARY KEY(jobId)," +
                 "CONSTRAINT jobId___fk FOREIGN KEY (jobId) REFERENCES job (id) ON DELETE CASCADE )";
-        TestHelper.ExecuteSQL(sql);
+        ExecuteSQL(sql);
     }
 
     public static void InitializeJobTables() {
@@ -71,21 +61,21 @@ public class TestHelper {
                 "(1, 'fake org', 'fake title', 'fake location', 0, 0)," +
                 "(2, 'google', 'second title', 'vancouver', 0, 0)," +
                 "(3, 'CityOFWinnipeg', 'third title', 'location', 0, 0)";
-        TestHelper.ExecuteSQL(sql);
+        ExecuteSQL(sql);
 
         sql = "INSERT INTO jobRating(jobId, score, votes) VALUES" +
                 "(1, 1.0, 1)," +
                 "(2, 2.0, 2)";
-        TestHelper.ExecuteSQL(sql);
+        ExecuteSQL(sql);
     }
 
     public static void CleanTables() {
         String sql;
 
         sql = "Delete from jobRating";
-        TestHelper.ExecuteSQL(sql);
+        ExecuteSQL(sql);
 
         sql = "Delete from job";
-        TestHelper.ExecuteSQL(sql);
+        ExecuteSQL(sql);
     }
 }

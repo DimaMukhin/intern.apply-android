@@ -1,4 +1,4 @@
-package intern.apply.internapply.Integration;
+package intern.apply.internapply.IntegrationTests;
 
 
 import android.content.Intent;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import intern.apply.internapply.R;
+import intern.apply.internapply.TestHelper;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
