@@ -2,6 +2,11 @@
 
 Please see the [main repository](https://github.com/DimaMukhin/intern.apply) of the project for more information.
 
+## Bugs
+
+1. the test server run's on every build - for example: when you build project, run app and tests
+2. the test server run's twice - once in configuration phase and then again in execution phase.
+
 ## running the application on production mode
 
 1. clone the project
@@ -28,3 +33,8 @@ Why manualy changing the BASE URL of the api? because Retrofit does not support 
 ## running tests
 
 right click on "AllIntegrationTests" and click on "run 'AllIntegrationTests'"
+
+## running system tests
+
+#Set the path of web server (intern.apply) to your local server repo in intern.apply.android/ServerScript.bat
+right click on "SystemTests" and click on "run 'SystemTests'"
