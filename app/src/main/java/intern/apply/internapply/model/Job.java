@@ -20,19 +20,35 @@ public class Job {
         this.numSalaries = numSalaries;
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getOrganization() { return organization; }
+    public String getOrganization() {
+        return organization;
+    }
 
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public String getLocation() { return location; }
+    public String getLocation() {
+        return location;
+    }
 
-    public String getUrl() { return url; }
+    public String getUrl() {
+        return url;
+    }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public double getSalary() { return salary; }
+    public double getSalary() {
+        return salary;
+    }
 
-    public int getNumSalaries() { return numSalaries; }
+    public int getNumSalaries() {
+        return numSalaries;
+    }
 }
