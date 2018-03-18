@@ -1,4 +1,4 @@
-package intern.apply.internapply.Integration;
+package intern.apply.internapply;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -18,13 +18,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ContactUsAcceptanceTest extends ActivityInstrumentationTestCase2<ContactUsActivity> {
+public class ContactUsIntegrationTest extends ActivityInstrumentationTestCase2<ContactUsActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
     private final InternAPIProvider api;
     private Solo solo;
 
-    public ContactUsAcceptanceTest() {
+    public ContactUsIntegrationTest() {
         super(ContactUsActivity.class);
         api = mock(InternAPIProvider.class);
         setActivityIntent(new Intent().putExtra("TEST", true));

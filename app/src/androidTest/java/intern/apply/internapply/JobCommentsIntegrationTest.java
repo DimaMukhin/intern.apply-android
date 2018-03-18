@@ -1,4 +1,4 @@
-package intern.apply.internapply.Integration;
+package intern.apply.internapply;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -8,7 +8,6 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
-import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Comment;
 import intern.apply.internapply.view.jobcommentsactivity.JobCommentsActivity;
@@ -18,7 +17,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<JobCommentsActivity> {
+public class JobCommentsIntegrationTest extends ActivityInstrumentationTestCase2<JobCommentsActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private final InternAPIProvider api;
     private Solo solo;
@@ -27,7 +26,7 @@ public class JobCommentsAcceptanceTest extends ActivityInstrumentationTestCase2<
     private List<Comment> singleComment;
     private List<Comment> multipleComments;
 
-    public JobCommentsAcceptanceTest() {
+    public JobCommentsIntegrationTest() {
         super(JobCommentsActivity.class);
         api = mock(InternAPIProvider.class);
         populateFakeComments();

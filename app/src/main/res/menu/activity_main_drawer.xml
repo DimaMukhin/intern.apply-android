@@ -8,6 +8,9 @@
             android:id="@+id/action_add_job"
             android:icon="@drawable/ic_add"
             android:title="@string/add_job_title" />
+        <item
+            android:id="@+id/action_qna"
+            android:title="@string/qna_title" />
     </group>
 
 </menu>

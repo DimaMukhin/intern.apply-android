@@ -1,8 +1,8 @@
 package intern.apply.internapply.view.jobcommentsactivity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -52,7 +52,7 @@ public class JobCommentsActivity extends AppCompatActivity {
                     CommentsCustomListAdapter listAdapter = new CommentsCustomListAdapter(this, response);
                     commentsListView.setAdapter(listAdapter);
                 }, error -> {
-                    Toast.makeText(this, "Internal server error, please try again later", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.InternalServerError, Toast.LENGTH_LONG).show();
                 });
     }
 

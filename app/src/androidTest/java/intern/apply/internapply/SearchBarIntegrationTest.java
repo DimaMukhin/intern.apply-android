@@ -1,4 +1,4 @@
-package intern.apply.internapply.Integration;
+package intern.apply.internapply;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -9,7 +9,6 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
-import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class SearchBarIntegrationTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
@@ -36,7 +35,7 @@ public class SearchBarAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
     private List<Job> allJob;
     private List<Job> emptyJob;
 
-    public SearchBarAcceptanceTest() {
+    public SearchBarIntegrationTest() {
         super(MainActivity.class);
         api = mock(InternAPIProvider.class);
         setActivityIntent(new Intent().putExtra("TEST", true));

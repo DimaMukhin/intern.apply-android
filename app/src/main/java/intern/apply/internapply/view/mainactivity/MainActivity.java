@@ -22,6 +22,7 @@ import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.view.addjobactivity.AddJobActivity;
 import intern.apply.internapply.view.contactusactivity.ContactUsActivity;
+import intern.apply.internapply.view.qnaactivity.QNAActivity;
 import intern.apply.internapply.view.surveyactivity.SurveyActivity;
 import intern.apply.internapply.view.viewjobactivity.ViewJobActivity;
 
@@ -158,6 +159,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_add_job) {
             Intent addJobIntent = new Intent(MainActivity.this, AddJobActivity.class);
             startActivity(addJobIntent);
+        } else if (id == R.id.action_qna) {
+            Intent qnaIntent = new Intent(MainActivity.this, QNAActivity.class);
+            startActivity(qnaIntent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

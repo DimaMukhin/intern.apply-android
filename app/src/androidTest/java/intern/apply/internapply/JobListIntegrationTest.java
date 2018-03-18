@@ -1,4 +1,4 @@
-package intern.apply.internapply.Integration;
+package intern.apply.internapply;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -8,7 +8,6 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
-import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
@@ -18,7 +17,7 @@ import io.reactivex.Observable;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class JobListIntegrationTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private static final String ACTIVITY_ERROR = "wrong activity";
     private final InternAPIProvider api;
@@ -28,7 +27,7 @@ public class JobListAcceptanceTest extends ActivityInstrumentationTestCase2<Main
     private List<Job> singleJob;
     private List<Job> multipleJobs;
 
-    public JobListAcceptanceTest() {
+    public JobListIntegrationTest() {
         super(MainActivity.class);
         api = mock(InternAPIProvider.class);
         setActivityIntent(new Intent().putExtra("TEST", true));

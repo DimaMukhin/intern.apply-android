@@ -1,4 +1,4 @@
-package intern.apply.internapply.Integration;
+package intern.apply.internapply;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.CompletedSurvey;
 import intern.apply.internapply.model.ServerError;
@@ -21,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SurveyAcceptanceTest extends ActivityInstrumentationTestCase2<SurveyActivity> {
+public class SurveyIntegrationTest extends ActivityInstrumentationTestCase2<SurveyActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
     private final InternAPIProvider api;
@@ -30,7 +29,7 @@ public class SurveyAcceptanceTest extends ActivityInstrumentationTestCase2<Surve
     private List<String[]> responsesData;
     private List<SurveyQuestion> questionsList;
 
-    public SurveyAcceptanceTest() {
+    public SurveyIntegrationTest() {
         super(SurveyActivity.class);
         api = mock(InternAPIProvider.class);
         populateFakeQuestions();

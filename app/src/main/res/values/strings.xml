@@ -53,10 +53,28 @@
     <string name="InvalidSalary">Invalid salary (should be greater than 0)</string>
     <string name="InvalidSalaryType">Please pick a pay duration</string>
 
+    <!-- Strings related to Q&A -->
+    <string name="qna_title">Q&amp;A</string>
+    <string name="add_question">Add Question</string>
+    <string name="question">Question</string>
+    <string name="ask">Ask</string>
+    <string name="questionSuccess">Question was added successfully</string>
+    <string name="invalidQuestionTitle">Invalid question title (max 45 characters)</string>
+    <string name="invalidQuestionBody">Invalid question body (max 1000 characters)</string>
+    <string name="invalidQuestionAuthor">Invalid name (max 25 characters)</string>
+    <string name="couldNotGetQuestion">Could not get the question, please try again later</string>
 
     <string name="apply">apply</string>
     <string name="comments">Comments</string>
     <string name="add_a_comment">Add a comment</string>
     <string name="your_name">Your Name</string>
+    <string name="answersTitle">Answers</string>
+    <string name="byAuthor">By</string>
+    <string name="add_answer_title">Add Answer</string>
+    <string name="your_answer">Your Answer</string>
+    <string name="answer_button">answer</string>
+    <string name="answerSuccess">Your answer was successfully added</string>
+    <string name="invalidAnswerAuthor">Invalid name (max 45 characters)</string>
+    <string name="invalidAnswerBody">Invalid answer (max 1000 characters)</string>
 
 </resources>

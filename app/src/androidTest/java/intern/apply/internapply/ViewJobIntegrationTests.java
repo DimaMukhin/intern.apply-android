@@ -1,4 +1,4 @@
-package intern.apply.internapply.Integration;
+package intern.apply.internapply;
 
 
 import android.content.Intent;
@@ -9,7 +9,6 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
-import intern.apply.internapply.R;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
@@ -20,7 +19,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<ViewJobActivity> {
+public class ViewJobIntegrationTests extends ActivityInstrumentationTestCase2<ViewJobActivity> {
     private static final String ACTIVITY_ERROR = "wrong activity";
     private static final String TEXT_NOT_FOUND = "text not found";
     private final InternAPIProvider api;
@@ -28,7 +27,7 @@ public class ViewJobAcceptanceTests extends ActivityInstrumentationTestCase2<Vie
     private String[] jobData;
     private ArrayList<Job> job;
 
-    public ViewJobAcceptanceTests() {
+    public ViewJobIntegrationTests() {
         super(ViewJobActivity.class);
         api = mock(InternAPIProvider.class);
         createFakeJob();
