@@ -1,4 +1,4 @@
-package intern.apply.internapply;
+package intern.apply.internapply.Integration;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
