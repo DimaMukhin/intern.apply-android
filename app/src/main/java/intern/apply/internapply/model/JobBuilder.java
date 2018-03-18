@@ -4,6 +4,7 @@ public class JobBuilder {
     private String title = "";
     private String organization = "";
     private String location = "";
+    private String url = "";
     private String description = "";
     private double salary = 0;
     private int numSalaries = 0;
@@ -23,6 +24,11 @@ public class JobBuilder {
         return this;
     }
 
+    public JobBuilder setUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
     public JobBuilder setDescription(String description) {
         this.description = description;
         return this;
@@ -39,6 +45,6 @@ public class JobBuilder {
     }
 
     public Job createJob() {
-        return new Job(organization, title, location, description, salary, numSalaries);
+        return new Job(organization, title, location, url, description, salary, numSalaries);
     }
 }
