@@ -9,13 +9,15 @@ Please see the [main repository](https://github.com/DimaMukhin/intern.apply) of 
      and find a better way if any exists. Also this only happens in the development environment.
 2. the test server run's twice - once in configuration phase and then again in execution phase. This however does not affects anything as the second run will terminate immediately.
 
-## running the application on production mode
+## running the application on production mode (Use this when evaluating)
 
-1. clone the project
-2. for some reasons our app requires to be run without instant run. It is on by default, to turn it off
-   go to file (top left), Settings, "Build, Execution, Deployment", "Instant Run", and tick off the
+1. Use Android Studio
+2. clone the project
+3. for some reasons our app requires to be run without instant run. It is on by default, to turn it off
+   go to "file" (top left), "Settings", "Build, Execution, Deployment", "Instant Run", and tick off the
    "Enable Instant Run to ..."
-3. use android studio to compile and run the application
+3. use android studio to compile and run the application  
+4. The very first run sometimes does not work properly, so restart the application.  
 
 If the application does not work, please try to rebuild the whole project (clean + recompile)  
 Try to restart the application once if at first nothing shows up (this is an issue with Android Studio). 
