@@ -76,6 +76,12 @@ public class AddJobIntegrationTest extends ActivityInstrumentationTestCase2<AddJ
         testHelper(Observable.error(TestHelper.CreateHttpException(errors)), "Invalid job description");
     }
 
+    public void testInvalidJobUrl() {
+        List<ServerError> errors = new ArrayList<>();
+        errors.add(new ServerError(15, "Invalid job URL (max 1000 characters)"));
+        testHelper(Observable.error(TestHelper.CreateHttpException(errors)), "Invalid job URL");
+    }
+
     private void testHelper(Observable<Job> output, String textToTest) {
         solo.assertCurrentActivity(ACTIVITY_ERROR, AddJobActivity.class);
         solo.waitForActivity(AddJobActivity.class);

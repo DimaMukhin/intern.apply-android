@@ -1,6 +1,7 @@
 package intern.apply.internapply.view.viewjobactivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -244,5 +245,27 @@ public class ViewJobActivity extends AppCompatActivity {
             else
                 jobId = 0;
         }
+    }
+
+    /**
+     * go to url to apply for the job
+     */
+    public void goToUrl(View view) {
+        api.getJob(jobId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                response -> {
+                    if (response.size() != 0) {
+                        Job job = response.get(0);
+                        String jobUrl = job.getUrl();
+
+                        if(jobUrl != null) {
+                            Intent jobWebsite = new Intent( Intent.ACTION_VIEW , Uri.parse( jobUrl ) );
+                            startActivity( jobWebsite );
+                        }
+                    }
+                }
+            );
     }
 }

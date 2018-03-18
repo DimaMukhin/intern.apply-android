@@ -18,7 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class AddJobActivity extends AppCompatActivity {
-    private EditText etJobOrg, etJobTitle, etJobDesc, etJobLoc;
+    private EditText etJobOrg, etJobTitle, etJobLoc, etJobUrl, etJobDesc;
     private InternAPIProvider api;
 
     private void onInit() {
@@ -26,6 +26,7 @@ public class AddJobActivity extends AppCompatActivity {
         etJobTitle = findViewById(R.id.etJobTitle);
         etJobDesc = findViewById(R.id.etJobDesc);
         etJobLoc = findViewById(R.id.etJobLoc);
+        etJobUrl = findViewById(R.id.etJobUrl);
 
         api = InternAPI.getAPI();
     }
@@ -52,11 +53,17 @@ public class AddJobActivity extends AppCompatActivity {
 
         String organization = etJobOrg.getText().toString();
         String title = etJobTitle.getText().toString();
-        String description = etJobDesc.getText().toString();
         String location = etJobLoc.getText().toString();
+        String url = etJobUrl.getText().toString();
+        String description = etJobDesc.getText().toString();
 
-
-        Job newJob = new JobBuilder().setOrganization(organization).setTitle(title).setLocation(location).setDescription(description).createJob();
+        Job newJob = new JobBuilder()
+                .setOrganization(organization)
+                .setTitle(title)
+                .setLocation(location)
+                .setUrl(url)
+                .setDescription(description)
+                .createJob();
 
         api.addJob(newJob)
                 .subscribeOn(Schedulers.io())
@@ -79,6 +86,8 @@ public class AddJobActivity extends AppCompatActivity {
                                     Toast.makeText(this, R.string.InvalidJobLocation, Toast.LENGTH_LONG).show();
                                 else if (errors.get(0).getCode() == 14)
                                     Toast.makeText(this, R.string.InvalidJobDescription, Toast.LENGTH_LONG).show();
+                                else if (errors.get(0).getCode() == 15)
+                                    Toast.makeText(this, R.string.InvalidJobUrl, Toast.LENGTH_LONG).show();
                             }
                         }
                 );
@@ -88,6 +97,7 @@ public class AddJobActivity extends AppCompatActivity {
         etJobOrg.setText("");
         etJobTitle.setText("");
         etJobLoc.setText("");
+        etJobUrl.setText("");
         etJobDesc.setText("");
     }
 }
