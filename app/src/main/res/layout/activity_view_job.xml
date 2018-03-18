@@ -127,6 +127,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:padding="0dp"
+                android:onClick="goToUrl"
                 android:text="@string/apply"
                 android:visibility="invisible" />
 

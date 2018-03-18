@@ -5,6 +5,7 @@ public class Job {
     private final String organization;
     private final String title;
     private String location;
+    private String url;
     private String description;
     private double salary;
     private int numSalaries;
@@ -34,15 +35,13 @@ public class Job {
         return location;
     }
 
-    public double getSalary() {
-        return salary;
-    }
-
-    public int getNumSalaries() {
-        return numSalaries;
-    }
+    public String getUrl() { return url; }
 
     public String getDescription() {
         return description;
     }
+
+    public double getSalary() { return salary; }
+
+    public int getNumSalaries() { return numSalaries; }
 }
