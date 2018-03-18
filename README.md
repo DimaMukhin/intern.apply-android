@@ -4,14 +4,14 @@ Please see the [main repository](https://github.com/DimaMukhin/intern.apply) of 
 
 ## Code Debt/Bugs
 
-1. the test server run's on every build - for example: when you build project, run app or tests
+1. the test server runs on every build - for example: when you build project, run app or tests
     - Code debt: we need the test server for system tests but couldn't find a fix, we plan to talk to you about this
      and find a better way if any exists. Also this only happens in the development environment.
-2. the test server run's twice - once in configuration phase and then again in execution phase. This however does not affects anything as the second run will terminate immediately.
+2. the test server runs twice - once in configuration phase and then again in execution phase. This however does not affects anything as the second run will terminate immediately.
 
 ## running the application on production mode (Use this when evaluating)
 
-1. Use Android Studio
+1. Use Android Studio (on windows please)
 2. clone the project
 3. for some reasons our app requires to be run without instant run. It is on by default, to turn it off
    go to "file" (top left), "Settings", "Build, Execution, Deployment", "Instant Run", and tick off the
