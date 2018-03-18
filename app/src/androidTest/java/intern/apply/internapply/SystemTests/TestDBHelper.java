@@ -66,6 +66,20 @@ public class TestDBHelper {
         ExecuteSQL(sql);
     }
 
+    public static void createQNATables() {
+        String sql = "DROP TABLE IF EXISTS question";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE question (" +
+                "id INT NOT NULL AUTO_INCREMENT," +
+                "title VARCHAR(45) NOT NULL," +
+                "body VARCHAR(1000) NOT NULL," +
+                "author VARCHAR(45) NOT NULL," +
+                "creationTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                "PRIMARY KEY (id))";
+        ExecuteSQL(sql);
+    }
+
     public static void createContactUsTable() {
         String sql;
 
@@ -103,6 +117,16 @@ public class TestDBHelper {
         ExecuteSQL(sql);
     }
 
+    public static void initializeQNATables() {
+        String sql;
+
+        sql = "INSERT INTO question (id, title, author, body) VALUES" +
+                "(1, 'first test title', 'Dima', 'this is the body')," +
+                "(2, 'how much time to find a job?', 'Ben', 'I dont want to wait')," +
+                "(3, 'what are you looking at?', 'dima', 'this is just a question')";
+        ExecuteSQL(sql);
+    }
+
     public static void CleanTables() {
         String sql;
 
@@ -113,6 +137,9 @@ public class TestDBHelper {
         ExecuteSQL(sql);
 
         sql = "Delete from job";
+        ExecuteSQL(sql);
+
+        sql = "Delete from question";
         ExecuteSQL(sql);
 
         sql = "Delete from contactMessage";

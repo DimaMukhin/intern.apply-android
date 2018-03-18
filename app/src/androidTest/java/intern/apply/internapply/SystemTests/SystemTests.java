@@ -17,6 +17,7 @@ public class SystemTests {
         suite.addTestSuite(ContactUsSystemTest.class);
         suite.addTestSuite(JobCommentsSystemTest.class);
         suite.addTestSuite(AddCommentSystemTest.class);
+        suite.addTestSuite(QuestionSystemTest.class);
         return suite;
     }
 }
