@@ -52,7 +52,7 @@ In the "intern.apply.internapply.integrationTests" package, right click on "AllI
 Perform the following one time setup:  
 1. First you need to set the path to the folder where the server is located (if you dont have the server on your machine, clone it from the "intern.apply" repository)
 2. open "ServerScript.bat" which is located in the root folder of this android application.
-3. change the first line from "cd C:\Users\habib\intern.apply" to "cd <path to the server folder you cloned>"
+3. change the first line from "cd C:\Users\habib\intern.apply" to "cd < path to the server folder you cloned >"
 
 Now simply run the tests by doing the following:
 4. In the "intern.apply.internapply.SystemTests" package, right click on "SystemTests.java" and click on "run 'SystemTests'"
