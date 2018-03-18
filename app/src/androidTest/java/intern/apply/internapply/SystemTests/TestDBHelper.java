@@ -53,6 +53,21 @@ public class TestDBHelper {
         ExecuteSQL(sql);
     }
 
+    public static void createContactUsTable() {
+        String sql;
+
+        sql = "DROP TABLE IF EXISTS contactMessage";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE contactMessage (" +
+                "id INT NOT NULL AUTO_INCREMENT," +
+                "email VARCHAR(45) NOT NULL," +
+                "title VARCHAR(45) NOT NULL," +
+                "message VARCHAR(300) NOT NULL," +
+                "PRIMARY KEY (id))";
+        ExecuteSQL(sql);
+    }
+
     public static void InitializeJobTables() {
 
         String sql;
@@ -76,6 +91,9 @@ public class TestDBHelper {
         ExecuteSQL(sql);
 
         sql = "Delete from job";
+        ExecuteSQL(sql);
+
+        sql = "Delete from contactMessage";
         ExecuteSQL(sql);
     }
 }
