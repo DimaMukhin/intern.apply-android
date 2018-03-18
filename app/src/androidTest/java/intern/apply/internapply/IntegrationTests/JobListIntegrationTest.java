@@ -1,4 +1,4 @@
-package intern.apply.internapply;
+package intern.apply.internapply.IntegrationTests;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -8,6 +8,8 @@ import com.robotium.solo.Solo;
 import java.util.ArrayList;
 import java.util.List;
 
+import intern.apply.internapply.R;
+import intern.apply.internapply.TestHelper;
 import intern.apply.internapply.api.InternAPIProvider;
 import intern.apply.internapply.model.Job;
 import intern.apply.internapply.model.JobBuilder;
