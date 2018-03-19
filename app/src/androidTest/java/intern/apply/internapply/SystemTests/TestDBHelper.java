@@ -130,19 +130,19 @@ public class TestDBHelper {
     public static void CleanTables() {
         String sql;
 
-        sql = "Delete from jobRating";
+        sql = "DROP TABLE IF EXISTS jobRating";
         ExecuteSQL(sql);
 
-        sql = "Delete from comment";
+        sql = "DROP TABLE IF EXISTS comment";
         ExecuteSQL(sql);
 
-        sql = "Delete from job";
+        sql = "DROP TABLE IF EXISTS job";
         ExecuteSQL(sql);
 
-        sql = "Delete from question";
+        sql = "DROP TABLE IF EXISTS question";
         ExecuteSQL(sql);
 
-        sql = "Delete from contactMessage";
+        sql = "DROP TABLE IF EXISTS contactMessage";
         ExecuteSQL(sql);
     }
 }

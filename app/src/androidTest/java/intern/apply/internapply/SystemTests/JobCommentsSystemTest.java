@@ -21,12 +21,12 @@ public class JobCommentsSystemTest extends ActivityInstrumentationTestCase2<Main
     public JobCommentsSystemTest() {
         super(MainActivity.class);
         InternAPI.setBaseUrl(TestHelper.LOCAL_HOST_URL);
-        TestDBHelper.CreateJobTables();
     }
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        TestDBHelper.CreateJobTables();
         TestDBHelper.InitializeJobTables();
         solo = new Solo(getInstrumentation(), getActivity());
     }

@@ -21,12 +21,12 @@ public class QuestionSystemTest extends ActivityInstrumentationTestCase2<MainAct
     public QuestionSystemTest() {
         super(MainActivity.class);
         InternAPI.setBaseUrl(TestHelper.LOCAL_HOST_URL);
-        TestDBHelper.createQNATables();
     }
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        TestDBHelper.createQNATables();
         TestDBHelper.initializeQNATables();
         solo = new Solo(getInstrumentation(), getActivity());
     }
