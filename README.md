@@ -9,6 +9,14 @@ Please see the [main repository](https://github.com/DimaMukhin/intern.apply) of 
      and find a better way if any exists. Also this only happens in the development environment.
 2. the test server runs twice - once in configuration phase and then again in execution phase. This however does not affects anything as the second run will terminate immediately.
 
+## Android Virtual Device to use when evaluating
+
+Please use the following Android Virtual Device when evaluating for best results (or if the one you are using does not work)
+"Nexus_5X_API_27_x86"  
+Device: Nexus 5x  
+Target API level: 27  
+For more information see [AVD.md](https://github.com/DimaMukhin/intern.apply-android/blob/master/AVD.md)
+
 ## running the application on production mode (Use this when evaluating)
 
 1. Use Android Studio (on windows please)
