@@ -18,11 +18,11 @@ public class JobListSystemTest extends ActivityInstrumentationTestCase2<MainActi
     public JobListSystemTest() {
         super(MainActivity.class);
         InternAPI.setBaseUrl(TestHelper.LOCAL_HOST_URL);
-        TestDBHelper.CreateJobTables();
     }
 
     public void setUp() throws Exception {
         super.setUp();
+        TestDBHelper.CreateJobTables();
     }
 
     @Override

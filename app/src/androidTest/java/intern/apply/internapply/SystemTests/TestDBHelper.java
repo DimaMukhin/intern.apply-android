@@ -30,6 +30,9 @@ public class TestDBHelper {
         String sql = "DROP TABLE IF EXISTS jobRating";
         ExecuteSQL(sql);
 
+        sql = "DROP TABLE IF EXISTS comment";
+        ExecuteSQL(sql);
+
         sql = "DROP TABLE IF EXISTS job";
         ExecuteSQL(sql);
 
@@ -44,12 +47,51 @@ public class TestDBHelper {
                 "PRIMARY KEY (id))";
         ExecuteSQL(sql);
 
+        sql = "CREATE TABLE comment (" +
+                "id INT NOT NULL AUTO_INCREMENT," +
+                "jobID INT NOT NULL," +
+                "message VARCHAR(300) NOT NULL," +
+                "author VARCHAR(45) NOT NULL," +
+                "ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                "PRIMARY KEY (id)," +
+                "FOREIGN KEY (jobID) REFERENCES job (id))";
+        ExecuteSQL(sql);
+
         sql = "CREATE TABLE jobRating (" +
                 "jobId INT(11) NOT NULL," +
                 "score DECIMAL(3,2) DEFAULT '0.00' NOT NULL," +
                 "votes INT(11) DEFAULT '0' NOT NULL," +
                 "PRIMARY KEY(jobId)," +
                 "CONSTRAINT jobId___fk FOREIGN KEY (jobId) REFERENCES job (id) ON DELETE CASCADE )";
+        ExecuteSQL(sql);
+    }
+
+    public static void createQNATables() {
+        String sql = "DROP TABLE IF EXISTS question";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE question (" +
+                "id INT NOT NULL AUTO_INCREMENT," +
+                "title VARCHAR(45) NOT NULL," +
+                "body VARCHAR(1000) NOT NULL," +
+                "author VARCHAR(45) NOT NULL," +
+                "creationTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                "PRIMARY KEY (id))";
+        ExecuteSQL(sql);
+    }
+
+    public static void createContactUsTable() {
+        String sql;
+
+        sql = "DROP TABLE IF EXISTS contactMessage";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE contactMessage (" +
+                "id INT NOT NULL AUTO_INCREMENT," +
+                "email VARCHAR(45) NOT NULL," +
+                "title VARCHAR(45) NOT NULL," +
+                "message VARCHAR(300) NOT NULL," +
+                "PRIMARY KEY (id))";
         ExecuteSQL(sql);
     }
 
@@ -67,15 +109,40 @@ public class TestDBHelper {
                 "(1, 1.0, 1)," +
                 "(2, 2.0, 2)";
         ExecuteSQL(sql);
+
+        sql = "INSERT INTO comment (id, jobID, message, author) VALUES" +
+                "(1, 1, 'this is a nice comment body', 'dima')," +
+                "(2, 1, 'another comment for the same job', 'ben')," +
+                "(3, 2, 'this last comment is for job 2', 'rick')";
+        ExecuteSQL(sql);
+    }
+
+    public static void initializeQNATables() {
+        String sql;
+
+        sql = "INSERT INTO question (id, title, author, body) VALUES" +
+                "(1, 'first test title', 'Dima', 'this is the body')," +
+                "(2, 'how much time to find a job?', 'Ben', 'I dont want to wait')," +
+                "(3, 'what are you looking at?', 'dima', 'this is just a question')";
+        ExecuteSQL(sql);
     }
 
     public static void CleanTables() {
         String sql;
 
-        sql = "Delete from jobRating";
+        sql = "DROP TABLE IF EXISTS jobRating";
         ExecuteSQL(sql);
 
-        sql = "Delete from job";
+        sql = "DROP TABLE IF EXISTS comment";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS job";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS question";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS contactMessage";
         ExecuteSQL(sql);
     }
 }

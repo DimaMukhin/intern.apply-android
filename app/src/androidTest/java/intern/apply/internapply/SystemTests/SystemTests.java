@@ -14,6 +14,10 @@ public class SystemTests {
         TestSuite suite = new TestSuite("Acceptance tests");
         suite.addTestSuite(AddSalarySystemTest.class);
         suite.addTestSuite(JobListSystemTest.class);
+        suite.addTestSuite(ContactUsSystemTest.class);
+        suite.addTestSuite(JobCommentsSystemTest.class);
+        suite.addTestSuite(AddCommentSystemTest.class);
+        suite.addTestSuite(QuestionSystemTest.class);
         return suite;
     }
 }

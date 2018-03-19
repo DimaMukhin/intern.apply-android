@@ -20,13 +20,13 @@ public class AddSalarySystemTest extends ActivityInstrumentationTestCase2<ViewJo
     public AddSalarySystemTest() {
         super(ViewJobActivity.class);
         InternAPI.setBaseUrl(TestHelper.LOCAL_HOST_URL);
-        TestDBHelper.CreateJobTables();
     }
 
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        TestDBHelper.CreateJobTables();
         TestDBHelper.InitializeJobTables();
         setActivityIntent(new Intent().putExtra("jobId", 2));
         solo = new Solo(getInstrumentation(), getActivity());
