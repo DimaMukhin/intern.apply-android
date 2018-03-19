@@ -17,7 +17,7 @@ import retrofit2.Response;
 
 public class TestHelper {
 
-    public static String LOCAL_HOST_URL = "http://10.0.2.2:3000/";
+    public static String LOCAL_HOST_URL = "http://10.0.2.2:3001/";
 
     public static HttpException CreateHttpException(List<ServerError> errors) {
         JsonArray errorBody = new JsonArray();
