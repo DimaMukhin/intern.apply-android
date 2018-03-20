@@ -14,6 +14,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 class JobsList {
+    private final int MAX_QUERY_LENGTH =100;
     private final InternAPIProvider api;
     private ListView listView;
 
@@ -33,12 +34,15 @@ class JobsList {
     }
 
     public void ShowFilteredList(MainActivity activity, String filter) {
-        api.getAllJobs(filter).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> {
-                    CustomListAdapter listAdapter = new CustomListAdapter(activity, response);
-                    ListView listView = activity.findViewById(R.id.JobsListView);
-                    listView.setAdapter(listAdapter);
-                }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
+        if(filter.length()>MAX_QUERY_LENGTH){Toast.makeText(activity, "Search query has to be less than 100 characters", Toast.LENGTH_LONG).show();}
+        else {
+            api.getAllJobs(filter).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(response -> {
+                        CustomListAdapter listAdapter = new CustomListAdapter(activity, response);
+                        ListView listView = activity.findViewById(R.id.JobsListView);
+                        listView.setAdapter(listAdapter);
+                    }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
+        }
     }
 }

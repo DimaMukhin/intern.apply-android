@@ -139,6 +139,9 @@ public class TestDBHelper {
         sql = "DROP TABLE IF EXISTS job";
         ExecuteSQL(sql);
 
+        sql = "DROP TABLE IF EXISTS answers";
+        ExecuteSQL(sql);
+
         sql = "DROP TABLE IF EXISTS question";
         ExecuteSQL(sql);
 

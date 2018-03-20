@@ -8,3 +8,6 @@
 /captures
 .externalNativeBuild
 .idea/modules.xml
+/ServerScript.bat
+.idea/compiler.xml
+.idea/copyright/
