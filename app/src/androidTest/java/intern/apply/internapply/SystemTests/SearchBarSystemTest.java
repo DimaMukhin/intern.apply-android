@@ -24,6 +24,7 @@ public class SearchBarSystemTest extends ActivityInstrumentationTestCase2<MainAc
     public void setUp() throws Exception {
         super.setUp();
         TestDBHelper.CreateJobTables();
+        TestDBHelper.initializeSearchJobTables();
     }
 
     @Override
@@ -34,10 +35,7 @@ public class SearchBarSystemTest extends ActivityInstrumentationTestCase2<MainAc
     }
 
     public void testFoundJobByTitle() {
-        String sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
-                "(1, 'Facebook', 'Software Engineering', 'fake location', 0, 0)," +
-                "(2, 'Amazon', 'SDE', 'Newyork', 0, 0)," +
-                "(3, 'IBM', 'Software Developer', 'Ottawa', 0, 0)";
+
         String[] searchedData = new String[]{
                 "Software Developer", "IBM"
         };
@@ -45,14 +43,11 @@ public class SearchBarSystemTest extends ActivityInstrumentationTestCase2<MainAc
                 "Software Engineering", "Facebook",
                 "SDE","Amazon"
         };
-        testHelper(sql, searchedData,"Software Developer", true, nonExistent);
+        testHelper(searchedData, "Software Developer", true, nonExistent);
     }
 
     public void testFoundJobByOrganization() {
-        String sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
-                "(1, 'Facebook', 'Software Engineering', 'fake location', 0, 0)," +
-                "(2, 'Amazon', 'SDE', 'Newyork', 0, 0)," +
-                "(3, 'IBM', 'Software Developer', 'Ottawa', 0, 0)";
+
         String[] searchedData = new String[]{
                 "Software Engineering", "Facebook",
         };
@@ -60,14 +55,11 @@ public class SearchBarSystemTest extends ActivityInstrumentationTestCase2<MainAc
                 "SDE","Amazon",
                 "Software Developer", "IBM"
         };
-        testHelper(sql, searchedData,"Facebook", true, nonExistent);
+        testHelper(searchedData, "Facebook", true, nonExistent);
     }
 
     public void testFoundJobByLocation() {
-        String sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
-                "(1, 'Facebook', 'Software Engineering', 'fake location', 0, 0)," +
-                "(2, 'Amazon', 'SDE', 'Newyork', 0, 0)," +
-                "(3, 'IBM', 'Software Developer', 'Ottawa', 0, 0)";
+
         String[] searchedData = new String[]{
                 "SDE","Amazon"
         };
@@ -75,14 +67,11 @@ public class SearchBarSystemTest extends ActivityInstrumentationTestCase2<MainAc
                 "Software Engineering", "Facebook",
                 "Software Developer", "IBM"
         };
-        testHelper(sql, searchedData,"Newyork", true, nonExistent);
+        testHelper(searchedData, "Newyork", true, nonExistent);
     }
 
     public void testMultipleJobsShowing() {
-        String sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
-                "(1, 'Facebook', 'Software Engineering', 'fake location', 0, 0)," +
-                "(2, 'Amazon', 'SDE', 'Newyork', 0, 0)," +
-                "(3, 'IBM', 'Software Developer', 'Ottawa', 0, 0)";
+
         String[] searchedData = new String[]{
                 "Software Engineering", "Facebook",
                 "Software Developer", "IBM"
@@ -90,50 +79,40 @@ public class SearchBarSystemTest extends ActivityInstrumentationTestCase2<MainAc
         String[] nonExistent = new String[]{
                 "SDE","Amazon"
         };
-        testHelper(sql, searchedData,"Software", true, nonExistent);
+        testHelper(searchedData, "Software", true, nonExistent);
     }
 
     public void testTooLongQuery() {
         String longSearchQuery = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry";
-        String sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
-                "(1, 'Facebook', 'Software Engineering', 'fake location', 0, 0)," +
-                "(2, 'Amazon', 'SDE', 'Newyork', 0, 0)," +
-                "(3, 'IBM', 'Software Developer', 'Ottawa', 0, 0)";
+
         String[] searchedData = new String[]{
                 "Search query has to be less than 100 characters"
         };
 
-        testHelper(sql, searchedData,longSearchQuery, false, null);
+        testHelper(searchedData, longSearchQuery, false, null);
     }
     public void testNoJobsFound() {
-        String sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
-                "(1, 'Facebook', 'Software Engineering', 'fake location', 0, 0)," +
-                "(2, 'Amazon', 'SDE', 'Newyork', 0, 0)," +
-                "(3, 'IBM', 'Software Developer', 'Ottawa', 0, 0)";
         String[] nonExistent = new String[]{
                 "Software Engineering", "Facebook",
                 "Software Developer", "IBM",
                 "SDE","Amazon"
         };
 
-        testHelper(sql, new String[0],"Dropbox", true, nonExistent);
+        testHelper(new String[0], "Dropbox", true, nonExistent);
     }
 
     public void testEmptySearch() {
-        String sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
-                "(1, 'Facebook', 'Software Engineering', 'fake location', 0, 0)," +
-                "(2, 'Amazon', 'SDE', 'Newyork', 0, 0)," +
-                "(3, 'IBM', 'Software Developer', 'Ottawa', 0, 0)";
+
         String[] searchedData = new String[]{
                 "Software Engineering", "Facebook",
                 "Software Developer", "IBM",
                 "SDE", "Amazon"
         };
-        testHelper(sql, searchedData,"",false, null);
+        testHelper(searchedData, "", false, null);
     }
 
-    private void testHelper(String insertSqlStatements, String[] data, String searchQuery,Boolean nonExistentQuery, String[] nonExistent) {
-        TestDBHelper.ExecuteSQL(insertSqlStatements);
+    private void testHelper(String[] data, String searchQuery, Boolean nonExistentQuery, String[] nonExistent) {
+
         solo = new Solo(getInstrumentation(), getActivity());
 
         solo.assertCurrentActivity(ACTIVITY_ERROR, MainActivity.class);

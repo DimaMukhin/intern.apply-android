@@ -95,6 +95,15 @@ public class TestDBHelper {
         ExecuteSQL(sql);
     }
 
+    public static void initializeSearchJobTables() {
+        String sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
+                "(1, 'Facebook', 'Software Engineering', 'fake location', 0, 0)," +
+                "(2, 'Amazon', 'SDE', 'Newyork', 0, 0)," +
+                "(3, 'IBM', 'Software Developer', 'Ottawa', 0, 0)";
+        ExecuteSQL(sql);
+
+    }
+
     public static void InitializeJobTables() {
 
         String sql;

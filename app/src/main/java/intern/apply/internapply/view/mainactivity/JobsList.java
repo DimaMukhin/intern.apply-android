@@ -30,11 +30,13 @@ class JobsList {
                     listView = activity.findViewById(R.id.JobsListView);
 
                     listView.setAdapter(listAdapter);
-                }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
+                }, error -> Toast.makeText(activity, R.string.InternalServerError, Toast.LENGTH_LONG).show());
     }
 
     public void ShowFilteredList(MainActivity activity, String filter) {
-        if(filter.length()>MAX_QUERY_LENGTH){Toast.makeText(activity, "Search query has to be less than 100 characters", Toast.LENGTH_LONG).show();}
+        if (filter.length() > MAX_QUERY_LENGTH) {
+            Toast.makeText(activity, R.string.searchQueryLengthError, Toast.LENGTH_LONG).show();
+        }
         else {
             api.getAllJobs(filter).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -42,7 +44,7 @@ class JobsList {
                         CustomListAdapter listAdapter = new CustomListAdapter(activity, response);
                         ListView listView = activity.findViewById(R.id.JobsListView);
                         listView.setAdapter(listAdapter);
-                    }, error -> Toast.makeText(activity, "Internal server error, please try again later", Toast.LENGTH_LONG).show());
+                    }, error -> Toast.makeText(activity, R.string.InternalServerError, Toast.LENGTH_LONG).show());
         }
     }
 }

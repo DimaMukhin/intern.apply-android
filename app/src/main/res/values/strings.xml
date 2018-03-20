@@ -78,5 +78,6 @@
     <string name="answerSuccess">Your answer was successfully added</string>
     <string name="invalidAnswerAuthor">Invalid name (max 45 characters)</string>
     <string name="invalidAnswerBody">Invalid answer (max 1000 characters)</string>
+    <string name="searchQueryLengthError">Search query has to be less than 100 characters</string>
 
 </resources>
