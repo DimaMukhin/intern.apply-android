@@ -141,5 +141,4 @@ public class AddJobSystemTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.clickOnText("Add Job");
         solo.waitForActivity(AddJobActivity.class);
     }
-
 }
