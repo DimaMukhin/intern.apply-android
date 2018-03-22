@@ -136,6 +136,13 @@ public class TestDBHelper {
                 "(2, 'how much time to find a job?', 'Ben', 'I dont want to wait')," +
                 "(3, 'what are you looking at?', 'dima', 'this is just a question')";
         ExecuteSQL(sql);
+
+        sql = "INSERT INTO answers (questionId, body, author) VALUES" +
+                "(1, 'body of answer 1', 'Dima')," +
+                "(1, 'body of answer 2', 'Dima')," +
+                "(2, 'body of answer 1', 'Ben')," +
+                "(2, 'body of answer 2', 'Ben')";
+        ExecuteSQL(sql);
     }
 
     public static void CleanTables() {
@@ -148,6 +155,9 @@ public class TestDBHelper {
         ExecuteSQL(sql);
 
         sql = "DROP TABLE IF EXISTS job";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS answers";
         ExecuteSQL(sql);
 
         sql = "DROP TABLE IF EXISTS question";
