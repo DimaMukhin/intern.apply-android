@@ -36,6 +36,10 @@ public class TestHelper {
                                 errorBody.toString())));
     }
 
+    public static void nonExistentStrings(String[] nonExistentStrings, Solo solo) {
+        for (String s : nonExistentStrings)
+            Assert.assertFalse("Unexpected text found", solo.searchText(s));
+    }
 
     public static void findStrings(String[] expectedStrings, Solo solo) {
         for (String s : expectedStrings)
