@@ -44,7 +44,6 @@ public class AddSalarySystemTest extends ActivityInstrumentationTestCase2<ViewJo
         assertTrue(TEXT_NOT_FOUND, solo.waitForText("Average Salary: 5.0k per year (1"));
     }
 
-
     public void testAddSalaryWithInvalidSalary() {
         testHelper("-5000", 1, "Invalid salary");
     }

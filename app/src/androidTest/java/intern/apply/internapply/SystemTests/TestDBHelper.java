@@ -42,6 +42,7 @@ public class TestDBHelper {
                 "title VARCHAR(100) NOT NULL," +
                 "location VARCHAR(45)," +
                 "description VARCHAR(2000)," +
+                "url VARCHAR(1000)," +
                 "salary DECIMAL(4,1)," +
                 "numSalaries INT(10)," +
                 "PRIMARY KEY (id))";
@@ -106,6 +107,15 @@ public class TestDBHelper {
         ExecuteSQL(sql);
     }
 
+    public static void initializeSearchJobTables() {
+        String sql = "INSERT INTO job (id, organization, title, location, salary, numSalaries) VALUES" +
+                "(1, 'Facebook', 'Software Engineering', 'fake location', 0, 0)," +
+                "(2, 'Amazon', 'SDE', 'Newyork', 0, 0)," +
+                "(3, 'IBM', 'Software Developer', 'Ottawa', 0, 0)";
+        ExecuteSQL(sql);
+
+    }
+
     public static void InitializeJobTables() {
 
         String sql;
@@ -164,6 +174,82 @@ public class TestDBHelper {
         ExecuteSQL(sql);
 
         sql = "DROP TABLE IF EXISTS contactMessage";
+        ExecuteSQL(sql);
+        
+        sql = "DROP TABLE IF EXISTS surveyQuestion;";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS surveyResponse;";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS completedSurveyRes;";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS completedSurvey;";
+        ExecuteSQL(sql);
+    }
+
+    public static void createSurveyTables() {
+        String sql;
+
+        sql = "DROP TABLE IF EXISTS surveyQuestion;";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS surveyResponse;";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS completedSurveyRes;";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS completedSurvey;";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE surveyQuestion (" +
+                "id INT NOT NULL AUTO_INCREMENT,"+
+                "question VARCHAR(300) NOT NULL,"+
+                "questionType VARCHAR(300) NOT NULL,"+
+                "questionIndex INT NOT NULL,"+
+                "PRIMARY KEY (id))";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE surveyResponse (" +
+                "id INT NOT NULL AUTO_INCREMENT,"+
+                "response VARCHAR(300) NOT NULL,"+
+                "questionType VARCHAR(300) NOT NULL,"+
+                "PRIMARY KEY (id))";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE completedSurvey (" +
+                "id INT NOT NULL AUTO_INCREMENT,"+
+                "completionTime date NOT NULL,"+
+                "PRIMARY KEY (id))";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE completedSurveyRes (" +
+                "id INT NOT NULL AUTO_INCREMENT,"+
+                "surveyID INT NOT NULL,"+
+                "response VARCHAR(300) NOT NULL,"+
+                "questionIndex INT NOT NULL,"+
+                "PRIMARY KEY (id),"+
+                "INDEX (surveyID),"+
+                "FOREIGN KEY (surveyID) REFERENCES completedSurvey(id) ON DELETE CASCADE)";
+        ExecuteSQL(sql);
+    }
+
+    public static void initializeSurveyTables() {
+        String sql;
+
+        sql = "INSERT INTO surveyQuestion (id, question, questionType, questionIndex) VALUES " +
+                "(1, 'Is this a test?', 'boolean', 1)," +
+                "(2, 'Test2?', 'scale', 2)";
+        ExecuteSQL(sql);
+
+        sql = "INSERT INTO surveyResponse (id, response, questionType) VALUES " +
+                "(1, 'True', 'boolean')," +
+                "(2, 'False', 'boolean'),"+
+                "(3, 'Disagree', 'scale'),"+
+                "(4, 'No Opinion', 'scale'),"+
+                "(5, 'Agree', 'scale')";
         ExecuteSQL(sql);
     }
 }
