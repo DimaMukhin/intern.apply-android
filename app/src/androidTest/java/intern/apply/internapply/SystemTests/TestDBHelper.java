@@ -68,7 +68,10 @@ public class TestDBHelper {
     }
 
     public static void createQNATables() {
-        String sql = "DROP TABLE IF EXISTS question";
+        String sql = "DROP TABLE IF EXISTS answers";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS question";
         ExecuteSQL(sql);
 
         sql = "CREATE TABLE question (" +
@@ -78,6 +81,14 @@ public class TestDBHelper {
                 "author VARCHAR(45) NOT NULL," +
                 "creationTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP," +
                 "PRIMARY KEY (id))";
+        ExecuteSQL(sql);
+
+        sql = "CREATE TABLE answers (" +
+                "questionId INT(11) NOT NULL," +
+                "body VARCHAR(1000) NOT NULL," +
+                "author VARCHAR(45) NOT NULL," +
+                "created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL," +
+                "FOREIGN KEY (questionId) REFERENCES question (id) ON DELETE CASCADE)";
         ExecuteSQL(sql);
     }
 
@@ -134,6 +145,13 @@ public class TestDBHelper {
                 "(1, 'first test title', 'Dima', 'this is the body')," +
                 "(2, 'how much time to find a job?', 'Ben', 'I dont want to wait')," +
                 "(3, 'what are you looking at?', 'dima', 'this is just a question')";
+        ExecuteSQL(sql);
+
+        sql = "INSERT INTO answers (questionId, body, author) VALUES" +
+                "(1, 'body of answer 1', 'Dima')," +
+                "(1, 'body of answer 2', 'Dima')," +
+                "(2, 'body of answer 1', 'Ben')," +
+                "(2, 'body of answer 2', 'Ben')";
         ExecuteSQL(sql);
     }
 
