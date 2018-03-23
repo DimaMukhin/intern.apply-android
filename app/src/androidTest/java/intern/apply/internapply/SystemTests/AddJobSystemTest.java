@@ -37,17 +37,22 @@ public class AddJobSystemTest extends ActivityInstrumentationTestCase2<MainActiv
         TestDBHelper.CleanTables();
     }
 
-    public void testAddNewValidJob(){
+    public void testAddNewValidJob() {
         navigateToAddJob();
         setFormFields();
 
-        solo.enterText(jobOrg, "valid organization");
-        solo.enterText(jobTitle, "valid title");
-        solo.enterText(jobLoc, "valid location");
+        solo.enterText(jobOrg, "New job organization");
+        solo.enterText(jobTitle, "New job title");
+        solo.enterText(jobLoc, "New job valid location");
         solo.enterText(jobUrl, "https://www.validUrl.com");
-        solo.enterText(jobDesc, "valid description");
+        solo.enterText(jobDesc, "New job valid description");
 
         submitAndCheckForMessage("Job added successfully");
+
+        //check if the job was added by going to the home page
+        solo.clickOnImageButton(0);
+        String[] job = new String[]{"New job organization", "New job title"};
+        TestHelper.findStrings(job, solo);
     }
 
     public void testInvalidJobOrganization() {
@@ -61,6 +66,12 @@ public class AddJobSystemTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.enterText(jobDesc, "valid description");
 
         submitAndCheckForMessage("Invalid job organization");
+
+        solo.clickOnImageButton(0);
+        solo.waitForActivity(MainActivity.class);
+
+        String[] job = {"CityOFWinnipeg", "third title"};
+        TestHelper.findStrings(job, solo);
     }
 
     public void testInvalidJobTitle() {
@@ -74,6 +85,12 @@ public class AddJobSystemTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.enterText(jobDesc, "valid description");
 
         submitAndCheckForMessage("Invalid job title");
+
+        solo.clickOnImageButton(0);
+        solo.waitForActivity(MainActivity.class);
+
+        String[] job = {"CityOFWinnipeg", "third title"};
+        TestHelper.findStrings(job, solo);
     }
 
     public void testInvalidJobLocation() {
@@ -87,6 +104,12 @@ public class AddJobSystemTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.enterText(jobDesc, "valid description");
 
         submitAndCheckForMessage("Invalid job location");
+
+        solo.clickOnImageButton(0);
+        solo.waitForActivity(MainActivity.class);
+
+        String[] job = {"CityOFWinnipeg", "third title"};
+        TestHelper.findStrings(job, solo);
     }
 
     public void testInvalidJobUrl() {
@@ -105,6 +128,12 @@ public class AddJobSystemTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.enterText(jobUrl, "www.invalidUrl.com");
 
         submitAndCheckForMessage("Invalid job URL");
+
+        solo.clickOnImageButton(0);
+        solo.waitForActivity(MainActivity.class);
+
+        String[] job = {"CityOFWinnipeg", "third title"};
+        TestHelper.findStrings(job, solo);
     }
 
     public void testInvalidJobDescription() {
@@ -118,6 +147,12 @@ public class AddJobSystemTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.enterText(jobDesc, "");
 
         submitAndCheckForMessage("Invalid job description");
+
+        solo.clickOnImageButton(0);
+        solo.waitForActivity(MainActivity.class);
+
+        String[] job = {"CityOFWinnipeg", "third title"};
+        TestHelper.findStrings(job, solo);
     }
 
     private void setFormFields() {
