@@ -21,6 +21,9 @@ public class SystemTests {
         suite.addTestSuite(QuestionSystemTest.class);
         suite.addTestSuite(SearchBarSystemTest.class);
         suite.addTestSuite(SurveySystemTest.class);
+        suite.addTestSuite(ViewJobSystemTest.class);
+        suite.addTestSuite(JobRatingSystemTest.class);
+        suite.addTestSuite(AnswersSystemTest.class);
         return suite;
     }
 }
