@@ -19,6 +19,7 @@ public class SystemTests {
         suite.addTestSuite(AddCommentSystemTest.class);
         suite.addTestSuite(QuestionSystemTest.class);
         suite.addTestSuite(SearchBarSystemTest.class);
+        suite.addTestSuite(SurveySystemTest.class);
         return suite;
     }
 }
