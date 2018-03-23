@@ -12,6 +12,7 @@ import junit.framework.TestSuite;
 public class SystemTests {
     public static Test suite() {
         TestSuite suite = new TestSuite("Acceptance tests");
+        suite.addTestSuite(AddJobSystemTest.class);
         suite.addTestSuite(AddSalarySystemTest.class);
         suite.addTestSuite(JobListSystemTest.class);
         suite.addTestSuite(ContactUsSystemTest.class);

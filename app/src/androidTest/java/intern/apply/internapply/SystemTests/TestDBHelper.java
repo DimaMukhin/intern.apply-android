@@ -42,6 +42,7 @@ public class TestDBHelper {
                 "title VARCHAR(100) NOT NULL," +
                 "location VARCHAR(45)," +
                 "description VARCHAR(2000)," +
+                "url VARCHAR(1000)," +
                 "salary DECIMAL(4,1)," +
                 "numSalaries INT(10)," +
                 "PRIMARY KEY (id))";
