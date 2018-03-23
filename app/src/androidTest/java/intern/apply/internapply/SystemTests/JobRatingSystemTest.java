@@ -56,7 +56,7 @@ public class JobRatingSystemTest extends ActivityInstrumentationTestCase2<MainAc
 
         solo.clickOnView(solo.getView(R.id.ratingBar));
 
-        String[] jobRating = {"1", "votes"};
+        String[] jobRating = {"1", "votes", "Job was rated successfully"};
 
         TestHelper.findStrings(jobRating, solo);
     }
