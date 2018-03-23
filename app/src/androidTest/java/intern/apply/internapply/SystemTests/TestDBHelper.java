@@ -156,6 +156,18 @@ public class TestDBHelper {
 
         sql = "DROP TABLE IF EXISTS contactMessage";
         ExecuteSQL(sql);
+        
+        sql = "DROP TABLE IF EXISTS surveyQuestion;";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS surveyResponse;";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS completedSurveyRes;";
+        ExecuteSQL(sql);
+
+        sql = "DROP TABLE IF EXISTS completedSurvey;";
+        ExecuteSQL(sql);
     }
 
     public static void createSurveyTables() {
