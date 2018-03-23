@@ -8,7 +8,7 @@ Please see the [main repository](https://github.com/DimaMukhin/intern.apply) of 
     - Code debt: we need the test server for system tests but couldn't find a fix, we plan to talk to you about this
      and find a better way if any exists. Also this only happens in the development environment.
 2. the test server runs twice - once in configuration phase and then again in execution phase. This however does not affects anything as the second run will terminate immediately.
-3. "move the URL configuration out of the Java class and into an external XML configuration file." This is not possible with Android because a context is needed to access the resources in the XML files. There are a few hacky ways to acomplish this, but we decided not to implement them, because introduce some anti-patterns and code smells. 
+3. "move the URL configuration out of the Java class and into an external XML configuration file." This is not possible with Android because a context is needed to access the resources in the XML files. There are a few hacky ways to acomplish this, but we decided not to implement them, because they introduce some anti-patterns and code smells. 
 
 ## Android Virtual Device to use when evaluating
 
