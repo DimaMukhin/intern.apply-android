@@ -65,3 +65,7 @@ Perform the following one time setup:
 
 Now simply run the tests by doing the following:
 4. In the "intern.apply.internapply.SystemTests" package, right click on "SystemTests.java" and click on "run 'SystemTests'"
+
+## unit tests
+
+There are no units to test. The application is implementing a thin client architecture, all the business logic is in the back-end server.
